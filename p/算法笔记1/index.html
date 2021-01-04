@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='算法分析 算法和算法复杂性 可计算的问题：
+ what：分类问题——树状判定分支 why： 证明问题——公式序列解决 how： 或称问题——算法流程解决  欧几里得算法的python实现
+def alg(a,b): if b==0 : return a print(a) c=a%b alg(b,c) def main(): #a,b为要计算的两个数 a=15 b=9 print(alg(a,b)) main() 计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。
+不可计算问题
+ 停机问题 几乎所有无理数都无法通过算法找出任意一位精确数  程序与算法的区别 算法是描述问题解决的分布步骤而程序则是通过某种编程语言实现的算法。
+算法分析主要是从计算机资源消耗的角度来评判和比较算法。评判的两个标准有两种：算法执行时间和空间（内存或存储空间）。
+利用python的time库中 time.time()函数可以计算算法的执行时间。
+ time.time() 是计算从1970到现在的时长，并将值返回。
+ 对于算法运行时间的检测也收到语言性能、机器的性能的影响。
+大O表示法 一个算法所实施的操作数量或步骤可作为独立于程序/机器的度量指标。
+程序设计语言中除与计算资源无关的定义语句外，主要是三种控制流语句和赋值语句。
+一个赋值语句包含了（表达式）计算和（变量）存储两个基本资源。而控制流语句仅起组织语句的作用，并不涉及处理。
+算法分析的目标是找出问题规模如何影响执行时间
+数量级函数 数量级函数描述了T（n）中随着n增加而增加速度最快的主导部分。称作大O表示法记作O(f(n)),其中f(n)表示T(n)中的主导部分。
+ T(n)=5n^2&#43;27n&#43;1005
+当n越来越大起主导作用的是5*n^2,其中系数5对n^2的增长速度无影响。因此可以表示为O(n^2)
+ 具体数据也会影响算法运行时间，如排序算法。此时分为最好，最差和平均状况，主要还是通过平均状况分析性能。
+大O表示所有上限中最小的那个上限
+大Ω表示所有下限中最大的那个下限
+如果上下限相同用Θ大表示
+变位词  写一个布尔函数，一两个此作为参数，返回两个词是否为变位词
+  将每一个单词逐个检查  课程给的代码示例：
+def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &amp;lt; len(s1) and stillok: #只要字符中有一个没找到就可以通过32行退出 pos2 = 0 found =False while pos2 &amp;lt; len(alist) and not found: if s1[pos2] == alist[pos2]: found = True else: pos2 = pos2 &#43; 1 if found: alist[pos2] = None else: stillok = False pos1 = pos1 &#43; 1 return stillok 如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none'><title>算法笔记1</title>
+
+<link rel='canonical' href='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='算法笔记1'>
+<meta property='og:description' content='算法分析 算法和算法复杂性 可计算的问题：
+ what：分类问题——树状判定分支 why： 证明问题——公式序列解决 how： 或称问题——算法流程解决  欧几里得算法的python实现
+def alg(a,b): if b==0 : return a print(a) c=a%b alg(b,c) def main(): #a,b为要计算的两个数 a=15 b=9 print(alg(a,b)) main() 计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。
+不可计算问题
+ 停机问题 几乎所有无理数都无法通过算法找出任意一位精确数  程序与算法的区别 算法是描述问题解决的分布步骤而程序则是通过某种编程语言实现的算法。
+算法分析主要是从计算机资源消耗的角度来评判和比较算法。评判的两个标准有两种：算法执行时间和空间（内存或存储空间）。
+利用python的time库中 time.time()函数可以计算算法的执行时间。
+ time.time() 是计算从1970到现在的时长，并将值返回。
+ 对于算法运行时间的检测也收到语言性能、机器的性能的影响。
+大O表示法 一个算法所实施的操作数量或步骤可作为独立于程序/机器的度量指标。
+程序设计语言中除与计算资源无关的定义语句外，主要是三种控制流语句和赋值语句。
+一个赋值语句包含了（表达式）计算和（变量）存储两个基本资源。而控制流语句仅起组织语句的作用，并不涉及处理。
+算法分析的目标是找出问题规模如何影响执行时间
+数量级函数 数量级函数描述了T（n）中随着n增加而增加速度最快的主导部分。称作大O表示法记作O(f(n)),其中f(n)表示T(n)中的主导部分。
+ T(n)=5n^2&#43;27n&#43;1005
+当n越来越大起主导作用的是5*n^2,其中系数5对n^2的增长速度无影响。因此可以表示为O(n^2)
+ 具体数据也会影响算法运行时间，如排序算法。此时分为最好，最差和平均状况，主要还是通过平均状况分析性能。
+大O表示所有上限中最小的那个上限
+大Ω表示所有下限中最大的那个下限
+如果上下限相同用Θ大表示
+变位词  写一个布尔函数，一两个此作为参数，返回两个词是否为变位词
+  将每一个单词逐个检查  课程给的代码示例：
+def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &amp;lt; len(s1) and stillok: #只要字符中有一个没找到就可以通过32行退出 pos2 = 0 found =False while pos2 &amp;lt; len(alist) and not found: if s1[pos2] == alist[pos2]: found = True else: pos2 = pos2 &#43; 1 if found: alist[pos2] = None else: stillok = False pos1 = pos1 &#43; 1 return stillok 如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none'>
+<meta property='og:url' content='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/'>
+<meta property='og:site_name' content='Rainbow'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-01-04T13:09:08&#43;08:00'/><meta property='article:modified_time' content='2021-01-04T13:09:08&#43;08:00'/>
+<meta name="twitter:title" content="算法笔记1">
+<meta name="twitter:description" content="算法分析 算法和算法复杂性 可计算的问题：
+ what：分类问题——树状判定分支 why： 证明问题——公式序列解决 how： 或称问题——算法流程解决  欧几里得算法的python实现
+def alg(a,b): if b==0 : return a print(a) c=a%b alg(b,c) def main(): #a,b为要计算的两个数 a=15 b=9 print(alg(a,b)) main() 计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。
+不可计算问题
+ 停机问题 几乎所有无理数都无法通过算法找出任意一位精确数  程序与算法的区别 算法是描述问题解决的分布步骤而程序则是通过某种编程语言实现的算法。
+算法分析主要是从计算机资源消耗的角度来评判和比较算法。评判的两个标准有两种：算法执行时间和空间（内存或存储空间）。
+利用python的time库中 time.time()函数可以计算算法的执行时间。
+ time.time() 是计算从1970到现在的时长，并将值返回。
+ 对于算法运行时间的检测也收到语言性能、机器的性能的影响。
+大O表示法 一个算法所实施的操作数量或步骤可作为独立于程序/机器的度量指标。
+程序设计语言中除与计算资源无关的定义语句外，主要是三种控制流语句和赋值语句。
+一个赋值语句包含了（表达式）计算和（变量）存储两个基本资源。而控制流语句仅起组织语句的作用，并不涉及处理。
+算法分析的目标是找出问题规模如何影响执行时间
+数量级函数 数量级函数描述了T（n）中随着n增加而增加速度最快的主导部分。称作大O表示法记作O(f(n)),其中f(n)表示T(n)中的主导部分。
+ T(n)=5n^2&#43;27n&#43;1005
+当n越来越大起主导作用的是5*n^2,其中系数5对n^2的增长速度无影响。因此可以表示为O(n^2)
+ 具体数据也会影响算法运行时间，如排序算法。此时分为最好，最差和平均状况，主要还是通过平均状况分析性能。
+大O表示所有上限中最小的那个上限
+大Ω表示所有下限中最大的那个下限
+如果上下限相同用Θ大表示
+变位词  写一个布尔函数，一两个此作为参数，返回两个词是否为变位词
+  将每一个单词逐个检查  课程给的代码示例：
+def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &amp;lt; len(s1) and stillok: #只要字符中有一个没找到就可以通过32行退出 pos2 = 0 found =False while pos2 &amp;lt; len(alist) and not found: if s1[pos2] == alist[pos2]: found = True else: pos2 = pos2 &#43; 1 if found: alist[pos2] = None else: stillok = False pos1 = pos1 &#43; 1 return stillok 如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://abananajuice.github.io/">Rainbow</a></h1>
+        <h2 class="site-description">“You don&#39;t need to be accepted by others. You need to be yourself.”</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://abananajuice.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/">算法笔记1</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Jan 04, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="算法分析">算法分析</h1>
+<h2 id="算法和算法复杂性">算法和算法复杂性</h2>
+<p>可计算的问题：</p>
+<ul>
+<li>what：分类问题——树状判定分支</li>
+<li>why： 证明问题——公式序列解决</li>
+<li>how： 或称问题——算法流程解决</li>
+</ul>
+<p>欧几里得算法的python实现</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">alg</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">%</span><span class="n">b</span>
+    <span class="n">alg</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>   <span class="c1">#a,b为要计算的两个数</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">15</span>
+    <span class="n">b</span><span class="o">=</span><span class="mi">9</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">alg</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div><p>计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。</p>
+<p>不可计算问题</p>
+<ul>
+<li>停机问题</li>
+<li>几乎所有无理数都无法通过算法找出任意一位精确数</li>
+</ul>
+<h2 id="程序与算法的区别">程序与算法的区别</h2>
+<p>算法是描述问题解决的分布步骤而程序则是通过某种编程语言实现的算法。<br>
+算法分析主要是从计算机资源消耗的角度来评判和比较算法。评判的两个标准有两种：算法执行时间和空间（内存或存储空间）。</p>
+<p>利用python的time库中 <code>time.time()</code>函数可以计算算法的执行时间。</p>
+<blockquote>
+<p><code>time.time()</code> 是计算从1970到现在的时长，并将值返回。</p>
+</blockquote>
+<p>对于算法运行时间的检测也收到语言性能、机器的性能的影响。</p>
+<h2 id="大o表示法">大O表示法</h2>
+<p>一个算法所实施的操作数量或步骤可作为独立于程序/机器的度量指标。<br>
+程序设计语言中除与计算资源无关的定义语句外，主要是三种控制流语句和赋值语句。</p>
+<p><strong>一个赋值语句包含了（表达式）计算和（变量）存储两个基本资源。而控制流语句仅起组织语句的作用，并不涉及处理。</strong></p>
+<p>算法分析的目标是找出问题规模如何影响执行时间</p>
+<h3 id="数量级函数">数量级函数</h3>
+<p>数量级函数描述了T（n）中随着n增加而增加速度最快的主导部分。称作大O表示法记作O(f(n)),其中f(n)表示T(n)中的主导部分。</p>
+<blockquote>
+<p>T(n)=5n^2+27n+1005<br>
+当n越来越大起主导作用的是5*n^2,其中系数5对n^2的增长速度无影响。因此可以表示为O(n^2)</p>
+</blockquote>
+<p>具体数据也会影响算法运行时间，如排序算法。此时分为最好，最差和平均状况，主要还是通过平均状况分析性能。</p>
+<p><img src="https://s2.ax1x.com/2020/02/03/10fUJO.png" alt=""  /></p>
+<p>大O表示所有上限中最小的那个上限<br>
+大Ω表示所有下限中最大的那个下限<br>
+如果上下限相同用Θ大表示</p>
+<h2 id="变位词">变位词</h2>
+<blockquote>
+<p>写一个布尔函数，一两个此作为参数，返回两个词是否为变位词</p>
+</blockquote>
+<ul>
+<li>将每一个单词逐个检查</li>
+</ul>
+<p>课程给的代码示例：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">solu1_example</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
+   <span class="n">alist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+   <span class="n">pos1</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="n">stillok</span> <span class="o">=</span> <span class="bp">True</span>
+   <span class="k">while</span> <span class="n">pos1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">stillok</span><span class="p">:</span> <span class="c1">#只要字符中有一个没找到就可以通过32行退出</span>
+       <span class="n">pos2</span> <span class="o">=</span> <span class="mi">0</span>
+       <span class="n">found</span> <span class="o">=</span><span class="bp">False</span>
+       <span class="k">while</span> <span class="n">pos2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>     
+           <span class="k">if</span> <span class="n">s1</span><span class="p">[</span><span class="n">pos2</span><span class="p">]</span> <span class="o">==</span>  <span class="n">alist</span><span class="p">[</span><span class="n">pos2</span><span class="p">]:</span>
+               <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="n">pos2</span> <span class="o">=</span> <span class="n">pos2</span> <span class="o">+</span> <span class="mi">1</span>
+           <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+               <span class="n">alist</span><span class="p">[</span><span class="n">pos2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="n">stillok</span> <span class="o">=</span> <span class="bp">False</span>
+       <span class="n">pos1</span> <span class="o">=</span> <span class="n">pos1</span> <span class="o">+</span> <span class="mi">1</span>
+   <span class="k">return</span> <span class="n">stillok</span>   
+</code></pre></div><p>如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none</p>
+<h3 id="数量级的计算">数量级的计算</h3>
+<p>两层循环，外层循环为n次，每次到内层每次循环查找次数为1&ndash;n之间。因此总和为：1/2*(n^2)+1/2*n。所以数量级为O(n^2)</p>
+<ul>
+<li>排序比较：先将字符串按字母顺序排好，再一一对比</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">solu2</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
+    <span class="n">alist1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+    <span class="n">alist2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+
+    <span class="n">alist1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>    <span class="c1">#列表排序函数</span>
+    <span class="n">alist2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">pos</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">matches</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">alist1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">alist2</span><span class="p">[</span><span class="n">pos</span><span class="p">]:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="n">matches</span>
+</code></pre></div><p>看似很简单仅有一个循环，但在两个数组排序过程消耗的时间不可忽视。时间运算数量级为O(nlog n)</p>
+<h3 id="暴力法">暴力法</h3>
+<p>将S1中的字符进行全排列，然后查看S2是否在其中。<br>
+用暴力算法解决时，数量级会以N!的方式增长。</p>
+<h3 id="计数比较">计数比较</h3>
+<p>检查26个字母在字符中出现的情况，若两者相同则输出。</p>
+<p><code>ord()</code>函数：返回字符的Unicode编码值</p>
+<p>T(n)=2n + 26;<br>
+因此数量级为O(n);相比之下，该项算法性能较优，然而该算法需要的内存空间较大。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">solu4</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">26</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">26</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)):</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="c1">#返回一个字符的uincode编码</span>
+        <span class="n">c1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">c1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s2</span><span class="p">)):</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+        <span class="n">c2</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">c2</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">stillok</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">26</span> <span class="ow">and</span> <span class="n">stillok</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">c2</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stillok</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="n">stillok</span>
+</code></pre></div><h1 id="python数据类型的性能">Python数据类型的性能</h1>
+<h2 id="list和dict">list和dict</h2>
+<p><img src="https://s2.ax1x.com/2020/03/02/3WYNM6.png" alt="3WYNM6.png"  /></p>
+<p>按索引取值和赋值：由于列表的随机访问特性，均为O(1)</p>
+<p>列表添加append()和_add_()&quot;+&quot;</p>
+<ul>
+<li>list.append(v)&ndash;O(1),lst= lst+ [v]</li>
+<li>实行时间为O(n+k),k为所加列表长度</li>
+</ul>
+<h2 id="pop的复杂度">pop的复杂度</h2>
+<p>从尾部移除数组的元素是复杂度为O(1),移除数组中某一元素为O(N)；原因是移除中间元素需要将这个元素后面的元素前移。这是为了保证按索引取值和赋值速度的妥协。</p>
+<p>在列表中in操作复杂度为O(N),字典中为O(1)。</p>
+<h1 id="引用">引用</h1>
+<ul>
+<li><a class="link" href="https://www.icourse163.org/learn/PKU-1206307812"  target="_blank" rel="noopener"
+    >数据结构与算法Python版_中国大学MOOC(慕课)</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under GNU General Public License v2.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Rainbow
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

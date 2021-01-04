@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='yolov3学习笔记 基本概念 下采样即图像缩小；将x*x个像素点取均值换算为一个。
+上采样即图像放大，利用插值算法。
+ground truth即监督学习中数据标注的正确的范围。也就是标准答案的意思。
+IOU预测的范围（bounding box）与ground truth的交集/两者并集
+bounding box(bbox) 在目标检测中不仅要知道目标的类别还要知道它的位置。在木变检测中常用边界框来描述目标位置。
+anchor box目标检测算法通常会在输入图像中采样大量的区域，然后判断这些区域中是否包含我们感兴趣的目标，并调整区域边缘从而更准确地预测目标的真实边界框（ground-truth bounding box）。不同的模型使用的区域采样方法可能不同。这里我们介绍其中的一种方法：它以每个像素为中心生成多个大小和宽高比（aspect ratio）不同的边界框。这些边界框被称为锚框（anchor box）。(——动手做深度学习)
+精确率与召回率实际上非常简单，精确率是针对我们预测结果而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)，也就是
+P=TP/(TP&#43;FP)
+而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。
+R=TP/TP&#43;FN
+非极大值抑制简称为NMS算法，思想是搜索局部最大值，抑制极大值。
+流程如下：
+ 根据置信度得分进行排序
+选择置信度最高的比边界框添加到最终输出列表中，将其从边界框列表中删除
+计算所有边界框的面积
+计算置信度最高的边界框与其它候选框的IoU。
+删除IoU大于阈值的边界框
+重复上述过程，直至边界框列表为空。
+ **批标准化(batch normalization)**将分散的数据统一的做法，便与神经网络的学习和优化。normalization 预处理, 使得输入的 x 变化范围不会太大, 让输入值经过激励函数的敏感部分。BN实在每个全连接层之间都进行批数据标准化。(作者： 聚类算法 聚类算法是根据样本之间的距离来将他们归为一类的，这个距离不是普通的距离，理论上叫做欧氏距离。
+一般面向大量的，同时维度在2个或两个以上的样本群。
+ 1、在样本中随机选择K个点，作为每个类别的初始中心点，这K是自己定的，假如你想将样本分成3个类K就等于3,4个类K就等于4；
+2、计算所有样本离这K个初始中心点的距离并分别进行比较，选出其中最近的距离并把这个样本归到这个初始中心点的类别里，即总共划分成K个类别；
+3、舍弃原来的初始中心点，在划分好的K个类别里分别计算出新的中心点，使得这些中心点距离他类别里的所有样本的距离之和最小；
+4、判断新获得的中心点是否与旧中心点一样，如不一样则回到第2步，重新计算所有样本离这K个新的中心点的距离并进行比较，选出其中最近的距离并归到这个新的中心点的类别里，继续下面的步奏；如一样则完成，即收敛。
+ 残差网络 残差 残差：实际观测值与估计值（拟合值）之间的差。如果回归模型正确则残差可以看做误差的观测值。
+理论上，可以训练一个 shallower 网络，然后在这个训练好的 shallower 网络上堆几层 identity mapping（恒等映射） 的层，即输出等于输入的层，构建出一个 deeper 网络。这两个网络（shallower 和 deeper）得到的结果应该是一模一样的.
+退化问题 为什么属于随着层数的增多训练集上的效果变差？
+原因是随着网络越来越深，训练变得原来越难，网络的优化变得越来越难。理论上，越深的网络，效果应该更好；但实际上，由于训练难度，过深的网络会产生退化问题，效果反而不如相对较浅的网络。而残差网络就可以解决这个问题的，残差网络越深，训练集上的效果会越好。（测试集上的效果可能涉及过拟合问题。过拟合问题指的是测试集上的效果和训练集上的效果之间有差距。）这里要注意到过拟合与退化问题之间的区别
+残差块 残差网络是通过加入shortcut connections,变得更容易被优化。包含一个shortcut connection的几层网络被称为一个残差块。shortcut即图中x到 ⨁的箭头。'><title>Yolo学习笔记＿１</title>
+
+<link rel='canonical' href='https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Yolo学习笔记＿１'>
+<meta property='og:description' content='yolov3学习笔记 基本概念 下采样即图像缩小；将x*x个像素点取均值换算为一个。
+上采样即图像放大，利用插值算法。
+ground truth即监督学习中数据标注的正确的范围。也就是标准答案的意思。
+IOU预测的范围（bounding box）与ground truth的交集/两者并集
+bounding box(bbox) 在目标检测中不仅要知道目标的类别还要知道它的位置。在木变检测中常用边界框来描述目标位置。
+anchor box目标检测算法通常会在输入图像中采样大量的区域，然后判断这些区域中是否包含我们感兴趣的目标，并调整区域边缘从而更准确地预测目标的真实边界框（ground-truth bounding box）。不同的模型使用的区域采样方法可能不同。这里我们介绍其中的一种方法：它以每个像素为中心生成多个大小和宽高比（aspect ratio）不同的边界框。这些边界框被称为锚框（anchor box）。(——动手做深度学习)
+精确率与召回率实际上非常简单，精确率是针对我们预测结果而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)，也就是
+P=TP/(TP&#43;FP)
+而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。
+R=TP/TP&#43;FN
+非极大值抑制简称为NMS算法，思想是搜索局部最大值，抑制极大值。
+流程如下：
+ 根据置信度得分进行排序
+选择置信度最高的比边界框添加到最终输出列表中，将其从边界框列表中删除
+计算所有边界框的面积
+计算置信度最高的边界框与其它候选框的IoU。
+删除IoU大于阈值的边界框
+重复上述过程，直至边界框列表为空。
+ **批标准化(batch normalization)**将分散的数据统一的做法，便与神经网络的学习和优化。normalization 预处理, 使得输入的 x 变化范围不会太大, 让输入值经过激励函数的敏感部分。BN实在每个全连接层之间都进行批数据标准化。(作者： 聚类算法 聚类算法是根据样本之间的距离来将他们归为一类的，这个距离不是普通的距离，理论上叫做欧氏距离。
+一般面向大量的，同时维度在2个或两个以上的样本群。
+ 1、在样本中随机选择K个点，作为每个类别的初始中心点，这K是自己定的，假如你想将样本分成3个类K就等于3,4个类K就等于4；
+2、计算所有样本离这K个初始中心点的距离并分别进行比较，选出其中最近的距离并把这个样本归到这个初始中心点的类别里，即总共划分成K个类别；
+3、舍弃原来的初始中心点，在划分好的K个类别里分别计算出新的中心点，使得这些中心点距离他类别里的所有样本的距离之和最小；
+4、判断新获得的中心点是否与旧中心点一样，如不一样则回到第2步，重新计算所有样本离这K个新的中心点的距离并进行比较，选出其中最近的距离并归到这个新的中心点的类别里，继续下面的步奏；如一样则完成，即收敛。
+ 残差网络 残差 残差：实际观测值与估计值（拟合值）之间的差。如果回归模型正确则残差可以看做误差的观测值。
+理论上，可以训练一个 shallower 网络，然后在这个训练好的 shallower 网络上堆几层 identity mapping（恒等映射） 的层，即输出等于输入的层，构建出一个 deeper 网络。这两个网络（shallower 和 deeper）得到的结果应该是一模一样的.
+退化问题 为什么属于随着层数的增多训练集上的效果变差？
+原因是随着网络越来越深，训练变得原来越难，网络的优化变得越来越难。理论上，越深的网络，效果应该更好；但实际上，由于训练难度，过深的网络会产生退化问题，效果反而不如相对较浅的网络。而残差网络就可以解决这个问题的，残差网络越深，训练集上的效果会越好。（测试集上的效果可能涉及过拟合问题。过拟合问题指的是测试集上的效果和训练集上的效果之间有差距。）这里要注意到过拟合与退化问题之间的区别
+残差块 残差网络是通过加入shortcut connections,变得更容易被优化。包含一个shortcut connection的几层网络被称为一个残差块。shortcut即图中x到 ⨁的箭头。'>
+<meta property='og:url' content='https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/'>
+<meta property='og:site_name' content='Rainbow'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2019-08-17T17:20:47&#43;08:00'/><meta property='article:modified_time' content='2019-08-17T17:20:47&#43;08:00'/>
+<meta name="twitter:title" content="Yolo学习笔记＿１">
+<meta name="twitter:description" content="yolov3学习笔记 基本概念 下采样即图像缩小；将x*x个像素点取均值换算为一个。
+上采样即图像放大，利用插值算法。
+ground truth即监督学习中数据标注的正确的范围。也就是标准答案的意思。
+IOU预测的范围（bounding box）与ground truth的交集/两者并集
+bounding box(bbox) 在目标检测中不仅要知道目标的类别还要知道它的位置。在木变检测中常用边界框来描述目标位置。
+anchor box目标检测算法通常会在输入图像中采样大量的区域，然后判断这些区域中是否包含我们感兴趣的目标，并调整区域边缘从而更准确地预测目标的真实边界框（ground-truth bounding box）。不同的模型使用的区域采样方法可能不同。这里我们介绍其中的一种方法：它以每个像素为中心生成多个大小和宽高比（aspect ratio）不同的边界框。这些边界框被称为锚框（anchor box）。(——动手做深度学习)
+精确率与召回率实际上非常简单，精确率是针对我们预测结果而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)，也就是
+P=TP/(TP&#43;FP)
+而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。
+R=TP/TP&#43;FN
+非极大值抑制简称为NMS算法，思想是搜索局部最大值，抑制极大值。
+流程如下：
+ 根据置信度得分进行排序
+选择置信度最高的比边界框添加到最终输出列表中，将其从边界框列表中删除
+计算所有边界框的面积
+计算置信度最高的边界框与其它候选框的IoU。
+删除IoU大于阈值的边界框
+重复上述过程，直至边界框列表为空。
+ **批标准化(batch normalization)**将分散的数据统一的做法，便与神经网络的学习和优化。normalization 预处理, 使得输入的 x 变化范围不会太大, 让输入值经过激励函数的敏感部分。BN实在每个全连接层之间都进行批数据标准化。(作者： 聚类算法 聚类算法是根据样本之间的距离来将他们归为一类的，这个距离不是普通的距离，理论上叫做欧氏距离。
+一般面向大量的，同时维度在2个或两个以上的样本群。
+ 1、在样本中随机选择K个点，作为每个类别的初始中心点，这K是自己定的，假如你想将样本分成3个类K就等于3,4个类K就等于4；
+2、计算所有样本离这K个初始中心点的距离并分别进行比较，选出其中最近的距离并把这个样本归到这个初始中心点的类别里，即总共划分成K个类别；
+3、舍弃原来的初始中心点，在划分好的K个类别里分别计算出新的中心点，使得这些中心点距离他类别里的所有样本的距离之和最小；
+4、判断新获得的中心点是否与旧中心点一样，如不一样则回到第2步，重新计算所有样本离这K个新的中心点的距离并进行比较，选出其中最近的距离并归到这个新的中心点的类别里，继续下面的步奏；如一样则完成，即收敛。
+ 残差网络 残差 残差：实际观测值与估计值（拟合值）之间的差。如果回归模型正确则残差可以看做误差的观测值。
+理论上，可以训练一个 shallower 网络，然后在这个训练好的 shallower 网络上堆几层 identity mapping（恒等映射） 的层，即输出等于输入的层，构建出一个 deeper 网络。这两个网络（shallower 和 deeper）得到的结果应该是一模一样的.
+退化问题 为什么属于随着层数的增多训练集上的效果变差？
+原因是随着网络越来越深，训练变得原来越难，网络的优化变得越来越难。理论上，越深的网络，效果应该更好；但实际上，由于训练难度，过深的网络会产生退化问题，效果反而不如相对较浅的网络。而残差网络就可以解决这个问题的，残差网络越深，训练集上的效果会越好。（测试集上的效果可能涉及过拟合问题。过拟合问题指的是测试集上的效果和训练集上的效果之间有差距。）这里要注意到过拟合与退化问题之间的区别
+残差块 残差网络是通过加入shortcut connections,变得更容易被优化。包含一个shortcut connection的几层网络被称为一个残差块。shortcut即图中x到 ⨁的箭头。">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://abananajuice.github.io/">Rainbow</a></h1>
+        <h2 class="site-description">“You don&#39;t need to be accepted by others. You need to be yourself.”</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://abananajuice.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/">Yolo学习笔记＿１</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Aug 17, 2019</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="yolov3学习笔记">yolov3学习笔记</h1>
+<h1 id="基本概念">基本概念</h1>
+<p><strong>下采样</strong>即图像缩小；将x*x个像素点取均值换算为一个。<br>
+<strong>上采样</strong>即图像放大，利用插值算法。</p>
+<p><strong>ground truth</strong>即监督学习中数据标注的正确的范围。也就是标准答案的意思。<br>
+<strong>IOU</strong>预测的范围（bounding box）与ground truth的交集/两者并集</p>
+<p><strong>bounding box(bbox)</strong> 在目标检测中不仅要知道目标的类别还要知道它的位置。在木变检测中常用<strong>边界框</strong>来描述目标位置。<br>
+<strong>anchor box</strong>目标检测算法通常会在输入图像中采样大量的区域，然后判断这些区域中是否包含我们感兴趣的目标，并调整区域边缘从而更准确地预测目标的真实边界框（ground-truth bounding box）。不同的模型使用的区域采样方法可能不同。这里我们介绍其中的一种方法：它以每个像素为中心生成多个大小和宽高比（aspect ratio）不同的边界框。这些边界框被称为<strong>锚框（anchor box）</strong>。(<strong>——动手做深度学习</strong>)</p>
+<p><strong>精确率与召回率</strong>实际上非常简单，精确率是针对我们预测结果而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)，也就是<br>
+P=TP/(TP+FP)<br>
+而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。<br>
+R=TP/TP+FN</p>
+<p><strong>非极大值抑制</strong>简称为NMS算法，思想是搜索局部最大值，抑制极大值。<br>
+流程如下：</p>
+<blockquote>
+<p>根据置信度得分进行排序<br>
+选择置信度最高的比边界框添加到最终输出列表中，将其从边界框列表中删除<br>
+计算所有边界框的面积<br>
+计算置信度最高的边界框与其它候选框的IoU。<br>
+删除IoU大于阈值的边界框<br>
+重复上述过程，直至边界框列表为空。</p>
+</blockquote>
+<p>**批标准化(batch normalization)**将分散的数据统一的做法，便与神经网络的学习和优化。normalization 预处理, 使得输入的 x 变化范围不会太大, 让输入值经过激励函数的敏感部分。BN实在每个全连接层之间都进行批数据标准化。(作者：
+<img src="https://pic3.zhimg.com/80/v2-083ca0bcd0749fd0f236a690b50442e6_hd.png" alt="BN"  /></p>
+<h2 id="聚类算法httpszhuanlanzhihucomp21387568"><a class="link" href="https://zhuanlan.zhihu.com/p/21387568"  target="_blank" rel="noopener"
+    >聚类算法</a></h2>
+<p>聚类算法是根据样本之间的距离来将他们归为一类的，这个距离不是普通的距离，理论上叫做欧氏距离。<br>
+一般面向大量的，同时维度在2个或两个以上的样本群。</p>
+<blockquote>
+<p>1、在样本中随机选择K个点，作为每个类别的初始中心点，这K是自己定的，假如你想将样本分成3个类K就等于3,4个类K就等于4；<br>
+2、计算所有样本离这K个初始中心点的距离并分别进行比较，选出其中最近的距离并把这个样本归到这个初始中心点的类别里，即总共划分成K个类别；<br>
+3、舍弃原来的初始中心点，在划分好的K个类别里分别计算出新的中心点，使得这些中心点距离他类别里的所有样本的距离之和最小；<br>
+4、判断新获得的中心点是否与旧中心点一样，如不一样则回到第2步，重新计算所有样本离这K个新的中心点的距离并进行比较，选出其中最近的距离并归到这个新的中心点的类别里，继续下面的步奏；如一样则完成，即收敛。</p>
+</blockquote>
+<h2 id="残差网络httpswwwcnblogscomwuliyttaotaop9560205html"><a class="link" href="https://www.cnblogs.com/wuliytTaotao/p/9560205.html"  target="_blank" rel="noopener"
+    >残差网络</a></h2>
+<h3 id="残差">残差</h3>
+<p>残差：实际观测值与估计值（拟合值）之间的差。如果回归模型正确则残差可以看做误差的观测值。</p>
+<p>理论上，可以训练一个 shallower 网络，然后在这个训练好的 shallower 网络上堆几层 identity mapping（恒等映射） 的层，即输出等于输入的层，构建出一个 deeper 网络。这两个网络（shallower 和 deeper）得到的结果应该是一模一样的.</p>
+<h3 id="退化问题">退化问题</h3>
+<p>为什么属于随着层数的增多<strong>训练集</strong>上的效果变差？</p>
+<p>原因是随着网络越来越深，训练变得原来越难，网络的优化变得越来越难。理论上，越深的网络，效果应该更好；但实际上，由于训练难度，过深的网络会产生退化问题，效果反而不如相对较浅的网络。而残差网络就可以解决这个问题的，残差网络越深，训练集上的效果会越好。（测试集上的效果可能涉及过拟合问题。过拟合问题指的是测试集上的效果和训练集上的效果之间有差距。）<strong>这里要注意到过拟合与退化问题之间的区别</strong></p>
+<h3 id="残差块">残差块</h3>
+<p>残差网络是通过加入shortcut connections,变得更容易被优化。包含一个shortcut connection的几层网络被称为一个残差块。shortcut即图中x到
+⨁的箭头。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1351564/201809/1351564-20180914164307733-889668964.png" alt="残差块"  /></p>
+<h3 id="残差块residual-block">残差块（residual block）</h3>
+<p>𝑥 表示输入，𝐹(𝑥) 表示残差块在第二层激活函数之前的输出，即 𝐹(𝑥)=𝑊2𝜎(𝑊1𝑥)，其中 𝑊1 和 𝑊2 表示第一层和第二层的权重，𝜎 表示 ReLU 激活函数。（这里省略了 bias。）最后残差块的输出是 𝜎(𝐹(𝑥)+𝑥)。</p>
+<p><strong>激活函数</strong>：上层节点的输出与下层节点的输入之间的函数关系。<br>
+常用的激活函数有：sigmoid函数，tanh函数，relu函数（这个比较常用）&hellip; &hellip;</p>
+<p>残差块中的网络可以使全连接层也可以是卷积层。</p>
+<blockquote>
+<p>设第二层网络在激活函数之前的输出为 𝐻(𝑥)。如果在该 2 层网络中，最优的输出就是输入 𝑥，那么对于没有 shortcut connection 的网络，就需要将其优化成 𝐻(𝑥)=𝑥；对于有 shortcut connection 的网络，即残差块，最优输出是 𝑥，则只需要将 𝐹(𝑥)=𝐻(𝑥)−𝑥 优化为 0 即可。后者的优化会比前者简单。这也是残差这一叫法的由来。</p>
+</blockquote>
+<p>上面相当于优化了恒等映射。残差网络可以不是神经网络，用全连接层也可以。</p>
+<h3 id="为什么残差网络会work">为什么残差网络会work</h3>
+<p>我们给一个网络不论在中间还是末尾加上一个残差块，并给残差块中的 weights 加上 L2 regularization（weight decay），这样图 1 中 𝐹(𝑥)=0 是很容易的。这种情况下加上一个残差块和不加之前的效果会是一样，所以加上残差块不会使得效果变得差。如果残差块中的隐藏单元学到了一些有用信息，那么它可能比 identity mapping（即 𝐹(𝑥)=0）表现的更好。</p>
+<h2 id="边界框回归httpsblogcsdnnetzijin0802034articledetails77685438"><a class="link" href="https://blog.csdn.net/zijin0802034/article/details/77685438"  target="_blank" rel="noopener"
+    >边界框回归</a></h2>
+<p>对于窗口一般使用四维向量(x,y,w,h) 来表示， 分别表示窗口的中心点坐标和宽高。 对于图 2, 红色的框 P 代表原始的Proposal, 绿色的框 G 代表目标的 Ground Truth， 我们的目标是寻找一种关系使得输入原始的窗口 P 经过映射得到一个跟真实窗口 G 更接近的回归窗口Ĝ。</p>
+<p><img src="https://img-blog.csdn.net/20170831205020797?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemlqaW4wODAyMDM0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图2"  /></p>
+<p>边框回归的目的既是：给定(Px,Py,Pw,Ph)(Px,Py,Pw,Ph)寻找一种映射ff， 使得f(Px,Py,Pw,Ph)=(Gx^,Gy^,Gw^,Gh^)f(Px,Py,Pw,Ph)=(Gx^,Gy^,Gw^,Gh^) 并且(Gx^,Gy^,Gw^,Gh^)≈(Gx,Gy,Gw,Gh)</p>
+<p><strong>边框回归的方法：平移+尺度缩放</strong></p>
+<h1 id="yolov1-yolov3httpsblogcsdnnetxd1723138323articledetails82532973"><a class="link" href="https://blog.csdn.net/xd1723138323/article/details/82532973"  target="_blank" rel="noopener"
+    >yolov1-yolov3</a></h1>
+<h2 id="yolov1">yolov1</h2>
+<h3 id="检测处理理想">检测处理理想</h3>
+<p>将输入图片划分为S * S的格子（逻辑区域），如果物体的中心坐标落在某个格子中，那么这个格子就负责检测这个物体（包括bounding box的坐标和类别概率）。每个格子预测B个bounding boxes和B个置信度，这个置信度表示这个格子预测的bounding  boxes包含物体的可信程度，论文作者将置信度定义为 Pr(Object)* IOU。Pr(Object)的值为0或者1，表示存不存在目标物体。</p>
+<p>每一个bounding box包括五个元素，x，y，w，h，confidence。坐标(x，y)表示的是box的中心坐标，并且是相对于格子的边界而言，w和h也是相对于整张图片的宽度和高度而言。置信度预测的值表示预测框和真实框的IOU值。虽然每个格子预测B个bounding box，但是每个格子只预测一组类条件概率，注意这里不是anchor，因为多个bounding box共用了一组class probability(表示的是<strong>先验概率</strong>)。所以网络架构的最后一层实际预测了B个bouding box和一组类别概率，注意这只是针对于一个格子，所以在不考虑batch size的情况下，实际预测输出长度为S* S*（B*5+C)</p>
+<h3 id="训练过程">训练过程</h3>
+<p>对于前面所说bounding box，作者也做了一些处理，将bounding box的w,h除以训练图像的宽度和高度（448*448），使其值在0-1之间。至于bouding box的x,y的实际值意义，作者认为不是相对于整张图片的中心坐标值，而是相对于的对应格子坐标左上边界偏移值，所以x,y的值也在0-1之间，这个地方有些难以理解。</p>
+<p>通过置信度为每一个各自从B个bounding box中筛选一个最终的bounding box。于是每个各自的坐标为（0+x，0+y），（0+x, 1+y）&hellip;&hellip;.</p>
+<p>通过我们设定的置信度阈值使用非极大值抑制方法从这49个bounding box中筛选；还有一种做法就是直接从98个bounding boxes使用非极大值抑制方法筛选。从图片的全局性来考虑，第一种方法更能体现图片的整体性。确定完bounding boxes后，用bounding box坐标值乘以与原图的比例值就可以在原图中框出相应的物体。</p>
+<h2 id="yolov2">yolov2</h2>
+<p>1.对数据进行批标准化处理。</p>
+<p>2.High Resolution Classifier:低分辨率训练分类网络，高分辨率训练检测网络，在两个过程见了一个适应性微调。</p>
+<p>3.Convolutional With Anchor Boxes（锚框卷积）：作者去掉了YOLOv1的全连接层，使用anchor boxes来预测bounding boxes，同时也去掉了最后池化层使得最后feature maps的分辨率大一些。与YOLOv1不同的是，YOLOv2为每一个bounding box预测一个类条件概率【YOLOv1中B个bounding box共用一个类条件概率】。在YOLOv1中bounding boxes数目为：S* S*(5* B+C)，而在YOLOv2中bounding box数目为S * S*B（5+C）。使用anchor box没有使精度提升，提高了召回率。</p>
+<p>4.作者采用维度聚类的方法对数据集的真实标签的bounding box进行聚类分析从而确定B的取值。如果用欧式距离来衡量K-means的距离，会使得大的bounding box比小的bounding box产生更大的误差，于是作者调整距离计算公式为：
+<img src="https://private.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Csmall%20d%28box%2Ccentroid%29%3D1-IOU%28box%2Ccentroid%29" alt=""  /></p>
+<p>5.13* 13的feature map可以提供足够信息预测较大的物体，但是对于小物体而言提供的信息仍然不够，所以作者提供了一个passthrough层，利用26*26的feature map来预测小物体（可能是受SSD的启发，不同大小的特征图检测不同大小的物体）。</p>
+<p>6.YOLOv2的网络只有卷积层和池化层，所以就可以在训练进行的过程改变feature maps的shape。 为了使得YOLOv2更具鲁棒性，我们让模型能够对不同大小的图片进行训练。在训练过程中，每10个batch就换一组新尺度的图片（这里的新图片指大小不同，图片的其他属性是一样的）。</p>
+<blockquote>
+<p>作者提出了一种将分类数据集和检测数据集联合训练的方法，在训练的过程，我们将这两类数据集混合，当输入的检测数据集时，反向传播全部的误差损失（YOLOv2的loss），当遇到分类数据集时，只反向传播分类误差损失。</p>
+</blockquote>
+<h2 id="yolov3">yolov3</h2>
+<p>###　1.边界框预测</p>
+<blockquote>
+<p>YOLOv3中引入一个<strong>Objectness score</strong>概念，使用logistic regression为每一个bounding box预测一个Objectness score。将预测的bounding boxes中与真实bounding box重叠最大的bounding box的Objectness score赋值为1，如果这个bounding box与真实bounding box重叠值达到设定的阈值0.5，这个bounding box的损失为0，其同一格子里面的其他bounding box只计算置信度损失，忽略坐标损失和类别损失。(可以认为0.5表示预测的边界框已经能很好地标记框出物体，所以不用计算它的损失。每一个格子中的object由一个预测的bounding box预测。既然已经找到了较好地bounding box，所以同一个格子里面的其他bounding box没有必要计算坐标误差和分类误差，只需要计算置信度误差，用来调整置信度，最理想的效果是这些bounding box的置信度值更新为0）。<br>
+这里bounding box是指网络模型预测的confidence，bx，by，bw，bh，计算置信度误差时，用真实标签坐标和预测坐标（bx，by，bw，bh）计算IOU，Objectness score相当于Pr(Object)，所以最终的置信度计算为IOU*Pr（Object）</p>
+</blockquote>
+<h3 id="2类别预测">2.类别预测</h3>
+<p>类别预测使用了多标签分类（多分类），没有使用softmax，而是对每一个类各自对立地使用了logistic分类器，用binary cross-entroy loss替代softmax loss，这样能较好地处理标签重叠（包含）关系（例如：女人和人）。</p>
+<h3 id="3交叉尺度多尺度预测">3.交叉尺度(多尺度)预测</h3>
+<p>YOLOv3预测三种不同尺度的box，每一种尺度预测三个anchor boxes，即N<em>N</em>(3*(4+1+80))，所以最终的输出是3*【N*N*(3*(4+1+80))】，最前面的3表示三种尺度。3种尺度，3个anchor box，是由聚类数为9决定的，按照一定的顺序（面积从小到大）将这个聚蔟box分配给不同尺度。在YOLOv2中，为了加强对小物体的检测，引入了passthrough层，假设最后提取的feature map的size是13*13，passthrough层的作用是将上层26*26的feature map和最后层13*13的feature map连接，作为网络最后的输出。</p>
+<p>YOLOv3是采用了低分辨率feature map上采用和高分辨率feature map做融合，形成新的feature map层，对新的feature map层单独做预测。这样就是多尺度预测。如果YOLOv3最后一层也是13<em>13的话，那么三个尺度的大小为（13</em>13，26<em>26，52</em>52），第三个尺度只用第二个尺度上采样并做融合。值得说明的是：YOLOv2中的多尺度指输入图像的大小不同，YOLOv3的多尺度是指用不同的分辨率的feature map做预测。</p>
+<hr>
+<p>##　参考文献：</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/24810318"  target="_blank" rel="noopener"
+    >什么是批标准化</a>　　作者：莫烦</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/21387568"  target="_blank" rel="noopener"
+    >聚类算法</a>　　作者：挖数</p>
+<p><a class="link" href="https://www.cnblogs.com/wuliytTaotao/p/9560205.html"  target="_blank" rel="noopener"
+    >残差网络</a>　　作者：wuliytTaotao</p>
+<p><a class="link" href="https://blog.csdn.net/zijin0802034/article/details/77685438"  target="_blank" rel="noopener"
+    >边框回归(Bounding Box Regression)详解</a>　　作者：南有乔木NTU</p>
+<p><a class="link" href="https://blog.csdn.net/xd1723138323/article/details/82532973"  target="_blank" rel="noopener"
+    >目标检测之YOLO系列-V1至V3改进详解</a>　　作者：xd1723138323</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under GNU General Public License v2.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Rainbow
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
