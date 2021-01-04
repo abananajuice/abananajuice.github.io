@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程 on Rainbow</title>
+    <link>https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 编程 on Rainbow</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Jan 2021 13:09:11 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法笔记2</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</link>
+      <pubDate>Mon, 04 Jan 2021 13:09:11 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</guid>
+      <description>基本数据结构 线性结构（linear structure）  有序数据项的集合 每个数据项都有唯一的前驱和后继（第一个和最后一个除外）  根据数据项增减的方式构成了数据结构
+ 栈(Stack)&amp;ndash;仅在表尾进行插入和删除操作的线性表 队列(Queue)&amp;ndash;只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作 双端队列(Deque)&amp;ndash;限定插入和删除操作在表的两端进行的线性表 列表(List)&amp;ndash;  栈 进行操作的一端为栈顶，另一端为栈底
+栈的特点：后进先出LIFO
+栈通过python的实现可以借助list的数据类型
+栈的应用 括号匹配&amp;ndash;基本思路 
+括号匹配与之前图灵机的模型有些相似；
+ 括号匹配可以用用于爬虫HTML数据的爬取；另外该方法也可通过正则表达式实现。  十进制与二进制的转换 十进制转换二进制是余数的连续求取，并将求得的余数倒过来书写。通过栈后进先出的特性可以实现。
+同时由此可以进行十进制到其他进制的转换。当转换的进制为十一禁进制以上时，可以使用数组来保存其中的字母
+digits = &amp;#34;0123456789ABC&amp;#34; 表达式转换 根据表达式操作符的的位置分为中缀、前缀和后缀，距离操作数最近的操作符先执行
+  中缀表达式转换为前缀和后缀表达式
+将表达式转换为全括号形式，将内部每个运算符移到对应的左括号或右括号处边可以转换为前缀、后缀表达式
+  中缀转后缀算法
+  从左到右扫描过程中，采用栈来暂存为处理的操作符，当遇到一个新的操作符，就需要跟栈顶的操作符比较下优先级，再行处理。
+算法流程
+ 从左到右扫描
+- 当遇到操作数，直接输出至列表末尾
+- 当遇到左括号压入栈顶
+- 当遇到右括号，反复弹出栈顶加入至输出列表末尾，直到碰到左括号
+- 当遇到操作符，与栈顶其他操作符比较。栈顶操作符高于或等于它，则将输出栈顶的操作符直到优先级低于它
+ 后缀表达式的求值 后缀表达式的操作符在操作数的后面，因此要暂存操作数,直到碰到操作符才进行运算(从这可以利用栈的特性)
+在实际运算时，先弹出的时右操作数然后才是左操作数，对于‘-’和‘/’要注意两个操作数的位置
+算法流程
+  创建空栈用于暂存操作数
+  从左到右扫面单词列表
+ 如果是操作数，压入栈顶 如果是操作符，从栈顶弹出两个操作数，进行计算。（注意操作数的位置）    最后扫描结束后，表达式的值被存在栈顶（如果表达式正确，则栈中仅有最后的结果一个元素）</description>
+    </item>
+    
+    <item>
+      <title>算法笔记1</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</link>
+      <pubDate>Mon, 04 Jan 2021 13:09:08 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</guid>
+      <description>算法分析 算法和算法复杂性 可计算的问题：
+ what：分类问题——树状判定分支 why： 证明问题——公式序列解决 how： 或称问题——算法流程解决  欧几里得算法的python实现
+def alg(a,b): if b==0 : return a print(a) c=a%b alg(b,c) def main(): #a,b为要计算的两个数 a=15 b=9 print(alg(a,b)) main() 计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。
+不可计算问题
+ 停机问题 几乎所有无理数都无法通过算法找出任意一位精确数  程序与算法的区别 算法是描述问题解决的分布步骤而程序则是通过某种编程语言实现的算法。
+算法分析主要是从计算机资源消耗的角度来评判和比较算法。评判的两个标准有两种：算法执行时间和空间（内存或存储空间）。
+利用python的time库中 time.time()函数可以计算算法的执行时间。
+ time.time() 是计算从1970到现在的时长，并将值返回。
+ 对于算法运行时间的检测也收到语言性能、机器的性能的影响。
+大O表示法 一个算法所实施的操作数量或步骤可作为独立于程序/机器的度量指标。
+程序设计语言中除与计算资源无关的定义语句外，主要是三种控制流语句和赋值语句。
+一个赋值语句包含了（表达式）计算和（变量）存储两个基本资源。而控制流语句仅起组织语句的作用，并不涉及处理。
+算法分析的目标是找出问题规模如何影响执行时间
+数量级函数 数量级函数描述了T（n）中随着n增加而增加速度最快的主导部分。称作大O表示法记作O(f(n)),其中f(n)表示T(n)中的主导部分。
+ T(n)=5n^2+27n+1005
+当n越来越大起主导作用的是5*n^2,其中系数5对n^2的增长速度无影响。因此可以表示为O(n^2)
+ 具体数据也会影响算法运行时间，如排序算法。此时分为最好，最差和平均状况，主要还是通过平均状况分析性能。
+大O表示所有上限中最小的那个上限
+大Ω表示所有下限中最大的那个下限
+如果上下限相同用Θ大表示
+变位词  写一个布尔函数，一两个此作为参数，返回两个词是否为变位词
+  将每一个单词逐个检查  课程给的代码示例：
+def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &amp;lt; len(s1) and stillok: #只要字符中有一个没找到就可以通过32行退出 pos2 = 0 found =False while pos2 &amp;lt; len(alist) and not found: if s1[pos2] == alist[pos2]: found = True else: pos2 = pos2 + 1 if found: alist[pos2] = None else: stillok = False pos1 = pos1 + 1 return stillok 如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none</description>
+    </item>
+    
+    <item>
+      <title>算法笔记0</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</link>
+      <pubDate>Mon, 04 Jan 2021 13:09:05 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</guid>
+      <description>抽象数据类型（ADT） 是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。
+递归 编写递归代码要注意的三点：
+  递归总有一个最简单的情况&amp;mdash;方法的第一条语句总是包含 return 的条件语句。 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集。   </description>
+    </item>
+    
+    <item>
+      <title>Ubuntu笔记</title>
+      <link>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 30 Jun 2019 11:00:55 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</guid>
+      <description>这篇笔记会根据情况隔段时间更新一次
+ 终端操作  cd+文件夹名 进入文件夹 可以使用TAB键进行自动补全或选择 cd ..( 退出几层就加几个..) 退出到上n层路径
+ls 显示文件夹中的目录
+pwd 显示当前路径
+gedit 使用文本编辑器编辑文件
+cat 在终端中查看文件（多用做文本文件）
+sudo 进入管理员模式（超级用户)
+sudo su 进入根用户
+nvidia-smi 查看显卡运行状态（A卡没有试过）
+ 在ubuntu中一些文件被写保护，需要更高级权限才能修改，可以在命令前加sudo
+复制一个文件到指定目录  (1) 在桌面上打开终端，输入sudo su
+(2) 输入密码，就切换到root用户下
+(3) 切换到桌面 命令输入为 cd 桌面
+(4) 然后输入复制命令行 cp -r studio.zip /home/androidstudio
+(5) 回车 大功告成 可以看看/home/androidstudio目录下是否有studio.zip
+ 作者：飞奔的小付
+来源：CSDN
+原文
+移动文件（假设现在在该文件的目录下）
+ sudo mv xxx.xx 新的位置的路径
+ 解压文件
+ sudo unzip opencv-3.3.0.zip
+ 重命名文件
+ sudo cp 原文件名 新文件名</description>
+    </item>
+    
+  </channel>
+</rss>

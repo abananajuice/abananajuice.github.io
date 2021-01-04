@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://abananajuice.github.io/categories/</loc>
+    <lastmod>2021-01-04T13:09:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://abananajuice.github.io/post/</loc>
     <lastmod>2021-01-04T13:09:11+08:00</lastmod>
   </url>
@@ -18,6 +23,11 @@
   </url>
   
   <url>
+    <loc>https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2021-01-04T13:09:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</loc>
     <lastmod>2021-01-04T13:09:08+08:00</lastmod>
   </url>
@@ -29,6 +39,11 @@
   
   <url>
     <loc>https://abananajuice.github.io/p/%E7%BA%A2%E6%8B%82%E5%A4%9C%E5%A5%94/</loc>
+    <lastmod>2021-01-04T13:01:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://abananajuice.github.io/categories/%E6%96%87%E5%AD%A6/</loc>
     <lastmod>2021-01-04T13:01:27+08:00</lastmod>
   </url>
   
@@ -60,10 +75,6 @@
   <url>
     <loc>https://abananajuice.github.io/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://abananajuice.github.io/categories/</loc>
   </url>
   
   <url>
