@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编程 on Mark</title>
-    <link>https://https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
+    <link>https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
     <description>Recent content in 编程 on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Jan 2021 13:09:11 +0800</lastBuildDate><atom:link href="https://https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jan 2021 13:09:11 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>算法笔记2</title>
-      <link>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</link>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</link>
       <pubDate>Mon, 04 Jan 2021 13:09:11 +0800</pubDate>
       
-      <guid>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</guid>
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</guid>
       <description>基本数据结构 线性结构（linear structure）  有序数据项的集合 每个数据项都有唯一的前驱和后继（第一个和最后一个除外）  根据数据项增减的方式构成了数据结构
  栈(Stack)&amp;ndash;仅在表尾进行插入和删除操作的线性表 队列(Queue)&amp;ndash;只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作 双端队列(Deque)&amp;ndash;限定插入和删除操作在表的两端进行的线性表 列表(List)&amp;ndash;  栈 进行操作的一端为栈顶，另一端为栈底
 栈的特点：后进先出LIFO
@@ -42,10 +42,10 @@ digits = &amp;#34;0123456789ABC&amp;#34; 表达式转换 根据表达式操作�
     
     <item>
       <title>算法笔记1</title>
-      <link>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</link>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</link>
       <pubDate>Mon, 04 Jan 2021 13:09:08 +0800</pubDate>
       
-      <guid>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</guid>
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</guid>
       <description>算法分析 算法和算法复杂性 可计算的问题：
  what：分类问题——树状判定分支 why： 证明问题——公式序列解决 how： 或称问题——算法流程解决  欧几里得算法的python实现
 def alg(a,b): if b==0 : return a print(a) c=a%b alg(b,c) def main(): #a,b为要计算的两个数 a=15 b=9 print(alg(a,b)) main() 计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。
@@ -73,10 +73,10 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
     
     <item>
       <title>算法笔记0</title>
-      <link>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</link>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</link>
       <pubDate>Mon, 04 Jan 2021 13:09:05 +0800</pubDate>
       
-      <guid>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</guid>
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</guid>
       <description>抽象数据类型（ADT） 是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。
 递归 编写递归代码要注意的三点：
   递归总有一个最简单的情况&amp;mdash;方法的第一条语句总是包含 return 的条件语句。 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集。   </description>
@@ -84,10 +84,10 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
     
     <item>
       <title>Yolo学习笔记＿１</title>
-      <link>https://https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</link>
+      <link>https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</link>
       <pubDate>Sat, 17 Aug 2019 17:20:47 +0800</pubDate>
       
-      <guid>https://https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</guid>
+      <guid>https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</guid>
       <description>yolov3学习笔记 基本概念 下采样即图像缩小；将x*x个像素点取均值换算为一个。
 上采样即图像放大，利用插值算法。
 ground truth即监督学习中数据标注的正确的范围。也就是标准答案的意思。
@@ -121,10 +121,10 @@ R=TP/TP+FN
     
     <item>
       <title>Ubuntu笔记</title>
-      <link>https://https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</link>
+      <link>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 30 Jun 2019 11:00:55 +0800</pubDate>
       
-      <guid>https://https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</guid>
       <description>这篇笔记会根据情况隔段时间更新一次
  终端操作  cd+文件夹名 进入文件夹 可以使用TAB键进行自动补全或选择 cd ..( 退出几层就加几个..) 退出到上n层路径
 ls 显示文件夹中的目录
