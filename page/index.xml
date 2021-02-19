@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pages on Rainbow</title>
-    <link>https://abananajuice.github.io/page/</link>
-    <description>Recent content in Pages on Rainbow</description>
+    <title>Pages on Mark</title>
+    <link>https://https://abananajuice.github.io/page/</link>
+    <description>Recent content in Pages on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://abananajuice.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://https://abananajuice.github.io/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>https://abananajuice.github.io/about/</link>
+      <link>https://https://abananajuice.github.io/about/</link>
       <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://abananajuice.github.io/about/</guid>
-      <description>大学生，00后，现居郑州 你好，陌生人
-如果我的博客能够帮到你，那真是太好了。
-邮箱：mark20317@outlook.com</description>
+      <guid>https://https://abananajuice.github.io/about/</guid>
+      <description>00后咸鱼一枚，非专业OTAKU，轻度社恐。现居郑州。沉迷于各种3A、网络游戏，喜欢OW。人菜瘾大，不能自拔。偶尔弹尤克里里，阅读各类书籍。
+本科自动化。Coding for fun，会那么一点C和python，专业需要也会用Matlab。偶尔逛逛GitHub，琢磨一些代码👩‍💻。幻想着成为技术大牛，进入巨硬养老🧐。
+期待与你联系
+关于博客 19年搭建的博客，20年底的时候换了一次主题。博客的初衷仅仅是想记录一些自己各方面的心得，说不定以后也会在其他平台上更新。当然，如果有人能看到并得到帮助那可真的是太好了😄。
+ 假如再也碰不到你，
+祝你早安、午安、晚安。
+📫邮箱　🖤GitHub　🤪BILI</description>
     </item>
     
     <item>
       <title>Archives</title>
-      <link>https://abananajuice.github.io/archives/</link>
+      <link>https://https://abananajuice.github.io/archives/</link>
       <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://abananajuice.github.io/archives/</guid>
+      <guid>https://https://abananajuice.github.io/archives/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Search</title>
-      <link>https://abananajuice.github.io/search/</link>
+      <link>https://https://abananajuice.github.io/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://abananajuice.github.io/search/</guid>
+      <guid>https://https://abananajuice.github.io/search/</guid>
       <description></description>
     </item>
     

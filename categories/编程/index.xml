@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>编程 on Rainbow</title>
-    <link>https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
-    <description>Recent content in 编程 on Rainbow</description>
+    <title>编程 on Mark</title>
+    <link>https://https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 编程 on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Jan 2021 13:09:11 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jan 2021 13:09:11 +0800</lastBuildDate><atom:link href="https://https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>算法笔记2</title>
-      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</link>
+      <link>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</link>
       <pubDate>Mon, 04 Jan 2021 13:09:11 +0800</pubDate>
       
-      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</guid>
+      <guid>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</guid>
       <description>基本数据结构 线性结构（linear structure）  有序数据项的集合 每个数据项都有唯一的前驱和后继（第一个和最后一个除外）  根据数据项增减的方式构成了数据结构
  栈(Stack)&amp;ndash;仅在表尾进行插入和删除操作的线性表 队列(Queue)&amp;ndash;只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作 双端队列(Deque)&amp;ndash;限定插入和删除操作在表的两端进行的线性表 列表(List)&amp;ndash;  栈 进行操作的一端为栈顶，另一端为栈底
 栈的特点：后进先出LIFO
@@ -42,10 +42,10 @@ digits = &amp;#34;0123456789ABC&amp;#34; 表达式转换 根据表达式操作�
     
     <item>
       <title>算法笔记1</title>
-      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</link>
+      <link>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</link>
       <pubDate>Mon, 04 Jan 2021 13:09:08 +0800</pubDate>
       
-      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</guid>
+      <guid>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</guid>
       <description>算法分析 算法和算法复杂性 可计算的问题：
  what：分类问题——树状判定分支 why： 证明问题——公式序列解决 how： 或称问题——算法流程解决  欧几里得算法的python实现
 def alg(a,b): if b==0 : return a print(a) c=a%b alg(b,c) def main(): #a,b为要计算的两个数 a=15 b=9 print(alg(a,b)) main() 计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。
@@ -73,21 +73,58 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
     
     <item>
       <title>算法笔记0</title>
-      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</link>
+      <link>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</link>
       <pubDate>Mon, 04 Jan 2021 13:09:05 +0800</pubDate>
       
-      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</guid>
+      <guid>https://https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</guid>
       <description>抽象数据类型（ADT） 是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。
 递归 编写递归代码要注意的三点：
   递归总有一个最简单的情况&amp;mdash;方法的第一条语句总是包含 return 的条件语句。 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集。   </description>
     </item>
     
     <item>
+      <title>Yolo学习笔记＿１</title>
+      <link>https://https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</link>
+      <pubDate>Sat, 17 Aug 2019 17:20:47 +0800</pubDate>
+      
+      <guid>https://https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</guid>
+      <description>yolov3学习笔记 基本概念 下采样即图像缩小；将x*x个像素点取均值换算为一个。
+上采样即图像放大，利用插值算法。
+ground truth即监督学习中数据标注的正确的范围。也就是标准答案的意思。
+IOU预测的范围（bounding box）与ground truth的交集/两者并集
+bounding box(bbox) 在目标检测中不仅要知道目标的类别还要知道它的位置。在木变检测中常用边界框来描述目标位置。
+anchor box目标检测算法通常会在输入图像中采样大量的区域，然后判断这些区域中是否包含我们感兴趣的目标，并调整区域边缘从而更准确地预测目标的真实边界框（ground-truth bounding box）。不同的模型使用的区域采样方法可能不同。这里我们介绍其中的一种方法：它以每个像素为中心生成多个大小和宽高比（aspect ratio）不同的边界框。这些边界框被称为锚框（anchor box）。(——动手做深度学习)
+精确率与召回率实际上非常简单，精确率是针对我们预测结果而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)，也就是
+P=TP/(TP+FP)
+而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。
+R=TP/TP+FN
+非极大值抑制简称为NMS算法，思想是搜索局部最大值，抑制极大值。
+流程如下：
+ 根据置信度得分进行排序
+选择置信度最高的比边界框添加到最终输出列表中，将其从边界框列表中删除
+计算所有边界框的面积
+计算置信度最高的边界框与其它候选框的IoU。
+删除IoU大于阈值的边界框
+重复上述过程，直至边界框列表为空。
+ **批标准化(batch normalization)**将分散的数据统一的做法，便与神经网络的学习和优化。normalization 预处理, 使得输入的 x 变化范围不会太大, 让输入值经过激励函数的敏感部分。BN实在每个全连接层之间都进行批数据标准化。(作者： 聚类算法 聚类算法是根据样本之间的距离来将他们归为一类的，这个距离不是普通的距离，理论上叫做欧氏距离。
+一般面向大量的，同时维度在2个或两个以上的样本群。
+ 1、在样本中随机选择K个点，作为每个类别的初始中心点，这K是自己定的，假如你想将样本分成3个类K就等于3,4个类K就等于4；
+2、计算所有样本离这K个初始中心点的距离并分别进行比较，选出其中最近的距离并把这个样本归到这个初始中心点的类别里，即总共划分成K个类别；
+3、舍弃原来的初始中心点，在划分好的K个类别里分别计算出新的中心点，使得这些中心点距离他类别里的所有样本的距离之和最小；
+4、判断新获得的中心点是否与旧中心点一样，如不一样则回到第2步，重新计算所有样本离这K个新的中心点的距离并进行比较，选出其中最近的距离并归到这个新的中心点的类别里，继续下面的步奏；如一样则完成，即收敛。
+ 残差网络 残差 残差：实际观测值与估计值（拟合值）之间的差。如果回归模型正确则残差可以看做误差的观测值。
+理论上，可以训练一个 shallower 网络，然后在这个训练好的 shallower 网络上堆几层 identity mapping（恒等映射） 的层，即输出等于输入的层，构建出一个 deeper 网络。这两个网络（shallower 和 deeper）得到的结果应该是一模一样的.
+退化问题 为什么属于随着层数的增多训练集上的效果变差？
+原因是随着网络越来越深，训练变得原来越难，网络的优化变得越来越难。理论上，越深的网络，效果应该更好；但实际上，由于训练难度，过深的网络会产生退化问题，效果反而不如相对较浅的网络。而残差网络就可以解决这个问题的，残差网络越深，训练集上的效果会越好。（测试集上的效果可能涉及过拟合问题。过拟合问题指的是测试集上的效果和训练集上的效果之间有差距。）这里要注意到过拟合与退化问题之间的区别
+残差块 残差网络是通过加入shortcut connections,变得更容易被优化。包含一个shortcut connection的几层网络被称为一个残差块。shortcut即图中x到 ⨁的箭头。</description>
+    </item>
+    
+    <item>
       <title>Ubuntu笔记</title>
-      <link>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</link>
+      <link>https://https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 30 Jun 2019 11:00:55 +0800</pubDate>
       
-      <guid>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</guid>
       <description>这篇笔记会根据情况隔段时间更新一次
  终端操作  cd+文件夹名 进入文件夹 可以使用TAB键进行自动补全或选择 cd ..( 退出几层就加几个..) 退出到上n层路径
 ls 显示文件夹中的目录
