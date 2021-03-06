@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='AD的概念及性能指标  AD概念：将连续的模拟信号转换为离散的数字信号的器件。 转换时间：AD完成一次转换所需要的时间，其倒数为转换速率。 分辨率 输出模拟量最小变化程度的指标(32上的为12位)。12位，满量程5v分辨率为:5 /（2^12）=1.22mv 量化误差 量化过程引起的误差 理论上规定为一个单位分辨率的-1/2 &amp;mdash; &#43;1/2LSB 。 转换精度：实际A/D转换器与一个理想A/D转换器在量化值上的差值，可用绝对误差或相对误差表示。  AD时钟 时钟由PCLK2经过分频产生，最大14M 一般使PCLK2=HCLK=72M
+采样的周期数可通过 ADC 采样时间寄存器 ADC_SMPRx（x=0、1） 中的 SMP[2:0]位设置，ADC_SMPR2 控制的是通道 0~9，ADC_SMPR1 控制的是通道 10~17。每个通道可以分别用不同的时间采样。其中采样周期最小是 1.5 个（ADC_CLK 周期，1/ADC_CLK），即如果我们要达到最快的采样，那么应该设置采样周期为 1.5 个周期。
+ADC的转换时间：与ADC的输入时钟和采样时间有关。 公式为：Tconv = 采样时间 &#43; 12.5 个周期。
+CubeMX的配置 使用 ADC1 的其中1个通道，通道号10，对应的引脚是 PC0；
+设置ADC 时钟参数，这里设置 PLCK2是72M；时钟经过 6 分频，那么此时的时钟就是 12MHz。
+设置 ADC 的转换模式以及通道进行设置，独立模式（Independent mode）、数据右对齐（Right Alignment）、连续转换模式（Continuous Conversion Mod）使能；使能规则通道转换，选择1个通道。
+
+常用函数 ADC:HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);//此函数Adon控制位，置1，启动ADC。 HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout); //用于轮询ADC转换。 adc句柄和超时时间 HAL_ADC_GetValue(ADC_HandleTypeDef* hadc); //读取ADC的值，清EOC； 返回AD采集的值 uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc); //读取ADC的状态；本例参数： adc句柄，取值&amp;amp;hadc1 返回状态值 终端回调函数的编写 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {	uint16_t ADC1_Value; uint32_t Rt; if (htim-&amp;gt;Instance == htim1.'><title>模数转换的应用</title>
+
+<link rel='canonical' href='https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='模数转换的应用'>
+<meta property='og:description' content='AD的概念及性能指标  AD概念：将连续的模拟信号转换为离散的数字信号的器件。 转换时间：AD完成一次转换所需要的时间，其倒数为转换速率。 分辨率 输出模拟量最小变化程度的指标(32上的为12位)。12位，满量程5v分辨率为:5 /（2^12）=1.22mv 量化误差 量化过程引起的误差 理论上规定为一个单位分辨率的-1/2 &amp;mdash; &#43;1/2LSB 。 转换精度：实际A/D转换器与一个理想A/D转换器在量化值上的差值，可用绝对误差或相对误差表示。  AD时钟 时钟由PCLK2经过分频产生，最大14M 一般使PCLK2=HCLK=72M
+采样的周期数可通过 ADC 采样时间寄存器 ADC_SMPRx（x=0、1） 中的 SMP[2:0]位设置，ADC_SMPR2 控制的是通道 0~9，ADC_SMPR1 控制的是通道 10~17。每个通道可以分别用不同的时间采样。其中采样周期最小是 1.5 个（ADC_CLK 周期，1/ADC_CLK），即如果我们要达到最快的采样，那么应该设置采样周期为 1.5 个周期。
+ADC的转换时间：与ADC的输入时钟和采样时间有关。 公式为：Tconv = 采样时间 &#43; 12.5 个周期。
+CubeMX的配置 使用 ADC1 的其中1个通道，通道号10，对应的引脚是 PC0；
+设置ADC 时钟参数，这里设置 PLCK2是72M；时钟经过 6 分频，那么此时的时钟就是 12MHz。
+设置 ADC 的转换模式以及通道进行设置，独立模式（Independent mode）、数据右对齐（Right Alignment）、连续转换模式（Continuous Conversion Mod）使能；使能规则通道转换，选择1个通道。
+
+常用函数 ADC:HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);//此函数Adon控制位，置1，启动ADC。 HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout); //用于轮询ADC转换。 adc句柄和超时时间 HAL_ADC_GetValue(ADC_HandleTypeDef* hadc); //读取ADC的值，清EOC； 返回AD采集的值 uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc); //读取ADC的状态；本例参数： adc句柄，取值&amp;amp;hadc1 返回状态值 终端回调函数的编写 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {	uint16_t ADC1_Value; uint32_t Rt; if (htim-&amp;gt;Instance == htim1.'>
+<meta property='og:url' content='https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/'>
+<meta property='og:site_name' content='Mark'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-03-06T20:11:17&#43;08:00'/><meta property='article:modified_time' content='2021-03-06T20:11:17&#43;08:00'/>
+<meta name="twitter:title" content="模数转换的应用">
+<meta name="twitter:description" content="AD的概念及性能指标  AD概念：将连续的模拟信号转换为离散的数字信号的器件。 转换时间：AD完成一次转换所需要的时间，其倒数为转换速率。 分辨率 输出模拟量最小变化程度的指标(32上的为12位)。12位，满量程5v分辨率为:5 /（2^12）=1.22mv 量化误差 量化过程引起的误差 理论上规定为一个单位分辨率的-1/2 &amp;mdash; &#43;1/2LSB 。 转换精度：实际A/D转换器与一个理想A/D转换器在量化值上的差值，可用绝对误差或相对误差表示。  AD时钟 时钟由PCLK2经过分频产生，最大14M 一般使PCLK2=HCLK=72M
+采样的周期数可通过 ADC 采样时间寄存器 ADC_SMPRx（x=0、1） 中的 SMP[2:0]位设置，ADC_SMPR2 控制的是通道 0~9，ADC_SMPR1 控制的是通道 10~17。每个通道可以分别用不同的时间采样。其中采样周期最小是 1.5 个（ADC_CLK 周期，1/ADC_CLK），即如果我们要达到最快的采样，那么应该设置采样周期为 1.5 个周期。
+ADC的转换时间：与ADC的输入时钟和采样时间有关。 公式为：Tconv = 采样时间 &#43; 12.5 个周期。
+CubeMX的配置 使用 ADC1 的其中1个通道，通道号10，对应的引脚是 PC0；
+设置ADC 时钟参数，这里设置 PLCK2是72M；时钟经过 6 分频，那么此时的时钟就是 12MHz。
+设置 ADC 的转换模式以及通道进行设置，独立模式（Independent mode）、数据右对齐（Right Alignment）、连续转换模式（Continuous Conversion Mod）使能；使能规则通道转换，选择1个通道。
+
+常用函数 ADC:HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);//此函数Adon控制位，置1，启动ADC。 HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout); //用于轮询ADC转换。 adc句柄和超时时间 HAL_ADC_GetValue(ADC_HandleTypeDef* hadc); //读取ADC的值，清EOC； 返回AD采集的值 uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc); //读取ADC的状态；本例参数： adc句柄，取值&amp;amp;hadc1 返回状态值 终端回调函数的编写 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {	uint16_t ADC1_Value; uint32_t Rt; if (htim-&amp;gt;Instance == htim1.">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://abananajuice.github.io/">Mark</a></h1>
+        <h2 class="site-description">“You don&#39;t need to be accepted by others. You need to be yourself.”</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://abananajuice.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/" >
+                技术宅
+            </a>
+        
+            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" >
+                嵌入式
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/">模数转换的应用</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Mar 06, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h2 id="ad的概念及性能指标">AD的概念及性能指标</h2>
+<ul>
+<li>AD概念：将连续的模拟信号转换为离散的数字信号的器件。</li>
+<li>转换时间：AD完成一次转换所需要的时间，其倒数为转换速率。</li>
+<li>分辨率 输出模拟量最小变化程度的指标(32上的为12位)。12位，满量程5v分辨率为:5 /（2^12）=1.22mv</li>
+<li>量化误差 量化过程引起的误差 理论上规定为一个单位分辨率的-1/2 &mdash; +1/2LSB 。</li>
+<li>转换精度：实际A/D转换器与一个理想A/D转换器在量化值上的差值，可用绝对误差或相对误差表示。</li>
+</ul>
+<h2 id="ad时钟">AD时钟</h2>
+<p>时钟由PCLK2经过分频产生，最大14M 一般使PCLK2=HCLK=72M</p>
+<p>采样的周期数可通过 ADC 采样时间寄存器 ADC_SMPRx（x=0、1） 中的 SMP[2:0]位设置，ADC_SMPR2 控制的是通道 0~9，ADC_SMPR1 控制的是通道 10~17。每个通道可以分别用不同的时间采样。其中采样周期最小是 1.5 个（ADC_CLK 周期，1/ADC_CLK），即如果我们要达到最快的采样，那么应该设置采样周期为 1.5 个周期。</p>
+<p>ADC的转换时间：与ADC的输入时钟和采样时间有关。 公式为：Tconv = 采样时间 + 12.5 个周期。</p>
+<h2 id="cubemx的配置">CubeMX的配置</h2>
+<p>使用 ADC1 的其中1个通道，通道号10，对应的引脚是 PC0；</p>
+<p>设置ADC 时钟参数，这里设置 PLCK2是72M；时钟经过 6 分频，那么此时的时钟就是 12MHz。</p>
+<p>设置 ADC 的转换模式以及通道进行设置，独立模式（Independent mode）、数据右对齐（Right Alignment）、连续转换模式（Continuous Conversion Mod）使能；使能规则通道转换，选择1个通道。</p>
+<p><a class="link" href="https://imgtu.com/i/6u1ZOU"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6u1ZOU.png" alt="6u1ZOU.png"  /></a></p>
+<h2 id="常用函数">常用函数</h2>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="nl">ADC</span><span class="p">:</span><span class="n">HAL_StatusTypeDef</span>  <span class="n">HAL_ADC_Start</span><span class="p">(</span><span class="n">ADC_HandleTypeDef</span><span class="o">*</span> <span class="n">hadc</span><span class="p">);</span><span class="c1">//此函数Adon控制位，置1，启动ADC。
+</span><span class="c1"></span><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_ADC_PollForConversion</span><span class="p">(</span><span class="n">ADC_HandleTypeDef</span><span class="o">*</span> <span class="n">hadc</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">Timeout</span><span class="p">);</span>
+<span class="c1">//用于轮询ADC转换。  adc句柄和超时时间
+</span><span class="c1"></span><span class="n">HAL_ADC_GetValue</span><span class="p">(</span><span class="n">ADC_HandleTypeDef</span><span class="o">*</span> <span class="n">hadc</span><span class="p">);</span> 
+<span class="c1">//读取ADC的值，清EOC； 返回AD采集的值
+</span><span class="c1"></span><span class="n">uint32_t</span>  <span class="nf">HAL_ADC_GetState</span><span class="p">(</span><span class="n">ADC_HandleTypeDef</span><span class="o">*</span> <span class="n">hadc</span><span class="p">);</span>
+<span class="c1">//读取ADC的状态；本例参数： adc句柄，取值&amp;hadc1    返回状态值
+</span></code></pre></div><h3 id="终端回调函数的编写">终端回调函数的编写</h3>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">HAL_TIM_PeriodElapsedCallback</span><span class="p">(</span><span class="n">TIM_HandleTypeDef</span> <span class="o">*</span><span class="n">htim</span><span class="p">)</span>
+<span class="p">{</span>	<span class="n">uint16_t</span> <span class="n">ADC1_Value</span><span class="p">;</span>
+  	 <span class="n">uint32_t</span> <span class="n">Rt</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">htim</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">htim1</span><span class="p">.</span><span class="n">Instance</span><span class="p">)</span>   <span class="c1">//判断时钟状态是否达到中断
+</span><span class="c1"></span>    <span class="p">{</span>
+        <span class="n">HAL_ADC_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span>
+  	<span class="n">HAL_ADC_PollForConversion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+ 	<span class="k">if</span><span class="p">(</span><span class="n">HAL_IS_BIT_SET</span><span class="p">(</span><span class="n">HAL_ADC_GetState</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">),</span> <span class="n">HAL_ADC_STATE_REG_EOC</span><span class="p">))</span>
+  	 <span class="p">{</span>
+	<span class="n">ADC1_Value</span> <span class="o">=</span> <span class="n">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span>
+   	 <span class="n">Rt</span><span class="o">=</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">ADC1_Value</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="mi">4096</span><span class="o">-</span><span class="n">ADC1_Value</span><span class="p">);</span> <span class="c1">//计算此时电阻 
+</span><span class="c1"></span>                <span class="k">return</span> <span class="n">Rt</span><span class="err">；</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under GNU General Public License v2.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32学习笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">简单的波形发生器</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记2</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记1</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记0</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Mark
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

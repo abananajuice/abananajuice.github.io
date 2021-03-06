@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='同相加法电路 求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}&#43;\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。
+
+同相放大电路 
+根据虚短 Vp=Vn，$v_{n}=\frac{R_{1}}{R_{1}&#43;R_{2}} v_{0}$
+方波产生电路 方波产生电路（也称多谐振荡电路）的是在迟滞比较器的基础上组成。
+迟滞比较器是一种正反馈的单限比较器。迟滞比较器拥有两个门限电压，输入电压由大到小由小到大的门限电压并不相同。通过这种方法可以少电压的干扰。右下角VCC 作为直流电源，分压后电源输入到运放中去。运放的同相端处接来自VCC的稳定的分压，运放的反相端处也有点压，作为抬升电压。
+
+
+以上便解释了方波的产生方法，方波的幅值由VCC最终所分到输出端的分压和输出电压的饱和值决定。但初始时得到的方波占空比并不能保证在50%，这里咋需要通过调节迟滞比较器上下限来改变方波的占空比。方法是通过VCC分压来改变Vref。根据公式可知改参数与上限电压成正比，下限成反比。当上下限均增大时，方波的占空比便会增加，位于到电平的时间减少。反之，亦然。
+$\begin{array}{l}v_{T&#43;}=\left(1&#43;\frac{R_{1}}{R_{2}}\right)&#43;v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 L} \v_{T-}=\left(1&#43;\frac{R_{1}}{R_{2}}\right)&#43;v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 H}\end{array}$
+积分电路 
+
+积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$
+在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。
+$R_{11}$减小时图形为  $R_{11}$增大时，会产生尖波 
+低通滤波电路 一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。
+
+ 引用  电子技术基础.模拟部分,第五版，康华光，高等教育出版社  '><title>简单的波形发生器</title>
+
+<link rel='canonical' href='https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='简单的波形发生器'>
+<meta property='og:description' content='同相加法电路 求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}&#43;\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。
+
+同相放大电路 
+根据虚短 Vp=Vn，$v_{n}=\frac{R_{1}}{R_{1}&#43;R_{2}} v_{0}$
+方波产生电路 方波产生电路（也称多谐振荡电路）的是在迟滞比较器的基础上组成。
+迟滞比较器是一种正反馈的单限比较器。迟滞比较器拥有两个门限电压，输入电压由大到小由小到大的门限电压并不相同。通过这种方法可以少电压的干扰。右下角VCC 作为直流电源，分压后电源输入到运放中去。运放的同相端处接来自VCC的稳定的分压，运放的反相端处也有点压，作为抬升电压。
+
+
+以上便解释了方波的产生方法，方波的幅值由VCC最终所分到输出端的分压和输出电压的饱和值决定。但初始时得到的方波占空比并不能保证在50%，这里咋需要通过调节迟滞比较器上下限来改变方波的占空比。方法是通过VCC分压来改变Vref。根据公式可知改参数与上限电压成正比，下限成反比。当上下限均增大时，方波的占空比便会增加，位于到电平的时间减少。反之，亦然。
+$\begin{array}{l}v_{T&#43;}=\left(1&#43;\frac{R_{1}}{R_{2}}\right)&#43;v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 L} \v_{T-}=\left(1&#43;\frac{R_{1}}{R_{2}}\right)&#43;v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 H}\end{array}$
+积分电路 
+
+积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$
+在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。
+$R_{11}$减小时图形为  $R_{11}$增大时，会产生尖波 
+低通滤波电路 一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。
+
+ 引用  电子技术基础.模拟部分,第五版，康华光，高等教育出版社  '>
+<meta property='og:url' content='https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/'>
+<meta property='og:site_name' content='Mark'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-03-06T19:24:37&#43;08:00'/><meta property='article:modified_time' content='2021-03-06T19:24:37&#43;08:00'/>
+<meta name="twitter:title" content="简单的波形发生器">
+<meta name="twitter:description" content="同相加法电路 求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}&#43;\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。
+
+同相放大电路 
+根据虚短 Vp=Vn，$v_{n}=\frac{R_{1}}{R_{1}&#43;R_{2}} v_{0}$
+方波产生电路 方波产生电路（也称多谐振荡电路）的是在迟滞比较器的基础上组成。
+迟滞比较器是一种正反馈的单限比较器。迟滞比较器拥有两个门限电压，输入电压由大到小由小到大的门限电压并不相同。通过这种方法可以少电压的干扰。右下角VCC 作为直流电源，分压后电源输入到运放中去。运放的同相端处接来自VCC的稳定的分压，运放的反相端处也有点压，作为抬升电压。
+
+
+以上便解释了方波的产生方法，方波的幅值由VCC最终所分到输出端的分压和输出电压的饱和值决定。但初始时得到的方波占空比并不能保证在50%，这里咋需要通过调节迟滞比较器上下限来改变方波的占空比。方法是通过VCC分压来改变Vref。根据公式可知改参数与上限电压成正比，下限成反比。当上下限均增大时，方波的占空比便会增加，位于到电平的时间减少。反之，亦然。
+$\begin{array}{l}v_{T&#43;}=\left(1&#43;\frac{R_{1}}{R_{2}}\right)&#43;v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 L} \v_{T-}=\left(1&#43;\frac{R_{1}}{R_{2}}\right)&#43;v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 H}\end{array}$
+积分电路 
+
+积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$
+在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。
+$R_{11}$减小时图形为  $R_{11}$增大时，会产生尖波 
+低通滤波电路 一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。
+
+ 引用  电子技术基础.模拟部分,第五版，康华光，高等教育出版社  ">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://abananajuice.github.io/">Mark</a></h1>
+        <h2 class="site-description">“You don&#39;t need to be accepted by others. You need to be yourself.”</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://abananajuice.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/" >
+                技术宅
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/">简单的波形发生器</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Mar 06, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h2 id="同相加法电路">同相加法电路</h2>
+<p>求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}+\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。</p>
+<p><a class="link" href="https://imgtu.com/i/6um5L9"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6um5L9.png" alt="6um5L9.png"  /></a></p>
+<h2 id="同相放大电路">同相放大电路</h2>
+<p><a class="link" href="https://imgtu.com/i/6um7Ix"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6um7Ix.png" alt="6um7Ix.png"  /></a></p>
+<p>根据虚短 Vp=Vn，$v_{n}=\frac{R_{1}}{R_{1}+R_{2}} v_{0}$</p>
+<h2 id="方波产生电路">方波产生电路</h2>
+<p>方波产生电路（也称多谐振荡电路）的是在迟滞比较器的基础上组成。</p>
+<p>迟滞比较器是一种正反馈的单限比较器。迟滞比较器拥有两个门限电压，输入电压由大到小由小到大的门限电压并不相同。通过这种方法可以少电压的干扰。右下角VCC 作为直流电源，分压后电源输入到运放中去。运放的同相端处接来自VCC的稳定的分压，运放的反相端处也有点压，作为抬升电压。</p>
+<p><a class="link" href="https://imgtu.com/i/6um4sJ"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6um4sJ.png" alt="6um4sJ.png"  /></a></p>
+<p><a class="link" href="https://imgtu.com/i/6umhM4"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6umhM4.png" alt="6umhM4.png"  /></a></p>
+<p>以上便解释了方波的产生方法，方波的幅值由VCC最终所分到输出端的分压和输出电压的饱和值决定。但初始时得到的方波占空比并不能保证在50%，这里咋需要通过调节迟滞比较器上下限来改变方波的占空比。方法是通过VCC分压来改变Vref。根据公式可知改参数与上限电压成正比，下限成反比。当上下限均增大时，方波的占空比便会增加，位于到电平的时间减少。反之，亦然。</p>
+<p>$\begin{array}{l}v_{T+}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 L} \v_{T-}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 H}\end{array}$</p>
+<h2 id="积分电路">积分电路</h2>
+<p><a class="link" href="https://imgtu.com/i/6umWzF"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6umWzF.png" alt="6umWzF.png"  /></a></p>
+<p><a class="link" href="https://imgtu.com/i/6umRRU"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6umRRU.png" alt="6umRRU.png"  /></a></p>
+<p>积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$</p>
+<p>在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。<br>
+$R_{11}$减小时图形为
+<a class="link" href="https://imgtu.com/i/6um2GT"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6um2GT.png" alt="6um2GT.png"  /></a>
+$R_{11}$增大时，会产生尖波
+<a class="link" href="https://imgtu.com/i/6umoZR"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6umoZR.png" alt="6umoZR.png"  /></a></p>
+<h2 id="低通滤波电路">低通滤波电路</h2>
+<p>一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。</p>
+<p><a class="link" href="https://imgtu.com/i/6uK0MD"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6uK0MD.png" alt="6uK0MD.png"  /></a></p>
+<hr>
+<h2 id="引用">引用</h2>
+<ul>
+<li>电子技术基础.模拟部分,第五版，康华光，高等教育出版社</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under GNU General Public License v2.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32学习笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">模数转换的应用</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记2</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记1</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记0</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Mark
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

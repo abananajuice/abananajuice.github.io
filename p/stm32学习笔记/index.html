@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='32简介 32的内核是ARM 32位的Cortex-M3。
+启动模式 内置flash：主闪存，对应着烧写到flash的用户程序
+系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用
+内置SRAM：访问SRAM 
+GPIO 一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。
+STM32的输入输出管脚有以下8种可能的配置：(4输入&#43;2输出&#43;2复用输出)
+浮空输入_IN_FLOATING 带上拉输入_IPU 带下拉输入_IPD 模拟输入_AIN 开漏输出_OUT_OD 推挽输出_OUT_PP 复用功能的推挽输出_AF_PP 复用功能的开漏输出_AF_OD 键盘取值 通过键盘扫描获得所按下的键和行列值，借助键盘的行列值通过计算返回需要的键值。
+行列扫描法 列线加上拉电阻，行线不加
+ 设置列线输出，行线输入。将第一列值0，其他列之1。读取行值。以此循环 当某各键被按下，其所在列被置零时，所在行读取到0。由此便可获得按下按键的行列位置。  反转法 行列均加上拉电阻
+ 将所有行置0，检测每列线的值。当有按键被按下，该按键所在的列为（低电平）0。得到按键所在列的位置。（未被按下为1）（行输出，列输入） 将所有列置0，获取每行线的值。按下按键所在行线为（低电平）0。得到按键所在行的位置。（列输出，行输入）  键盘消抖  软件消抖：当检测到有键按下时，延时5-15MS后，检测行线（或列线）是否仍未低电平。若仍为低电平则按键被按下。 硬件消抖：采用相应的硬件电路，消除信号的抖动。  点亮数码管 STM32上含有4个八段的数码管。当数码管写入低电平时数码管被点亮。每个数码管有0（亮）1（灭）两种状态。数码管要显示数字时需要用段码还显示。段码是将八个数码管的状态写成八位二进制数并转为16进制保存再在后面加上H。
+显示四位数字（动态显示）  使用函数利用保存段码确定每个数码管的状态 通过循环时4个八段数码管依次点亮 最后，利用视觉暂留效果，当循环速度足够快时便可时看起来一同亮起.  静态显示 将4个八段数码管都点亮，显示无闪烁亮度高但是占用线数多所需电流大
+ 数码管的控制引脚：C0 C2 C3 C4 C6 C7 C8 C9 A8 A11 A12 B15
+ PWM PWM模式即脉冲宽度调制模式。输出部分产生一个中间波形OCxREF（高有效）作为基准，链的末端决定最终输出信号的极性。占空比指一个脉冲周期内，通电时间占总周期的比例。
+ 占空比：Duty_R=100%×Width_P/Period_P 计时器的周期和预分频器的值通过CubeMX中设置 周期：Period_P 脉冲宽度：width_P
+ 中断 中断：当 CPU 执行程序时，由于发生了某种随机的事件(外部或内部)，CPU暂停当前的任务去执行另一段程序。事件处理完后又返回被中断的程序继续执行，这一过程就称为中断。'><title>STM32学习笔记</title>
+
+<link rel='canonical' href='https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='STM32学习笔记'>
+<meta property='og:description' content='32简介 32的内核是ARM 32位的Cortex-M3。
+启动模式 内置flash：主闪存，对应着烧写到flash的用户程序
+系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用
+内置SRAM：访问SRAM 
+GPIO 一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。
+STM32的输入输出管脚有以下8种可能的配置：(4输入&#43;2输出&#43;2复用输出)
+浮空输入_IN_FLOATING 带上拉输入_IPU 带下拉输入_IPD 模拟输入_AIN 开漏输出_OUT_OD 推挽输出_OUT_PP 复用功能的推挽输出_AF_PP 复用功能的开漏输出_AF_OD 键盘取值 通过键盘扫描获得所按下的键和行列值，借助键盘的行列值通过计算返回需要的键值。
+行列扫描法 列线加上拉电阻，行线不加
+ 设置列线输出，行线输入。将第一列值0，其他列之1。读取行值。以此循环 当某各键被按下，其所在列被置零时，所在行读取到0。由此便可获得按下按键的行列位置。  反转法 行列均加上拉电阻
+ 将所有行置0，检测每列线的值。当有按键被按下，该按键所在的列为（低电平）0。得到按键所在列的位置。（未被按下为1）（行输出，列输入） 将所有列置0，获取每行线的值。按下按键所在行线为（低电平）0。得到按键所在行的位置。（列输出，行输入）  键盘消抖  软件消抖：当检测到有键按下时，延时5-15MS后，检测行线（或列线）是否仍未低电平。若仍为低电平则按键被按下。 硬件消抖：采用相应的硬件电路，消除信号的抖动。  点亮数码管 STM32上含有4个八段的数码管。当数码管写入低电平时数码管被点亮。每个数码管有0（亮）1（灭）两种状态。数码管要显示数字时需要用段码还显示。段码是将八个数码管的状态写成八位二进制数并转为16进制保存再在后面加上H。
+显示四位数字（动态显示）  使用函数利用保存段码确定每个数码管的状态 通过循环时4个八段数码管依次点亮 最后，利用视觉暂留效果，当循环速度足够快时便可时看起来一同亮起.  静态显示 将4个八段数码管都点亮，显示无闪烁亮度高但是占用线数多所需电流大
+ 数码管的控制引脚：C0 C2 C3 C4 C6 C7 C8 C9 A8 A11 A12 B15
+ PWM PWM模式即脉冲宽度调制模式。输出部分产生一个中间波形OCxREF（高有效）作为基准，链的末端决定最终输出信号的极性。占空比指一个脉冲周期内，通电时间占总周期的比例。
+ 占空比：Duty_R=100%×Width_P/Period_P 计时器的周期和预分频器的值通过CubeMX中设置 周期：Period_P 脉冲宽度：width_P
+ 中断 中断：当 CPU 执行程序时，由于发生了某种随机的事件(外部或内部)，CPU暂停当前的任务去执行另一段程序。事件处理完后又返回被中断的程序继续执行，这一过程就称为中断。'>
+<meta property='og:url' content='https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='Mark'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-03-06T20:36:44&#43;08:00'/><meta property='article:modified_time' content='2021-03-06T20:36:44&#43;08:00'/>
+<meta name="twitter:title" content="STM32学习笔记">
+<meta name="twitter:description" content="32简介 32的内核是ARM 32位的Cortex-M3。
+启动模式 内置flash：主闪存，对应着烧写到flash的用户程序
+系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用
+内置SRAM：访问SRAM 
+GPIO 一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。
+STM32的输入输出管脚有以下8种可能的配置：(4输入&#43;2输出&#43;2复用输出)
+浮空输入_IN_FLOATING 带上拉输入_IPU 带下拉输入_IPD 模拟输入_AIN 开漏输出_OUT_OD 推挽输出_OUT_PP 复用功能的推挽输出_AF_PP 复用功能的开漏输出_AF_OD 键盘取值 通过键盘扫描获得所按下的键和行列值，借助键盘的行列值通过计算返回需要的键值。
+行列扫描法 列线加上拉电阻，行线不加
+ 设置列线输出，行线输入。将第一列值0，其他列之1。读取行值。以此循环 当某各键被按下，其所在列被置零时，所在行读取到0。由此便可获得按下按键的行列位置。  反转法 行列均加上拉电阻
+ 将所有行置0，检测每列线的值。当有按键被按下，该按键所在的列为（低电平）0。得到按键所在列的位置。（未被按下为1）（行输出，列输入） 将所有列置0，获取每行线的值。按下按键所在行线为（低电平）0。得到按键所在行的位置。（列输出，行输入）  键盘消抖  软件消抖：当检测到有键按下时，延时5-15MS后，检测行线（或列线）是否仍未低电平。若仍为低电平则按键被按下。 硬件消抖：采用相应的硬件电路，消除信号的抖动。  点亮数码管 STM32上含有4个八段的数码管。当数码管写入低电平时数码管被点亮。每个数码管有0（亮）1（灭）两种状态。数码管要显示数字时需要用段码还显示。段码是将八个数码管的状态写成八位二进制数并转为16进制保存再在后面加上H。
+显示四位数字（动态显示）  使用函数利用保存段码确定每个数码管的状态 通过循环时4个八段数码管依次点亮 最后，利用视觉暂留效果，当循环速度足够快时便可时看起来一同亮起.  静态显示 将4个八段数码管都点亮，显示无闪烁亮度高但是占用线数多所需电流大
+ 数码管的控制引脚：C0 C2 C3 C4 C6 C7 C8 C9 A8 A11 A12 B15
+ PWM PWM模式即脉冲宽度调制模式。输出部分产生一个中间波形OCxREF（高有效）作为基准，链的末端决定最终输出信号的极性。占空比指一个脉冲周期内，通电时间占总周期的比例。
+ 占空比：Duty_R=100%×Width_P/Period_P 计时器的周期和预分频器的值通过CubeMX中设置 周期：Period_P 脉冲宽度：width_P
+ 中断 中断：当 CPU 执行程序时，由于发生了某种随机的事件(外部或内部)，CPU暂停当前的任务去执行另一段程序。事件处理完后又返回被中断的程序继续执行，这一过程就称为中断。">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://abananajuice.github.io/">Mark</a></h1>
+        <h2 class="site-description">“You don&#39;t need to be accepted by others. You need to be yourself.”</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://abananajuice.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/" >
+                技术宅
+            </a>
+        
+            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" >
+                嵌入式
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">STM32学习笔记</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Mar 06, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h2 id="32简介">32简介</h2>
+<p>32的内核是ARM 32位的Cortex-M3。</p>
+<h3 id="启动模式">启动模式</h3>
+<p>内置flash：主闪存，对应着烧写到flash的用户程序<br>
+系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用<br>
+内置SRAM：访问SRAM
+<a class="link" href="https://imgtu.com/i/6u31EQ"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6u31EQ.png" alt="6u31EQ.png"  /></a></p>
+<h2 id="gpio">GPIO</h2>
+<p>一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。</p>
+<p>STM32的输入输出管脚有以下8种可能的配置：(4输入+2输出+2复用输出)</p>
+<pre><code>浮空输入_IN_FLOATING
+带上拉输入_IPU
+带下拉输入_IPD
+模拟输入_AIN
+开漏输出_OUT_OD
+推挽输出_OUT_PP
+复用功能的推挽输出_AF_PP
+复用功能的开漏输出_AF_OD
+</code></pre><h2 id="键盘取值">键盘取值</h2>
+<p>通过键盘扫描获得所按下的键和行列值，借助键盘的行列值通过计算返回需要的键值。</p>
+<h3 id="行列扫描法">行列扫描法</h3>
+<p>列线加上拉电阻，行线不加</p>
+<ul>
+<li>设置列线输出，行线输入。将第一列值0，其他列之1。读取行值。以此循环</li>
+<li>当某各键被按下，其所在列被置零时，所在行读取到0。由此便可获得按下按键的行列位置。</li>
+</ul>
+<h3 id="反转法">反转法</h3>
+<p>行列均加上拉电阻</p>
+<ul>
+<li>将所有行置0，检测每列线的值。当有按键被按下，该按键所在的列为（低电平）0。得到按键所在列的位置。（未被按下为1）（行输出，列输入）</li>
+<li>将所有列置0，获取每行线的值。按下按键所在行线为（低电平）0。得到按键所在行的位置。（列输出，行输入）</li>
+</ul>
+<h3 id="键盘消抖">键盘消抖</h3>
+<ul>
+<li>软件消抖：当检测到有键按下时，延时5-15MS后，检测行线（或列线）是否仍未低电平。若仍为低电平则按键被按下。</li>
+<li>硬件消抖：采用相应的硬件电路，消除信号的抖动。</li>
+</ul>
+<h2 id="点亮数码管">点亮数码管</h2>
+<p>STM32上含有4个八段的数码管。当数码管写入低电平时数码管被点亮。每个数码管有0（亮）1（灭）两种状态。数码管要显示数字时需要用段码还显示。段码是将八个数码管的状态写成八位二进制数并转为16进制保存再在后面加上H。</p>
+<h3 id="显示四位数字动态显示">显示四位数字（动态显示）</h3>
+<ul>
+<li>使用函数利用保存段码确定每个数码管的状态</li>
+<li>通过循环时4个八段数码管依次点亮</li>
+<li>最后，利用视觉暂留效果，当循环速度足够快时便可时看起来一同亮起.</li>
+</ul>
+<h3 id="静态显示">静态显示</h3>
+<p>将4个八段数码管都点亮，显示无闪烁亮度高但是占用线数多所需电流大</p>
+<blockquote>
+<p>数码管的控制引脚：C0 C2 C3 C4 C6 C7 C8 C9 A8 A11  A12 B15</p>
+</blockquote>
+<h2 id="pwm">PWM</h2>
+<p>PWM模式即脉冲宽度调制模式。输出部分产生一个中间波形OCxREF（高有效）作为基准，链的末端决定最终输出信号的极性。占空比指一个脉冲周期内，通电时间占总周期的比例。</p>
+<blockquote>
+<p>占空比：Duty_R=100%×Width_P/Period_P  计时器的周期和预分频器的值通过CubeMX中设置
+周期：Period_P  脉冲宽度：width_P</p>
+</blockquote>
+<h2 id="中断">中断</h2>
+<p>中断：当 CPU 执行程序时，由于发生了某种随机的事件(外部或内部)，CPU暂停当前的任务去执行另一段程序。事件处理完后又返回被中断的程序继续执行，这一过程就称为中断。</p>
+<h3 id="优先级规则">优先级规则</h3>
+<ol>
+<li>高抢占优先级的中断可以打断低抢占优先级的中断服务，从而构成嵌套；相同子优先级的中断之间不能构成中断嵌套。</li>
+<li>子优先级不能够构成中断嵌套；抢占优先级相同，而子优先级不同的中断同时发生时，首先响应子优先级高的中断。</li>
+<li>抢占优先级和子优先级相同的中断同时发生时，首先响应编号小的中断。</li>
+</ol>
+<h2 id="i2c通讯">I2C通讯</h2>
+<h3 id="写数据">写数据</h3>
+<p>若配置的方向传输位为“写数据”方向，如图的情况，广播完地址，接收到应答信号后，主机开始正式向从机传输数据(DATA)，数据包的大小为 8 位，主机每发送完一 个字节数据，都要等待从机的应答信号(ACK)，重复这个过程，可以向从机传输 N 个数据， 这个 N 没有大小限制。当数据传输结束时，主机向从机发送一个停止传输信号(P)，表示不 再传输数据。</p>
+<h3 id="读数据">读数据</h3>
+<p>若配置的方向传输位为“读数据”方向，如图的情况，广播完地址，接收到应 答信号后，从机开始向主机返回数据(DATA)，数据包大小也为 8 位，从机每发送完一个数 据，都会等待主机的应答信号(ACK)，重复这个过程，可以返回 N 个数据，这个 N 也没有 大小限制。当主机希望停止接收数据时，就向从机返回一个非应答信号(NACK)，则从机自动停止数据传输。<br>
+起始和停止信号（一般由主机产生）
+<a class="link" href="https://imgtu.com/i/6u8TwF"  target="_blank" rel="noopener"
+    ><img src="https://s3.ax1x.com/2021/03/06/6u8TwF.png" alt="6u8TwF.png"  /></a></p>
+<h3 id="相关函数">相关函数</h3>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">HAL_I2C_Mem_Write</span><span class="p">(</span><span class="n">I2C的句柄</span><span class="err">（或者说地址，确定选择那个</span><span class="n">I2C</span><span class="err">）</span><span class="p">,</span><span class="err">设备外部地址，设备内部地址，写内部地址的方式（</span><span class="mi">8</span><span class="err">位或</span><span class="mi">16</span><span class="err">位），写入的数组或指针</span><span class="p">,</span><span class="err">写入字节数，超时时间</span><span class="p">)</span>
+<span class="n">HAL_I2C_Mem_Read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hi2c2</span><span class="p">,</span> <span class="n">ADDR_AT24C02_Read</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="err">读的方式</span><span class="p">,</span><span class="err">读给的变量</span><span class="p">,</span><span class="err">读取长度</span><span class="p">,</span> <span class="err">超时时间</span><span class="p">);</span>
+
+</code></pre></div><h2 id="dma">DMA</h2>
+<ul>
+<li>传输源：DMA控制器从传输源读出数据；</li>
+<li>传输目标： DMA控制器将数据传输的目标；</li>
+<li>触发信号：用于触发一次数据传输的动作，执行一个单位的数据传输。</li>
+<li>示例：在AD采样的应用中</li>
+<li>传输源：ADC的结果寄存器</li>
+<li>传输目标：通常是内存单元，也就是存储器</li>
+<li>触发信号：软件触发、定时器触发或外部触发</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under GNU General Public License v2.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">模数转换的应用</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">简单的波形发生器</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记2</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记1</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记0</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Mark
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

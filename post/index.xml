@@ -6,7 +6,72 @@
     <description>Recent content in Posts on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Feb 2021 11:36:19 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 20:36:44 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>STM32学习笔记</title>
+      <link>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 06 Mar 2021 20:36:44 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>32简介 32的内核是ARM 32位的Cortex-M3。
+启动模式 内置flash：主闪存，对应着烧写到flash的用户程序
+系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用
+内置SRAM：访问SRAM 
+GPIO 一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。
+STM32的输入输出管脚有以下8种可能的配置：(4输入+2输出+2复用输出)
+浮空输入_IN_FLOATING 带上拉输入_IPU 带下拉输入_IPD 模拟输入_AIN 开漏输出_OUT_OD 推挽输出_OUT_PP 复用功能的推挽输出_AF_PP 复用功能的开漏输出_AF_OD 键盘取值 通过键盘扫描获得所按下的键和行列值，借助键盘的行列值通过计算返回需要的键值。
+行列扫描法 列线加上拉电阻，行线不加
+ 设置列线输出，行线输入。将第一列值0，其他列之1。读取行值。以此循环 当某各键被按下，其所在列被置零时，所在行读取到0。由此便可获得按下按键的行列位置。  反转法 行列均加上拉电阻
+ 将所有行置0，检测每列线的值。当有按键被按下，该按键所在的列为（低电平）0。得到按键所在列的位置。（未被按下为1）（行输出，列输入） 将所有列置0，获取每行线的值。按下按键所在行线为（低电平）0。得到按键所在行的位置。（列输出，行输入）  键盘消抖  软件消抖：当检测到有键按下时，延时5-15MS后，检测行线（或列线）是否仍未低电平。若仍为低电平则按键被按下。 硬件消抖：采用相应的硬件电路，消除信号的抖动。  点亮数码管 STM32上含有4个八段的数码管。当数码管写入低电平时数码管被点亮。每个数码管有0（亮）1（灭）两种状态。数码管要显示数字时需要用段码还显示。段码是将八个数码管的状态写成八位二进制数并转为16进制保存再在后面加上H。
+显示四位数字（动态显示）  使用函数利用保存段码确定每个数码管的状态 通过循环时4个八段数码管依次点亮 最后，利用视觉暂留效果，当循环速度足够快时便可时看起来一同亮起.  静态显示 将4个八段数码管都点亮，显示无闪烁亮度高但是占用线数多所需电流大
+ 数码管的控制引脚：C0 C2 C3 C4 C6 C7 C8 C9 A8 A11 A12 B15
+ PWM PWM模式即脉冲宽度调制模式。输出部分产生一个中间波形OCxREF（高有效）作为基准，链的末端决定最终输出信号的极性。占空比指一个脉冲周期内，通电时间占总周期的比例。
+ 占空比：Duty_R=100%×Width_P/Period_P 计时器的周期和预分频器的值通过CubeMX中设置 周期：Period_P 脉冲宽度：width_P
+ 中断 中断：当 CPU 执行程序时，由于发生了某种随机的事件(外部或内部)，CPU暂停当前的任务去执行另一段程序。事件处理完后又返回被中断的程序继续执行，这一过程就称为中断。</description>
+    </item>
+    
+    <item>
+      <title>模数转换的应用</title>
+      <link>https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Sat, 06 Mar 2021 20:11:17 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+      <description>AD的概念及性能指标  AD概念：将连续的模拟信号转换为离散的数字信号的器件。 转换时间：AD完成一次转换所需要的时间，其倒数为转换速率。 分辨率 输出模拟量最小变化程度的指标(32上的为12位)。12位，满量程5v分辨率为:5 /（2^12）=1.22mv 量化误差 量化过程引起的误差 理论上规定为一个单位分辨率的-1/2 &amp;mdash; +1/2LSB 。 转换精度：实际A/D转换器与一个理想A/D转换器在量化值上的差值，可用绝对误差或相对误差表示。  AD时钟 时钟由PCLK2经过分频产生，最大14M 一般使PCLK2=HCLK=72M
+采样的周期数可通过 ADC 采样时间寄存器 ADC_SMPRx（x=0、1） 中的 SMP[2:0]位设置，ADC_SMPR2 控制的是通道 0~9，ADC_SMPR1 控制的是通道 10~17。每个通道可以分别用不同的时间采样。其中采样周期最小是 1.5 个（ADC_CLK 周期，1/ADC_CLK），即如果我们要达到最快的采样，那么应该设置采样周期为 1.5 个周期。
+ADC的转换时间：与ADC的输入时钟和采样时间有关。 公式为：Tconv = 采样时间 + 12.5 个周期。
+CubeMX的配置 使用 ADC1 的其中1个通道，通道号10，对应的引脚是 PC0；
+设置ADC 时钟参数，这里设置 PLCK2是72M；时钟经过 6 分频，那么此时的时钟就是 12MHz。
+设置 ADC 的转换模式以及通道进行设置，独立模式（Independent mode）、数据右对齐（Right Alignment）、连续转换模式（Continuous Conversion Mod）使能；使能规则通道转换，选择1个通道。
+
+常用函数 ADC:HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);//此函数Adon控制位，置1，启动ADC。 HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout); //用于轮询ADC转换。 adc句柄和超时时间 HAL_ADC_GetValue(ADC_HandleTypeDef* hadc); //读取ADC的值，清EOC； 返回AD采集的值 uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc); //读取ADC的状态；本例参数： adc句柄，取值&amp;amp;hadc1 返回状态值 终端回调函数的编写 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {	uint16_t ADC1_Value; uint32_t Rt; if (htim-&amp;gt;Instance == htim1.</description>
+    </item>
+    
+    <item>
+      <title>简单的波形发生器</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/</link>
+      <pubDate>Sat, 06 Mar 2021 19:24:37 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/</guid>
+      <description>同相加法电路 求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}+\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。
+
+同相放大电路 
+根据虚短 Vp=Vn，$v_{n}=\frac{R_{1}}{R_{1}+R_{2}} v_{0}$
+方波产生电路 方波产生电路（也称多谐振荡电路）的是在迟滞比较器的基础上组成。
+迟滞比较器是一种正反馈的单限比较器。迟滞比较器拥有两个门限电压，输入电压由大到小由小到大的门限电压并不相同。通过这种方法可以少电压的干扰。右下角VCC 作为直流电源，分压后电源输入到运放中去。运放的同相端处接来自VCC的稳定的分压，运放的反相端处也有点压，作为抬升电压。
+
+
+以上便解释了方波的产生方法，方波的幅值由VCC最终所分到输出端的分压和输出电压的饱和值决定。但初始时得到的方波占空比并不能保证在50%，这里咋需要通过调节迟滞比较器上下限来改变方波的占空比。方法是通过VCC分压来改变Vref。根据公式可知改参数与上限电压成正比，下限成反比。当上下限均增大时，方波的占空比便会增加，位于到电平的时间减少。反之，亦然。
+$\begin{array}{l}v_{T+}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 L} \v_{T-}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 H}\end{array}$
+积分电路 
+
+积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$
+在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。
+$R_{11}$减小时图形为  $R_{11}$增大时，会产生尖波 
+低通滤波电路 一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。
+
+ 引用  电子技术基础.模拟部分,第五版，康华光，高等教育出版社  </description>
+    </item>
+    
     <item>
       <title>《苏菲的世界》摘抄-3</title>
       <link>https://abananajuice.github.io/p/%E8%8B%8F%E8%8F%B2%E7%9A%84%E4%B8%96%E7%95%8C%E6%91%98%E6%8A%84-3/</link>

@@ -6,7 +6,198 @@
         <description>Recent content on Mark</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Fri, 19 Feb 2021 11:36:19 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 06 Mar 2021 20:36:44 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>STM32学习笔记</title>
+        <link>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sat, 06 Mar 2021 20:36:44 +0800</pubDate>
+        
+        <guid>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h2 id=&#34;32简介&#34;&gt;32简介&lt;/h2&gt;
+&lt;p&gt;32的内核是ARM 32位的Cortex-M3。&lt;/p&gt;
+&lt;h3 id=&#34;启动模式&#34;&gt;启动模式&lt;/h3&gt;
+&lt;p&gt;内置flash：主闪存，对应着烧写到flash的用户程序&lt;br&gt;
+系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用&lt;br&gt;
+内置SRAM：访问SRAM
+&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6u31EQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6u31EQ.png&#34; alt=&#34;6u31EQ.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gpio&#34;&gt;GPIO&lt;/h2&gt;
+&lt;p&gt;一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。&lt;/p&gt;
+&lt;p&gt;STM32的输入输出管脚有以下8种可能的配置：(4输入+2输出+2复用输出)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;浮空输入_IN_FLOATING
+带上拉输入_IPU
+带下拉输入_IPD
+模拟输入_AIN
+开漏输出_OUT_OD
+推挽输出_OUT_PP
+复用功能的推挽输出_AF_PP
+复用功能的开漏输出_AF_OD
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;键盘取值&#34;&gt;键盘取值&lt;/h2&gt;
+&lt;p&gt;通过键盘扫描获得所按下的键和行列值，借助键盘的行列值通过计算返回需要的键值。&lt;/p&gt;
+&lt;h3 id=&#34;行列扫描法&#34;&gt;行列扫描法&lt;/h3&gt;
+&lt;p&gt;列线加上拉电阻，行线不加&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置列线输出，行线输入。将第一列值0，其他列之1。读取行值。以此循环&lt;/li&gt;
+&lt;li&gt;当某各键被按下，其所在列被置零时，所在行读取到0。由此便可获得按下按键的行列位置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;反转法&#34;&gt;反转法&lt;/h3&gt;
+&lt;p&gt;行列均加上拉电阻&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将所有行置0，检测每列线的值。当有按键被按下，该按键所在的列为（低电平）0。得到按键所在列的位置。（未被按下为1）（行输出，列输入）&lt;/li&gt;
+&lt;li&gt;将所有列置0，获取每行线的值。按下按键所在行线为（低电平）0。得到按键所在行的位置。（列输出，行输入）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;键盘消抖&#34;&gt;键盘消抖&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;软件消抖：当检测到有键按下时，延时5-15MS后，检测行线（或列线）是否仍未低电平。若仍为低电平则按键被按下。&lt;/li&gt;
+&lt;li&gt;硬件消抖：采用相应的硬件电路，消除信号的抖动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;点亮数码管&#34;&gt;点亮数码管&lt;/h2&gt;
+&lt;p&gt;STM32上含有4个八段的数码管。当数码管写入低电平时数码管被点亮。每个数码管有0（亮）1（灭）两种状态。数码管要显示数字时需要用段码还显示。段码是将八个数码管的状态写成八位二进制数并转为16进制保存再在后面加上H。&lt;/p&gt;
+&lt;h3 id=&#34;显示四位数字动态显示&#34;&gt;显示四位数字（动态显示）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;使用函数利用保存段码确定每个数码管的状态&lt;/li&gt;
+&lt;li&gt;通过循环时4个八段数码管依次点亮&lt;/li&gt;
+&lt;li&gt;最后，利用视觉暂留效果，当循环速度足够快时便可时看起来一同亮起.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;静态显示&#34;&gt;静态显示&lt;/h3&gt;
+&lt;p&gt;将4个八段数码管都点亮，显示无闪烁亮度高但是占用线数多所需电流大&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;数码管的控制引脚：C0 C2 C3 C4 C6 C7 C8 C9 A8 A11  A12 B15&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;pwm&#34;&gt;PWM&lt;/h2&gt;
+&lt;p&gt;PWM模式即脉冲宽度调制模式。输出部分产生一个中间波形OCxREF（高有效）作为基准，链的末端决定最终输出信号的极性。占空比指一个脉冲周期内，通电时间占总周期的比例。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;占空比：Duty_R=100%×Width_P/Period_P  计时器的周期和预分频器的值通过CubeMX中设置
+周期：Period_P  脉冲宽度：width_P&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;中断&#34;&gt;中断&lt;/h2&gt;
+&lt;p&gt;中断：当 CPU 执行程序时，由于发生了某种随机的事件(外部或内部)，CPU暂停当前的任务去执行另一段程序。事件处理完后又返回被中断的程序继续执行，这一过程就称为中断。&lt;/p&gt;
+&lt;h3 id=&#34;优先级规则&#34;&gt;优先级规则&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;高抢占优先级的中断可以打断低抢占优先级的中断服务，从而构成嵌套；相同子优先级的中断之间不能构成中断嵌套。&lt;/li&gt;
+&lt;li&gt;子优先级不能够构成中断嵌套；抢占优先级相同，而子优先级不同的中断同时发生时，首先响应子优先级高的中断。&lt;/li&gt;
+&lt;li&gt;抢占优先级和子优先级相同的中断同时发生时，首先响应编号小的中断。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;i2c通讯&#34;&gt;I2C通讯&lt;/h2&gt;
+&lt;h3 id=&#34;写数据&#34;&gt;写数据&lt;/h3&gt;
+&lt;p&gt;若配置的方向传输位为“写数据”方向，如图的情况，广播完地址，接收到应答信号后，主机开始正式向从机传输数据(DATA)，数据包的大小为 8 位，主机每发送完一 个字节数据，都要等待从机的应答信号(ACK)，重复这个过程，可以向从机传输 N 个数据， 这个 N 没有大小限制。当数据传输结束时，主机向从机发送一个停止传输信号(P)，表示不 再传输数据。&lt;/p&gt;
+&lt;h3 id=&#34;读数据&#34;&gt;读数据&lt;/h3&gt;
+&lt;p&gt;若配置的方向传输位为“读数据”方向，如图的情况，广播完地址，接收到应 答信号后，从机开始向主机返回数据(DATA)，数据包大小也为 8 位，从机每发送完一个数 据，都会等待主机的应答信号(ACK)，重复这个过程，可以返回 N 个数据，这个 N 也没有 大小限制。当主机希望停止接收数据时，就向从机返回一个非应答信号(NACK)，则从机自动停止数据传输。&lt;br&gt;
+起始和停止信号（一般由主机产生）
+&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6u8TwF&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6u8TwF.png&#34; alt=&#34;6u8TwF.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;相关函数&#34;&gt;相关函数&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;n&#34;&gt;HAL_I2C_Mem_Write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;I2C的句柄&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（或者说地址，确定选择那个&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;I2C&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;设备外部地址，设备内部地址，写内部地址的方式（&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;位或&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;位），写入的数组或指针&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;写入字节数，超时时间&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;HAL_I2C_Mem_Read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hi2c2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ADDR_AT24C02_Read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;读的方式&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;读给的变量&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;读取长度&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;超时时间&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;dma&#34;&gt;DMA&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;传输源：DMA控制器从传输源读出数据；&lt;/li&gt;
+&lt;li&gt;传输目标： DMA控制器将数据传输的目标；&lt;/li&gt;
+&lt;li&gt;触发信号：用于触发一次数据传输的动作，执行一个单位的数据传输。&lt;/li&gt;
+&lt;li&gt;示例：在AD采样的应用中&lt;/li&gt;
+&lt;li&gt;传输源：ADC的结果寄存器&lt;/li&gt;
+&lt;li&gt;传输目标：通常是内存单元，也就是存储器&lt;/li&gt;
+&lt;li&gt;触发信号：软件触发、定时器触发或外部触发&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>模数转换的应用</title>
+        <link>https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+        <pubDate>Sat, 06 Mar 2021 20:11:17 +0800</pubDate>
+        
+        <guid>https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;ad的概念及性能指标&#34;&gt;AD的概念及性能指标&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AD概念：将连续的模拟信号转换为离散的数字信号的器件。&lt;/li&gt;
+&lt;li&gt;转换时间：AD完成一次转换所需要的时间，其倒数为转换速率。&lt;/li&gt;
+&lt;li&gt;分辨率 输出模拟量最小变化程度的指标(32上的为12位)。12位，满量程5v分辨率为:5 /（2^12）=1.22mv&lt;/li&gt;
+&lt;li&gt;量化误差 量化过程引起的误差 理论上规定为一个单位分辨率的-1/2 &amp;mdash; +1/2LSB 。&lt;/li&gt;
+&lt;li&gt;转换精度：实际A/D转换器与一个理想A/D转换器在量化值上的差值，可用绝对误差或相对误差表示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ad时钟&#34;&gt;AD时钟&lt;/h2&gt;
+&lt;p&gt;时钟由PCLK2经过分频产生，最大14M 一般使PCLK2=HCLK=72M&lt;/p&gt;
+&lt;p&gt;采样的周期数可通过 ADC 采样时间寄存器 ADC_SMPRx（x=0、1） 中的 SMP[2:0]位设置，ADC_SMPR2 控制的是通道 0~9，ADC_SMPR1 控制的是通道 10~17。每个通道可以分别用不同的时间采样。其中采样周期最小是 1.5 个（ADC_CLK 周期，1/ADC_CLK），即如果我们要达到最快的采样，那么应该设置采样周期为 1.5 个周期。&lt;/p&gt;
+&lt;p&gt;ADC的转换时间：与ADC的输入时钟和采样时间有关。 公式为：Tconv = 采样时间 + 12.5 个周期。&lt;/p&gt;
+&lt;h2 id=&#34;cubemx的配置&#34;&gt;CubeMX的配置&lt;/h2&gt;
+&lt;p&gt;使用 ADC1 的其中1个通道，通道号10，对应的引脚是 PC0；&lt;/p&gt;
+&lt;p&gt;设置ADC 时钟参数，这里设置 PLCK2是72M；时钟经过 6 分频，那么此时的时钟就是 12MHz。&lt;/p&gt;
+&lt;p&gt;设置 ADC 的转换模式以及通道进行设置，独立模式（Independent mode）、数据右对齐（Right Alignment）、连续转换模式（Continuous Conversion Mod）使能；使能规则通道转换，选择1个通道。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6u1ZOU&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6u1ZOU.png&#34; alt=&#34;6u1ZOU.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用函数&#34;&gt;常用函数&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;nl&#34;&gt;ADC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_StatusTypeDef&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;HAL_ADC_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ADC_HandleTypeDef&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hadc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//此函数Adon控制位，置1，启动ADC。
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_StatusTypeDef&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_ADC_PollForConversion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ADC_HandleTypeDef&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hadc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;uint32_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Timeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;//用于轮询ADC转换。  adc句柄和超时时间
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_ADC_GetValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ADC_HandleTypeDef&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hadc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;span class=&#34;c1&#34;&gt;//读取ADC的值，清EOC； 返回AD采集的值
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uint32_t&lt;/span&gt;  &lt;span class=&#34;nf&#34;&gt;HAL_ADC_GetState&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ADC_HandleTypeDef&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hadc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;//读取ADC的状态；本例参数： adc句柄，取值&amp;amp;hadc1    返回状态值
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;终端回调函数的编写&#34;&gt;终端回调函数的编写&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PeriodElapsedCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ADC1_Value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  	 &lt;span class=&#34;n&#34;&gt;uint32_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Rt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Instance&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;//判断时钟状态是否达到中断
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;HAL_ADC_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+  	&lt;span class=&#34;n&#34;&gt;HAL_ADC_PollForConversion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+ 	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_IS_BIT_SET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_ADC_GetState&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_ADC_STATE_REG_EOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+  	 &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;ADC1_Value&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_ADC_GetValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+   	 &lt;span class=&#34;n&#34;&gt;Rt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10000&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ADC1_Value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4096&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ADC1_Value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//计算此时电阻 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;                &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Rt&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;；&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>简单的波形发生器</title>
+        <link>https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/</link>
+        <pubDate>Sat, 06 Mar 2021 19:24:37 +0800</pubDate>
+        
+        <guid>https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/</guid>
+        <description>&lt;h2 id=&#34;同相加法电路&#34;&gt;同相加法电路&lt;/h2&gt;
+&lt;p&gt;求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}+\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6um5L9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6um5L9.png&#34; alt=&#34;6um5L9.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;同相放大电路&#34;&gt;同相放大电路&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6um7Ix&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6um7Ix.png&#34; alt=&#34;6um7Ix.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;根据虚短 Vp=Vn，$v_{n}=\frac{R_{1}}{R_{1}+R_{2}} v_{0}$&lt;/p&gt;
+&lt;h2 id=&#34;方波产生电路&#34;&gt;方波产生电路&lt;/h2&gt;
+&lt;p&gt;方波产生电路（也称多谐振荡电路）的是在迟滞比较器的基础上组成。&lt;/p&gt;
+&lt;p&gt;迟滞比较器是一种正反馈的单限比较器。迟滞比较器拥有两个门限电压，输入电压由大到小由小到大的门限电压并不相同。通过这种方法可以少电压的干扰。右下角VCC 作为直流电源，分压后电源输入到运放中去。运放的同相端处接来自VCC的稳定的分压，运放的反相端处也有点压，作为抬升电压。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6um4sJ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6um4sJ.png&#34; alt=&#34;6um4sJ.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6umhM4&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6umhM4.png&#34; alt=&#34;6umhM4.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;以上便解释了方波的产生方法，方波的幅值由VCC最终所分到输出端的分压和输出电压的饱和值决定。但初始时得到的方波占空比并不能保证在50%，这里咋需要通过调节迟滞比较器上下限来改变方波的占空比。方法是通过VCC分压来改变Vref。根据公式可知改参数与上限电压成正比，下限成反比。当上下限均增大时，方波的占空比便会增加，位于到电平的时间减少。反之，亦然。&lt;/p&gt;
+&lt;p&gt;$\begin{array}{l}v_{T+}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 L} \v_{T-}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 H}\end{array}$&lt;/p&gt;
+&lt;h2 id=&#34;积分电路&#34;&gt;积分电路&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6umWzF&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6umWzF.png&#34; alt=&#34;6umWzF.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6umRRU&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6umRRU.png&#34; alt=&#34;6umRRU.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$&lt;/p&gt;
+&lt;p&gt;在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。&lt;br&gt;
+$R_{11}$减小时图形为
+&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6um2GT&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6um2GT.png&#34; alt=&#34;6um2GT.png&#34;  /&gt;&lt;/a&gt;
+$R_{11}$增大时，会产生尖波
+&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6umoZR&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6umoZR.png&#34; alt=&#34;6umoZR.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;低通滤波电路&#34;&gt;低通滤波电路&lt;/h2&gt;
+&lt;p&gt;一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6uK0MD&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6uK0MD.png&#34; alt=&#34;6uK0MD.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;引用&#34;&gt;引用&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;电子技术基础.模拟部分,第五版，康华光，高等教育出版社&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>《苏菲的世界》摘抄-3</title>
         <link>https://abananajuice.github.io/p/%E8%8B%8F%E8%8F%B2%E7%9A%84%E4%B8%96%E7%95%8C%E6%91%98%E6%8A%84-3/</link>
         <pubDate>Fri, 19 Feb 2021 11:36:19 +0800</pubDate>

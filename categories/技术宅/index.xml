@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术宅 on Mark</title>
+    <link>https://abananajuice.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/</link>
+    <description>Recent content in 技术宅 on Mark</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 06 Mar 2021 20:36:44 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>STM32学习笔记</title>
+      <link>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 06 Mar 2021 20:36:44 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>32简介 32的内核是ARM 32位的Cortex-M3。
+启动模式 内置flash：主闪存，对应着烧写到flash的用户程序
+系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用
+内置SRAM：访问SRAM 
+GPIO 一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。
+STM32的输入输出管脚有以下8种可能的配置：(4输入+2输出+2复用输出)
+浮空输入_IN_FLOATING 带上拉输入_IPU 带下拉输入_IPD 模拟输入_AIN 开漏输出_OUT_OD 推挽输出_OUT_PP 复用功能的推挽输出_AF_PP 复用功能的开漏输出_AF_OD 键盘取值 通过键盘扫描获得所按下的键和行列值，借助键盘的行列值通过计算返回需要的键值。
+行列扫描法 列线加上拉电阻，行线不加
+ 设置列线输出，行线输入。将第一列值0，其他列之1。读取行值。以此循环 当某各键被按下，其所在列被置零时，所在行读取到0。由此便可获得按下按键的行列位置。  反转法 行列均加上拉电阻
+ 将所有行置0，检测每列线的值。当有按键被按下，该按键所在的列为（低电平）0。得到按键所在列的位置。（未被按下为1）（行输出，列输入） 将所有列置0，获取每行线的值。按下按键所在行线为（低电平）0。得到按键所在行的位置。（列输出，行输入）  键盘消抖  软件消抖：当检测到有键按下时，延时5-15MS后，检测行线（或列线）是否仍未低电平。若仍为低电平则按键被按下。 硬件消抖：采用相应的硬件电路，消除信号的抖动。  点亮数码管 STM32上含有4个八段的数码管。当数码管写入低电平时数码管被点亮。每个数码管有0（亮）1（灭）两种状态。数码管要显示数字时需要用段码还显示。段码是将八个数码管的状态写成八位二进制数并转为16进制保存再在后面加上H。
+显示四位数字（动态显示）  使用函数利用保存段码确定每个数码管的状态 通过循环时4个八段数码管依次点亮 最后，利用视觉暂留效果，当循环速度足够快时便可时看起来一同亮起.  静态显示 将4个八段数码管都点亮，显示无闪烁亮度高但是占用线数多所需电流大
+ 数码管的控制引脚：C0 C2 C3 C4 C6 C7 C8 C9 A8 A11 A12 B15
+ PWM PWM模式即脉冲宽度调制模式。输出部分产生一个中间波形OCxREF（高有效）作为基准，链的末端决定最终输出信号的极性。占空比指一个脉冲周期内，通电时间占总周期的比例。
+ 占空比：Duty_R=100%×Width_P/Period_P 计时器的周期和预分频器的值通过CubeMX中设置 周期：Period_P 脉冲宽度：width_P
+ 中断 中断：当 CPU 执行程序时，由于发生了某种随机的事件(外部或内部)，CPU暂停当前的任务去执行另一段程序。事件处理完后又返回被中断的程序继续执行，这一过程就称为中断。</description>
+    </item>
+    
+    <item>
+      <title>模数转换的应用</title>
+      <link>https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Sat, 06 Mar 2021 20:11:17 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+      <description>AD的概念及性能指标  AD概念：将连续的模拟信号转换为离散的数字信号的器件。 转换时间：AD完成一次转换所需要的时间，其倒数为转换速率。 分辨率 输出模拟量最小变化程度的指标(32上的为12位)。12位，满量程5v分辨率为:5 /（2^12）=1.22mv 量化误差 量化过程引起的误差 理论上规定为一个单位分辨率的-1/2 &amp;mdash; +1/2LSB 。 转换精度：实际A/D转换器与一个理想A/D转换器在量化值上的差值，可用绝对误差或相对误差表示。  AD时钟 时钟由PCLK2经过分频产生，最大14M 一般使PCLK2=HCLK=72M
+采样的周期数可通过 ADC 采样时间寄存器 ADC_SMPRx（x=0、1） 中的 SMP[2:0]位设置，ADC_SMPR2 控制的是通道 0~9，ADC_SMPR1 控制的是通道 10~17。每个通道可以分别用不同的时间采样。其中采样周期最小是 1.5 个（ADC_CLK 周期，1/ADC_CLK），即如果我们要达到最快的采样，那么应该设置采样周期为 1.5 个周期。
+ADC的转换时间：与ADC的输入时钟和采样时间有关。 公式为：Tconv = 采样时间 + 12.5 个周期。
+CubeMX的配置 使用 ADC1 的其中1个通道，通道号10，对应的引脚是 PC0；
+设置ADC 时钟参数，这里设置 PLCK2是72M；时钟经过 6 分频，那么此时的时钟就是 12MHz。
+设置 ADC 的转换模式以及通道进行设置，独立模式（Independent mode）、数据右对齐（Right Alignment）、连续转换模式（Continuous Conversion Mod）使能；使能规则通道转换，选择1个通道。
+
+常用函数 ADC:HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);//此函数Adon控制位，置1，启动ADC。 HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout); //用于轮询ADC转换。 adc句柄和超时时间 HAL_ADC_GetValue(ADC_HandleTypeDef* hadc); //读取ADC的值，清EOC； 返回AD采集的值 uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc); //读取ADC的状态；本例参数： adc句柄，取值&amp;amp;hadc1 返回状态值 终端回调函数的编写 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {	uint16_t ADC1_Value; uint32_t Rt; if (htim-&amp;gt;Instance == htim1.</description>
+    </item>
+    
+    <item>
+      <title>简单的波形发生器</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/</link>
+      <pubDate>Sat, 06 Mar 2021 19:24:37 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/</guid>
+      <description>同相加法电路 求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}+\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。
+
+同相放大电路 
+根据虚短 Vp=Vn，$v_{n}=\frac{R_{1}}{R_{1}+R_{2}} v_{0}$
+方波产生电路 方波产生电路（也称多谐振荡电路）的是在迟滞比较器的基础上组成。
+迟滞比较器是一种正反馈的单限比较器。迟滞比较器拥有两个门限电压，输入电压由大到小由小到大的门限电压并不相同。通过这种方法可以少电压的干扰。右下角VCC 作为直流电源，分压后电源输入到运放中去。运放的同相端处接来自VCC的稳定的分压，运放的反相端处也有点压，作为抬升电压。
+
+
+以上便解释了方波的产生方法，方波的幅值由VCC最终所分到输出端的分压和输出电压的饱和值决定。但初始时得到的方波占空比并不能保证在50%，这里咋需要通过调节迟滞比较器上下限来改变方波的占空比。方法是通过VCC分压来改变Vref。根据公式可知改参数与上限电压成正比，下限成反比。当上下限均增大时，方波的占空比便会增加，位于到电平的时间减少。反之，亦然。
+$\begin{array}{l}v_{T+}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 L} \v_{T-}=\left(1+\frac{R_{1}}{R_{2}}\right)+v_{R E F}-\frac{R_{1}}{R_{2}} \cdot v_{0 H}\end{array}$
+积分电路 
+
+积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$
+在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。
+$R_{11}$减小时图形为  $R_{11}$增大时，会产生尖波 
+低通滤波电路 一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。
+
+ 引用  电子技术基础.模拟部分,第五版，康华光，高等教育出版社  </description>
+    </item>
+    
+    <item>
+      <title>算法笔记2</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</link>
+      <pubDate>Mon, 04 Jan 2021 13:09:11 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/</guid>
+      <description>基本数据结构 线性结构（linear structure）  有序数据项的集合 每个数据项都有唯一的前驱和后继（第一个和最后一个除外）  根据数据项增减的方式构成了数据结构
+ 栈(Stack)&amp;ndash;仅在表尾进行插入和删除操作的线性表 队列(Queue)&amp;ndash;只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作 双端队列(Deque)&amp;ndash;限定插入和删除操作在表的两端进行的线性表 列表(List)&amp;ndash;  栈 进行操作的一端为栈顶，另一端为栈底
+栈的特点：后进先出LIFO
+栈通过python的实现可以借助list的数据类型
+栈的应用 括号匹配&amp;ndash;基本思路 
+括号匹配与之前图灵机的模型有些相似；
+ 括号匹配可以用用于爬虫HTML数据的爬取；另外该方法也可通过正则表达式实现。  十进制与二进制的转换 十进制转换二进制是余数的连续求取，并将求得的余数倒过来书写。通过栈后进先出的特性可以实现。
+同时由此可以进行十进制到其他进制的转换。当转换的进制为十一禁进制以上时，可以使用数组来保存其中的字母
+digits = &amp;#34;0123456789ABC&amp;#34; 表达式转换 根据表达式操作符的的位置分为中缀、前缀和后缀，距离操作数最近的操作符先执行
+  中缀表达式转换为前缀和后缀表达式
+将表达式转换为全括号形式，将内部每个运算符移到对应的左括号或右括号处边可以转换为前缀、后缀表达式
+  中缀转后缀算法
+  从左到右扫描过程中，采用栈来暂存为处理的操作符，当遇到一个新的操作符，就需要跟栈顶的操作符比较下优先级，再行处理。
+算法流程
+ 从左到右扫描
+- 当遇到操作数，直接输出至列表末尾
+- 当遇到左括号压入栈顶
+- 当遇到右括号，反复弹出栈顶加入至输出列表末尾，直到碰到左括号
+- 当遇到操作符，与栈顶其他操作符比较。栈顶操作符高于或等于它，则将输出栈顶的操作符直到优先级低于它
+ 后缀表达式的求值 后缀表达式的操作符在操作数的后面，因此要暂存操作数,直到碰到操作符才进行运算(从这可以利用栈的特性)
+在实际运算时，先弹出的时右操作数然后才是左操作数，对于‘-’和‘/’要注意两个操作数的位置
+算法流程
+  创建空栈用于暂存操作数
+  从左到右扫面单词列表
+ 如果是操作数，压入栈顶 如果是操作符，从栈顶弹出两个操作数，进行计算。（注意操作数的位置）    最后扫描结束后，表达式的值被存在栈顶（如果表达式正确，则栈中仅有最后的结果一个元素）</description>
+    </item>
+    
+    <item>
+      <title>算法笔记1</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</link>
+      <pubDate>Mon, 04 Jan 2021 13:09:08 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/</guid>
+      <description>算法分析 算法和算法复杂性 可计算的问题：
+ what：分类问题——树状判定分支 why： 证明问题——公式序列解决 how： 或称问题——算法流程解决  欧几里得算法的python实现
+def alg(a,b): if b==0 : return a print(a) c=a%b alg(b,c) def main(): #a,b为要计算的两个数 a=15 b=9 print(alg(a,b)) main() 计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。
+不可计算问题
+ 停机问题 几乎所有无理数都无法通过算法找出任意一位精确数  程序与算法的区别 算法是描述问题解决的分布步骤而程序则是通过某种编程语言实现的算法。
+算法分析主要是从计算机资源消耗的角度来评判和比较算法。评判的两个标准有两种：算法执行时间和空间（内存或存储空间）。
+利用python的time库中 time.time()函数可以计算算法的执行时间。
+ time.time() 是计算从1970到现在的时长，并将值返回。
+ 对于算法运行时间的检测也收到语言性能、机器的性能的影响。
+大O表示法 一个算法所实施的操作数量或步骤可作为独立于程序/机器的度量指标。
+程序设计语言中除与计算资源无关的定义语句外，主要是三种控制流语句和赋值语句。
+一个赋值语句包含了（表达式）计算和（变量）存储两个基本资源。而控制流语句仅起组织语句的作用，并不涉及处理。
+算法分析的目标是找出问题规模如何影响执行时间
+数量级函数 数量级函数描述了T（n）中随着n增加而增加速度最快的主导部分。称作大O表示法记作O(f(n)),其中f(n)表示T(n)中的主导部分。
+ T(n)=5n^2+27n+1005
+当n越来越大起主导作用的是5*n^2,其中系数5对n^2的增长速度无影响。因此可以表示为O(n^2)
+ 具体数据也会影响算法运行时间，如排序算法。此时分为最好，最差和平均状况，主要还是通过平均状况分析性能。
+大O表示所有上限中最小的那个上限
+大Ω表示所有下限中最大的那个下限
+如果上下限相同用Θ大表示
+变位词  写一个布尔函数，一两个此作为参数，返回两个词是否为变位词
+  将每一个单词逐个检查  课程给的代码示例：
+def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &amp;lt; len(s1) and stillok: #只要字符中有一个没找到就可以通过32行退出 pos2 = 0 found =False while pos2 &amp;lt; len(alist) and not found: if s1[pos2] == alist[pos2]: found = True else: pos2 = pos2 + 1 if found: alist[pos2] = None else: stillok = False pos1 = pos1 + 1 return stillok 如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none</description>
+    </item>
+    
+    <item>
+      <title>算法笔记0</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</link>
+      <pubDate>Mon, 04 Jan 2021 13:09:05 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/</guid>
+      <description>抽象数据类型（ADT） 是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。
+递归 编写递归代码要注意的三点：
+  递归总有一个最简单的情况&amp;mdash;方法的第一条语句总是包含 return 的条件语句。 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集。   </description>
+    </item>
+    
+    <item>
+      <title>Yolo学习笔记＿１</title>
+      <link>https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</link>
+      <pubDate>Sat, 17 Aug 2019 17:20:47 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/yolo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%91/</guid>
+      <description>yolov3学习笔记 基本概念 下采样即图像缩小；将x*x个像素点取均值换算为一个。
+上采样即图像放大，利用插值算法。
+ground truth即监督学习中数据标注的正确的范围。也就是标准答案的意思。
+IOU预测的范围（bounding box）与ground truth的交集/两者并集
+bounding box(bbox) 在目标检测中不仅要知道目标的类别还要知道它的位置。在木变检测中常用边界框来描述目标位置。
+anchor box目标检测算法通常会在输入图像中采样大量的区域，然后判断这些区域中是否包含我们感兴趣的目标，并调整区域边缘从而更准确地预测目标的真实边界框（ground-truth bounding box）。不同的模型使用的区域采样方法可能不同。这里我们介绍其中的一种方法：它以每个像素为中心生成多个大小和宽高比（aspect ratio）不同的边界框。这些边界框被称为锚框（anchor box）。(——动手做深度学习)
+精确率与召回率实际上非常简单，精确率是针对我们预测结果而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)，也就是
+P=TP/(TP+FP)
+而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。
+R=TP/TP+FN
+非极大值抑制简称为NMS算法，思想是搜索局部最大值，抑制极大值。
+流程如下：
+ 根据置信度得分进行排序
+选择置信度最高的比边界框添加到最终输出列表中，将其从边界框列表中删除
+计算所有边界框的面积
+计算置信度最高的边界框与其它候选框的IoU。
+删除IoU大于阈值的边界框
+重复上述过程，直至边界框列表为空。
+ **批标准化(batch normalization)**将分散的数据统一的做法，便与神经网络的学习和优化。normalization 预处理, 使得输入的 x 变化范围不会太大, 让输入值经过激励函数的敏感部分。BN实在每个全连接层之间都进行批数据标准化。(作者： 聚类算法 聚类算法是根据样本之间的距离来将他们归为一类的，这个距离不是普通的距离，理论上叫做欧氏距离。
+一般面向大量的，同时维度在2个或两个以上的样本群。
+ 1、在样本中随机选择K个点，作为每个类别的初始中心点，这K是自己定的，假如你想将样本分成3个类K就等于3,4个类K就等于4；
+2、计算所有样本离这K个初始中心点的距离并分别进行比较，选出其中最近的距离并把这个样本归到这个初始中心点的类别里，即总共划分成K个类别；
+3、舍弃原来的初始中心点，在划分好的K个类别里分别计算出新的中心点，使得这些中心点距离他类别里的所有样本的距离之和最小；
+4、判断新获得的中心点是否与旧中心点一样，如不一样则回到第2步，重新计算所有样本离这K个新的中心点的距离并进行比较，选出其中最近的距离并归到这个新的中心点的类别里，继续下面的步奏；如一样则完成，即收敛。
+ 残差网络 残差 残差：实际观测值与估计值（拟合值）之间的差。如果回归模型正确则残差可以看做误差的观测值。
+理论上，可以训练一个 shallower 网络，然后在这个训练好的 shallower 网络上堆几层 identity mapping（恒等映射） 的层，即输出等于输入的层，构建出一个 deeper 网络。这两个网络（shallower 和 deeper）得到的结果应该是一模一样的.
+退化问题 为什么属于随着层数的增多训练集上的效果变差？
+原因是随着网络越来越深，训练变得原来越难，网络的优化变得越来越难。理论上，越深的网络，效果应该更好；但实际上，由于训练难度，过深的网络会产生退化问题，效果反而不如相对较浅的网络。而残差网络就可以解决这个问题的，残差网络越深，训练集上的效果会越好。（测试集上的效果可能涉及过拟合问题。过拟合问题指的是测试集上的效果和训练集上的效果之间有差距。）这里要注意到过拟合与退化问题之间的区别
+残差块 残差网络是通过加入shortcut connections,变得更容易被优化。包含一个shortcut connection的几层网络被称为一个残差块。shortcut即图中x到 ⨁的箭头。</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu笔记</title>
+      <link>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 30 Jun 2019 11:00:55 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/</guid>
+      <description>这篇笔记会根据情况隔段时间更新一次
+ 终端操作  cd+文件夹名 进入文件夹 可以使用TAB键进行自动补全或选择 cd ..( 退出几层就加几个..) 退出到上n层路径
+ls 显示文件夹中的目录
+pwd 显示当前路径
+gedit 使用文本编辑器编辑文件
+cat 在终端中查看文件（多用做文本文件）
+sudo 进入管理员模式（超级用户)
+sudo su 进入根用户
+nvidia-smi 查看显卡运行状态（A卡没有试过）
+ 在ubuntu中一些文件被写保护，需要更高级权限才能修改，可以在命令前加sudo
+复制一个文件到指定目录  (1) 在桌面上打开终端，输入sudo su
+(2) 输入密码，就切换到root用户下
+(3) 切换到桌面 命令输入为 cd 桌面
+(4) 然后输入复制命令行 cp -r studio.zip /home/androidstudio
+(5) 回车 大功告成 可以看看/home/androidstudio目录下是否有studio.zip
+ 作者：飞奔的小付
+来源：CSDN
+原文
+移动文件（假设现在在该文件的目录下）
+ sudo mv xxx.xx 新的位置的路径
+ 解压文件
+ sudo unzip opencv-3.3.0.zip
+ 重命名文件
+ sudo cp 原文件名 新文件名</description>
+    </item>
+    
+  </channel>
+</rss>
