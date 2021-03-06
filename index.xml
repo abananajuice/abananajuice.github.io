@@ -17,8 +17,8 @@
 &lt;h3 id=&#34;启动模式&#34;&gt;启动模式&lt;/h3&gt;
 &lt;p&gt;内置flash：主闪存，对应着烧写到flash的用户程序&lt;br&gt;
 系统存储器：对应着系统的启动代码，将采用串口1下载代码到flash。使用串口下载代码时使用&lt;br&gt;
-内置SRAM：访问SRAM
-&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6u31EQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+内置SRAM：访问SRAM&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6u31EQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6u31EQ.png&#34; alt=&#34;6u31EQ.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;gpio&#34;&gt;GPIO&lt;/h2&gt;
 &lt;p&gt;一个GPIO端口至少需要两个寄存器，一个做控制用的“通用I/O端口控制寄存器”，还有一个是存放数据的“通用I/O端口数据寄存器”。&lt;/p&gt;
@@ -156,7 +156,8 @@
         <pubDate>Sat, 06 Mar 2021 19:24:37 +0800</pubDate>
         
         <guid>https://abananajuice.github.io/p/%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%8F%91%E7%94%9F%E5%99%A8/</guid>
-        <description>&lt;h2 id=&#34;同相加法电路&#34;&gt;同相加法电路&lt;/h2&gt;
+        <description>&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;同相加法电路&#34;&gt;同相加法电路&lt;/h2&gt;
 &lt;p&gt;求和电路分为同相和反相。反相需要再加一个负号。图中未反相加法电路，其计算公式为：$-v_{\mathrm{o}}=\frac{R_{3}}{R_{1}} v_{\mathrm{i} 1}+\frac{R_{3}}{R_{2}} v_{\mathrm{i} 2}$因此要计算两个波形相叠加，需要改变电路中阻抗的阻值。&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6um5L9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6um5L9.png&#34; alt=&#34;6um5L9.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
@@ -180,11 +181,11 @@
     &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6umRRU.png&#34; alt=&#34;6umRRU.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;积分电路的基本计算公式为：$v_{0}=-\frac{1}{R C} \int v_{I} \mathrm{~d} t$&lt;/p&gt;
 &lt;p&gt;在实际电路中R11的作用是：通过改变$R_{11}$的电阻改变积分曲线的变化，使积分曲线的斜率发生变化。&lt;br&gt;
-$R_{11}$减小时图形为
-&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6um2GT&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6um2GT.png&#34; alt=&#34;6um2GT.png&#34;  /&gt;&lt;/a&gt;
-$R_{11}$增大时，会产生尖波
-&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6umoZR&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+$R_{11}$减小时图形为&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6um2GT&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6um2GT.png&#34; alt=&#34;6um2GT.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;$R_{11}$增大时，会产生尖波&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imgtu.com/i/6umoZR&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/06/6umoZR.png&#34; alt=&#34;6umoZR.png&#34;  /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;低通滤波电路&#34;&gt;低通滤波电路&lt;/h2&gt;
 &lt;p&gt;一般低通滤波电路是由同相比例放大电路和无源RC滤波电路构成。二阶有源低通滤波电路是由两节RC震荡电路和同相比例放大电路电路构成。其特点是，输入阻抗搞，输出阻抗低。图中红圈内即为无源RC滤波电路。&lt;/p&gt;
