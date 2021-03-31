@@ -34,7 +34,7 @@
 &lt;h2 id=&#34;有序表ordered-list&#34;&gt;有序表(ordered list)&lt;/h2&gt;
 &lt;p&gt;依照某种可比性，决定列表个元素的排序&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;对于python，可以适用于所有定义了&lt;code&gt;__gr__&lt;/code&gt;方法的数据类型&lt;/p&gt;
+&lt;p&gt;对于python，可以适用于所有定义了&lt;code&gt;__gt__&lt;/code&gt;方法的数据类型&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;查找(search)方法&lt;/strong&gt;：当遍历到的数据项大于所要查找的数据项，则说明所要查找的元素在链表中不存在。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;添加(add)方法&lt;/strong&gt;：需要引用当前节点和上一节点，将新的元素加入到两者之间。&lt;/p&gt;
