@@ -1,23 +1,62 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='抽象数据类型（ADT） 是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。
-递归 编写递归代码要注意的三点：
-  递归总有一个最简单的情况&amp;mdash;方法的第一条语句总是包含 return 的条件语句。 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集。   '><title>算法笔记0</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='队列(queue) 队列的特征：先进先出（FIFO）
+队列仅有一个入口和出口。添加数据处为尾端，移除数据处为首端。
+队列的操作
+如果将list的首端作为队列尾端，list的末端作为队列的首端。enqueue()的复杂度为O(n),dequeue()的复杂度为O(1)。
+首位倒过来时复杂度也倒过来
+双端队列（deque）:队首和队尾都可以进行加入和移出操作。
+无序表(unordered list) 数据的排列不具有顺序性，仅依靠相对位置
+利用链表实现无序表 链表的每个节点至少包含：数据项本身，下一节点的引用信息
+通过在数据项之间建立链接指向，就可以保持其前后相对位置。 通过链表实现的无序表仅仅包含对于受节点head的引用。
+添加(add)：将新的数据项添加至表头，减少算法复杂度。
+temp.setNext(self.head) self.head = temp #以上两条语句不能交换位置 链表的查找(search)和长度(size)方法都使用遍历的思想。删除(remove)第n的节点时需要把第n-1个节点指向n&#43;1个节点。因此，要实现该方法需要引用当前节点和上一节点。
+有序表(ordered list) 依照某种可比性，决定列表个元素的排序
+ 对于python，可以适用于所有定义了__gr__方法的数据类型
+ 查找(search)方法：当遍历到的数据项大于所要查找的数据项，则说明所要查找的元素在链表中不存在。
+添加(add)方法：需要引用当前节点和上一节点，将新的元素加入到两者之间。
+引用  数据结构与算法Python版_中国大学MOOC(慕课)  '><title>算法笔记3</title>
 
-<link rel='canonical' href='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/'>
+<link rel='canonical' href='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='算法笔记0'>
-<meta property='og:description' content='抽象数据类型（ADT） 是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。
-递归 编写递归代码要注意的三点：
-  递归总有一个最简单的情况&amp;mdash;方法的第一条语句总是包含 return 的条件语句。 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集。   '>
-<meta property='og:url' content='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='算法笔记3'>
+<meta property='og:description' content='队列(queue) 队列的特征：先进先出（FIFO）
+队列仅有一个入口和出口。添加数据处为尾端，移除数据处为首端。
+队列的操作
+如果将list的首端作为队列尾端，list的末端作为队列的首端。enqueue()的复杂度为O(n),dequeue()的复杂度为O(1)。
+首位倒过来时复杂度也倒过来
+双端队列（deque）:队首和队尾都可以进行加入和移出操作。
+无序表(unordered list) 数据的排列不具有顺序性，仅依靠相对位置
+利用链表实现无序表 链表的每个节点至少包含：数据项本身，下一节点的引用信息
+通过在数据项之间建立链接指向，就可以保持其前后相对位置。 通过链表实现的无序表仅仅包含对于受节点head的引用。
+添加(add)：将新的数据项添加至表头，减少算法复杂度。
+temp.setNext(self.head) self.head = temp #以上两条语句不能交换位置 链表的查找(search)和长度(size)方法都使用遍历的思想。删除(remove)第n的节点时需要把第n-1个节点指向n&#43;1个节点。因此，要实现该方法需要引用当前节点和上一节点。
+有序表(ordered list) 依照某种可比性，决定列表个元素的排序
+ 对于python，可以适用于所有定义了__gr__方法的数据类型
+ 查找(search)方法：当遍历到的数据项大于所要查找的数据项，则说明所要查找的元素在链表中不存在。
+添加(add)方法：需要引用当前节点和上一节点，将新的元素加入到两者之间。
+引用  数据结构与算法Python版_中国大学MOOC(慕课)  '>
+<meta property='og:url' content='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/'>
 <meta property='og:site_name' content='Mark'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-01-04T13:09:05&#43;08:00'/><meta property='article:modified_time' content='2021-01-04T13:09:05&#43;08:00'/>
-<meta name="twitter:title" content="算法笔记0">
-<meta name="twitter:description" content="抽象数据类型（ADT） 是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。
-递归 编写递归代码要注意的三点：
-  递归总有一个最简单的情况&amp;mdash;方法的第一条语句总是包含 return 的条件语句。 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集。   ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-03-31T17:58:45&#43;08:00'/><meta property='article:modified_time' content='2021-03-31T17:58:45&#43;08:00'/>
+<meta name="twitter:title" content="算法笔记3">
+<meta name="twitter:description" content="队列(queue) 队列的特征：先进先出（FIFO）
+队列仅有一个入口和出口。添加数据处为尾端，移除数据处为首端。
+队列的操作
+如果将list的首端作为队列尾端，list的末端作为队列的首端。enqueue()的复杂度为O(n),dequeue()的复杂度为O(1)。
+首位倒过来时复杂度也倒过来
+双端队列（deque）:队首和队尾都可以进行加入和移出操作。
+无序表(unordered list) 数据的排列不具有顺序性，仅依靠相对位置
+利用链表实现无序表 链表的每个节点至少包含：数据项本身，下一节点的引用信息
+通过在数据项之间建立链接指向，就可以保持其前后相对位置。 通过链表实现的无序表仅仅包含对于受节点head的引用。
+添加(add)：将新的数据项添加至表头，减少算法复杂度。
+temp.setNext(self.head) self.head = temp #以上两条语句不能交换位置 链表的查找(search)和长度(size)方法都使用遍历的思想。删除(remove)第n的节点时需要把第n-1个节点指向n&#43;1个节点。因此，要实现该方法需要引用当前节点和上一节点。
+有序表(ordered list) 依照某种可比性，决定列表个元素的排序
+ 对于python，可以适用于所有定义了__gr__方法的数据类型
+ 查找(search)方法：当遍历到的数据项大于所要查找的数据项，则说明所要查找的元素在链表中不存在。
+添加(add)方法：需要引用当前节点和上一节点，将新的元素加入到两者之间。
+引用  数据结构与算法Python版_中国大学MOOC(慕课)  ">
     </head>
     <body class="">
     <script>
@@ -206,7 +245,7 @@
     
 
     <h2 class="article-title">
-        <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/">算法笔记0</a>
+        <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/">算法笔记3</a>
     </h2>
 
     <footer class="article-time">
@@ -218,22 +257,42 @@
 
 
 
-        <time class="article-time--published">Jan 04, 2021</time>
+        <time class="article-time--published">Mar 31, 2021</time>
     </footer></div>
 </header>
 
     <section class="article-content">
-    <h2 id="抽象数据类型adt">抽象数据类型（ADT）</h2>
-<p>是对数据进行处理的一种逻辑描述，并不设计如何实现这些处理。</p>
-<h2 id="递归">递归</h2>
-<p>编写递归代码要注意的三点：</p>
+    <h2 id="队列queue">队列(queue)</h2>
+<p>队列的特征：先进先出（FIFO）<br>
+队列仅有一个入口和出口。添加数据处为尾端，移除数据处为首端。</p>
+<p>队列的操作<br>
+<img src="https://s1.ax1x.com/2020/03/30/Gnw9PO.png" alt="queue.png"  /></p>
+<p>如果将list的首端作为队列尾端，list的末端作为队列的首端。enqueue()的复杂度为O(n),dequeue()的复杂度为O(1)。</p>
+<p>首位倒过来时复杂度也倒过来</p>
+<p><strong>双端队列（deque）</strong>:队首和队尾都可以进行加入和移出操作。</p>
+<h2 id="无序表unordered-list">无序表(unordered list)</h2>
+<p>数据的排列不具有顺序性，仅依靠相对位置</p>
+<h3 id="利用链表实现无序表">利用链表实现无序表</h3>
+<p>链表的每个节点至少包含：数据项本身，下一节点的引用信息</p>
+<p>通过在数据项之间建立链接指向，就可以保持其前后相对位置。
+通过链表实现的无序表仅仅包含对于受节点head的引用。</p>
+<p><strong>添加(add)</strong>：将新的数据项添加至表头，减少算法复杂度。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">temp</span><span class="o">.</span><span class="n">setNext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">temp</span>
+<span class="c1">#以上两条语句不能交换位置</span>
+</code></pre></div><p>链表的查找(search)和长度(size)方法都使用遍历的思想。删除(remove)第n的节点时需要把第n-1个节点指向n+1个节点。因此，要实现该方法需要引用当前节点和上一节点。</p>
+<h2 id="有序表ordered-list">有序表(ordered list)</h2>
+<p>依照某种可比性，决定列表个元素的排序</p>
 <blockquote>
-<ul>
-<li>递归总有一个最简单的情况&mdash;方法的第一条语句总是包含 return 的条件语句。</li>
-<li>递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。</li>
-<li>递归调用的父问题和尝试解决的子问题之间不应该有交集。</li>
-</ul>
+<p>对于python，可以适用于所有定义了<code>__gr__</code>方法的数据类型</p>
 </blockquote>
+<p><strong>查找(search)方法</strong>：当遍历到的数据项大于所要查找的数据项，则说明所要查找的元素在链表中不存在。</p>
+<p><strong>添加(add)方法</strong>：需要引用当前节点和上一节点，将新的元素加入到两者之间。</p>
+<h1 id="引用">引用</h1>
+<ul>
+<li><a class="link" href="https://www.icourse163.org/learn/PKU-1206307812"  target="_blank" rel="noopener"
+    >数据结构与算法Python版_中国大学MOOC(慕课)</a></li>
+</ul>
 
 </section>
 
@@ -267,18 +326,6 @@
                 
                     
 <article class="">
-    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">算法笔记3</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="">
     <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
         
         
@@ -297,6 +344,18 @@
 
         <div class="article-details">
             <h2 class="article-title">算法笔记1</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B00/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记0</h2>
         </div>
     </a>
 </article>

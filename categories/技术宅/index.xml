@@ -6,7 +6,31 @@
     <description>Recent content in 技术宅 on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 20:36:44 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 31 Mar 2021 17:58:45 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法笔记3</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/</link>
+      <pubDate>Wed, 31 Mar 2021 17:58:45 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/</guid>
+      <description>队列(queue) 队列的特征：先进先出（FIFO）
+队列仅有一个入口和出口。添加数据处为尾端，移除数据处为首端。
+队列的操作
+如果将list的首端作为队列尾端，list的末端作为队列的首端。enqueue()的复杂度为O(n),dequeue()的复杂度为O(1)。
+首位倒过来时复杂度也倒过来
+双端队列（deque）:队首和队尾都可以进行加入和移出操作。
+无序表(unordered list) 数据的排列不具有顺序性，仅依靠相对位置
+利用链表实现无序表 链表的每个节点至少包含：数据项本身，下一节点的引用信息
+通过在数据项之间建立链接指向，就可以保持其前后相对位置。 通过链表实现的无序表仅仅包含对于受节点head的引用。
+添加(add)：将新的数据项添加至表头，减少算法复杂度。
+temp.setNext(self.head) self.head = temp #以上两条语句不能交换位置 链表的查找(search)和长度(size)方法都使用遍历的思想。删除(remove)第n的节点时需要把第n-1个节点指向n+1个节点。因此，要实现该方法需要引用当前节点和上一节点。
+有序表(ordered list) 依照某种可比性，决定列表个元素的排序
+ 对于python，可以适用于所有定义了__gr__方法的数据类型
+ 查找(search)方法：当遍历到的数据项大于所要查找的数据项，则说明所要查找的元素在链表中不存在。
+添加(add)方法：需要引用当前节点和上一节点，将新的元素加入到两者之间。
+引用  数据结构与算法Python版_中国大学MOOC(慕课)  </description>
+    </item>
+    
     <item>
       <title>STM32学习笔记</title>
       <link>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>

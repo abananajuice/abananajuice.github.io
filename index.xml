@@ -6,7 +6,46 @@
         <description>Recent content on Mark</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 06 Mar 2021 20:36:44 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 31 Mar 2021 17:58:45 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>算法笔记3</title>
+        <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/</link>
+        <pubDate>Wed, 31 Mar 2021 17:58:45 +0800</pubDate>
+        
+        <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/</guid>
+        <description>&lt;h2 id=&#34;队列queue&#34;&gt;队列(queue)&lt;/h2&gt;
+&lt;p&gt;队列的特征：先进先出（FIFO）&lt;br&gt;
+队列仅有一个入口和出口。添加数据处为尾端，移除数据处为首端。&lt;/p&gt;
+&lt;p&gt;队列的操作&lt;br&gt;
+&lt;img src=&#34;https://s1.ax1x.com/2020/03/30/Gnw9PO.png&#34; alt=&#34;queue.png&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;如果将list的首端作为队列尾端，list的末端作为队列的首端。enqueue()的复杂度为O(n),dequeue()的复杂度为O(1)。&lt;/p&gt;
+&lt;p&gt;首位倒过来时复杂度也倒过来&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;双端队列（deque）&lt;/strong&gt;:队首和队尾都可以进行加入和移出操作。&lt;/p&gt;
+&lt;h2 id=&#34;无序表unordered-list&#34;&gt;无序表(unordered list)&lt;/h2&gt;
+&lt;p&gt;数据的排列不具有顺序性，仅依靠相对位置&lt;/p&gt;
+&lt;h3 id=&#34;利用链表实现无序表&#34;&gt;利用链表实现无序表&lt;/h3&gt;
+&lt;p&gt;链表的每个节点至少包含：数据项本身，下一节点的引用信息&lt;/p&gt;
+&lt;p&gt;通过在数据项之间建立链接指向，就可以保持其前后相对位置。
+通过链表实现的无序表仅仅包含对于受节点head的引用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;添加(add)&lt;/strong&gt;：将新的数据项添加至表头，减少算法复杂度。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;n&#34;&gt;temp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setNext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;head&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;temp&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#以上两条语句不能交换位置&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;链表的查找(search)和长度(size)方法都使用遍历的思想。删除(remove)第n的节点时需要把第n-1个节点指向n+1个节点。因此，要实现该方法需要引用当前节点和上一节点。&lt;/p&gt;
+&lt;h2 id=&#34;有序表ordered-list&#34;&gt;有序表(ordered list)&lt;/h2&gt;
+&lt;p&gt;依照某种可比性，决定列表个元素的排序&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于python，可以适用于所有定义了&lt;code&gt;__gr__&lt;/code&gt;方法的数据类型&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;查找(search)方法&lt;/strong&gt;：当遍历到的数据项大于所要查找的数据项，则说明所要查找的元素在链表中不存在。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;添加(add)方法&lt;/strong&gt;：需要引用当前节点和上一节点，将新的元素加入到两者之间。&lt;/p&gt;
+&lt;h1 id=&#34;引用&#34;&gt;引用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.icourse163.org/learn/PKU-1206307812&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;数据结构与算法Python版_中国大学MOOC(慕课)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>STM32学习笔记</title>
         <link>https://abananajuice.github.io/p/stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <pubDate>Sat, 06 Mar 2021 20:36:44 +0800</pubDate>
