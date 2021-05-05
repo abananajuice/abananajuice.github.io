@@ -1,86 +1,41 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='这篇笔记会根据情况隔段时间更新一次
- 终端操作  cd&#43;文件夹名 进入文件夹 可以使用TAB键进行自动补全或选择 cd ..( 退出几层就加几个..) 退出到上n层路径
-ls 显示文件夹中的目录
-pwd 显示当前路径
-gedit 使用文本编辑器编辑文件
-cat 在终端中查看文件（多用做文本文件）
-sudo 进入管理员模式（超级用户)
-sudo su 进入根用户
-nvidia-smi 查看显卡运行状态（A卡没有试过）
- 在ubuntu中一些文件被写保护，需要更高级权限才能修改，可以在命令前加sudo
-复制一个文件到指定目录  (1) 在桌面上打开终端，输入sudo su
-(2) 输入密码，就切换到root用户下
-(3) 切换到桌面 命令输入为 cd 桌面
-(4) 然后输入复制命令行 cp -r studio.zip /home/androidstudio
-(5) 回车 大功告成 可以看看/home/androidstudio目录下是否有studio.zip
- 作者：飞奔的小付
-来源：CSDN
-原文
-移动文件（假设现在在该文件的目录下）
- sudo mv xxx.xx 新的位置的路径
- 解压文件
- sudo unzip opencv-3.3.0.zip
- 重命名文件
- sudo cp 原文件名 新文件名'><title>Ubuntu笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是调用自身。
+ 结束条件 减小规模 调用自身  递归调用的实现：函数每次调用将现场数据压入系统调用栈，当函数返回时则从栈顶返回恢复现场。
+ 现场数据：栈保存的一个函数调用所需要维护的信息。
+每次调用，压入栈的现场数据成为栈帧。
+ #python中递归深度的设置(默认为1000) import sys sys.getrecursionlimit() sys.setrecursion(3000) 递归的应用  递归数列求和：将问题拆分成两个数相加，当列表长度为1时结束。 0-16任意进制的转换：设置convertstring = &amp;quot;0123456789ABCDEF&amp;quot; 通过除以整除\\进制基base以及对进制基求余数来将整数拆开。当数小于进制基时结束。  convertstring = &amp;#34;0123456789ABCDEF&amp;#34; ...... else: return toStr(n//base,base) &#43; convertstring[n%base] #字符串连接；n//base表示整除   迷宫：在原位置先向北走一步，如果找不到出口则按北南西东的顺序尝试。（这个实际上随意设置也行）；为了防止艳茹无限递归的死循环，需要加入之前的路径。
+  找零兑换：求兑换最少数量的硬币
+ 贪心策略：从允许最多数量最大面值的硬币开始，余额则用下一最大面值硬币尽可能多的数量分解。由此直到到达最小面值或余额为0。为了减少算法中的重复计算，可以将中间结果保存在表中。递归之前查表，直接返回。 2.动态规划法    动态规划 动态规划：从问题的最小规模的最优解开始，逐步扩大问题规模到要解决的问题。
+最优化问题能用动态规划解决的必要条件：问题最优解包含和更小规模子问题的最优解。
+递归可视化 分形树，谢尔宾斯基三角形，汉诺塔'><title>算法笔记4_递归Recursion</title>
 
-<link rel='canonical' href='https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/'>
+<link rel='canonical' href='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Ubuntu笔记'>
-<meta property='og:description' content='这篇笔记会根据情况隔段时间更新一次
- 终端操作  cd&#43;文件夹名 进入文件夹 可以使用TAB键进行自动补全或选择 cd ..( 退出几层就加几个..) 退出到上n层路径
-ls 显示文件夹中的目录
-pwd 显示当前路径
-gedit 使用文本编辑器编辑文件
-cat 在终端中查看文件（多用做文本文件）
-sudo 进入管理员模式（超级用户)
-sudo su 进入根用户
-nvidia-smi 查看显卡运行状态（A卡没有试过）
- 在ubuntu中一些文件被写保护，需要更高级权限才能修改，可以在命令前加sudo
-复制一个文件到指定目录  (1) 在桌面上打开终端，输入sudo su
-(2) 输入密码，就切换到root用户下
-(3) 切换到桌面 命令输入为 cd 桌面
-(4) 然后输入复制命令行 cp -r studio.zip /home/androidstudio
-(5) 回车 大功告成 可以看看/home/androidstudio目录下是否有studio.zip
- 作者：飞奔的小付
-来源：CSDN
-原文
-移动文件（假设现在在该文件的目录下）
- sudo mv xxx.xx 新的位置的路径
- 解压文件
- sudo unzip opencv-3.3.0.zip
- 重命名文件
- sudo cp 原文件名 新文件名'>
-<meta property='og:url' content='https://abananajuice.github.io/p/ubuntu%E7%AC%94%E8%AE%B0/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='算法笔记4_递归Recursion'>
+<meta property='og:description' content='将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是调用自身。
+ 结束条件 减小规模 调用自身  递归调用的实现：函数每次调用将现场数据压入系统调用栈，当函数返回时则从栈顶返回恢复现场。
+ 现场数据：栈保存的一个函数调用所需要维护的信息。
+每次调用，压入栈的现场数据成为栈帧。
+ #python中递归深度的设置(默认为1000) import sys sys.getrecursionlimit() sys.setrecursion(3000) 递归的应用  递归数列求和：将问题拆分成两个数相加，当列表长度为1时结束。 0-16任意进制的转换：设置convertstring = &amp;quot;0123456789ABCDEF&amp;quot; 通过除以整除\\进制基base以及对进制基求余数来将整数拆开。当数小于进制基时结束。  convertstring = &amp;#34;0123456789ABCDEF&amp;#34; ...... else: return toStr(n//base,base) &#43; convertstring[n%base] #字符串连接；n//base表示整除   迷宫：在原位置先向北走一步，如果找不到出口则按北南西东的顺序尝试。（这个实际上随意设置也行）；为了防止艳茹无限递归的死循环，需要加入之前的路径。
+  找零兑换：求兑换最少数量的硬币
+ 贪心策略：从允许最多数量最大面值的硬币开始，余额则用下一最大面值硬币尽可能多的数量分解。由此直到到达最小面值或余额为0。为了减少算法中的重复计算，可以将中间结果保存在表中。递归之前查表，直接返回。 2.动态规划法    动态规划 动态规划：从问题的最小规模的最优解开始，逐步扩大问题规模到要解决的问题。
+最优化问题能用动态规划解决的必要条件：问题最优解包含和更小规模子问题的最优解。
+递归可视化 分形树，谢尔宾斯基三角形，汉诺塔'>
+<meta property='og:url' content='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/'>
 <meta property='og:site_name' content='Mark'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2019-06-30T11:00:55&#43;08:00'/><meta property='article:modified_time' content='2019-06-30T11:00:55&#43;08:00'/>
-<meta name="twitter:title" content="Ubuntu笔记">
-<meta name="twitter:description" content="这篇笔记会根据情况隔段时间更新一次
- 终端操作  cd&#43;文件夹名 进入文件夹 可以使用TAB键进行自动补全或选择 cd ..( 退出几层就加几个..) 退出到上n层路径
-ls 显示文件夹中的目录
-pwd 显示当前路径
-gedit 使用文本编辑器编辑文件
-cat 在终端中查看文件（多用做文本文件）
-sudo 进入管理员模式（超级用户)
-sudo su 进入根用户
-nvidia-smi 查看显卡运行状态（A卡没有试过）
- 在ubuntu中一些文件被写保护，需要更高级权限才能修改，可以在命令前加sudo
-复制一个文件到指定目录  (1) 在桌面上打开终端，输入sudo su
-(2) 输入密码，就切换到root用户下
-(3) 切换到桌面 命令输入为 cd 桌面
-(4) 然后输入复制命令行 cp -r studio.zip /home/androidstudio
-(5) 回车 大功告成 可以看看/home/androidstudio目录下是否有studio.zip
- 作者：飞奔的小付
-来源：CSDN
-原文
-移动文件（假设现在在该文件的目录下）
- sudo mv xxx.xx 新的位置的路径
- 解压文件
- sudo unzip opencv-3.3.0.zip
- 重命名文件
- sudo cp 原文件名 新文件名">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-05-04T20:54:38&#43;08:00'/><meta property='article:modified_time' content='2021-05-04T20:54:38&#43;08:00'/>
+<meta name="twitter:title" content="算法笔记4_递归Recursion">
+<meta name="twitter:description" content="将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是调用自身。
+ 结束条件 减小规模 调用自身  递归调用的实现：函数每次调用将现场数据压入系统调用栈，当函数返回时则从栈顶返回恢复现场。
+ 现场数据：栈保存的一个函数调用所需要维护的信息。
+每次调用，压入栈的现场数据成为栈帧。
+ #python中递归深度的设置(默认为1000) import sys sys.getrecursionlimit() sys.setrecursion(3000) 递归的应用  递归数列求和：将问题拆分成两个数相加，当列表长度为1时结束。 0-16任意进制的转换：设置convertstring = &amp;quot;0123456789ABCDEF&amp;quot; 通过除以整除\\进制基base以及对进制基求余数来将整数拆开。当数小于进制基时结束。  convertstring = &amp;#34;0123456789ABCDEF&amp;#34; ...... else: return toStr(n//base,base) &#43; convertstring[n%base] #字符串连接；n//base表示整除   迷宫：在原位置先向北走一步，如果找不到出口则按北南西东的顺序尝试。（这个实际上随意设置也行）；为了防止艳茹无限递归的死循环，需要加入之前的路径。
+  找零兑换：求兑换最少数量的硬币
+ 贪心策略：从允许最多数量最大面值的硬币开始，余额则用下一最大面值硬币尽可能多的数量分解。由此直到到达最小面值或余额为0。为了减少算法中的重复计算，可以将中间结果保存在表中。递归之前查表，直接返回。 2.动态规划法    动态规划 动态规划：从问题的最小规模的最优解开始，逐步扩大问题规模到要解决的问题。
+最优化问题能用动态规划解决的必要条件：问题最优解包含和更小规模子问题的最优解。
+递归可视化 分形树，谢尔宾斯基三角形，汉诺塔">
     </head>
     <body class="">
     <script>
@@ -269,7 +224,7 @@ nvidia-smi 查看显卡运行状态（A卡没有试过）
     
 
     <h2 class="article-title">
-        <a href="/p/ubuntu%E7%AC%94%E8%AE%B0/">Ubuntu笔记</a>
+        <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/">算法笔记4_递归Recursion</a>
     </h2>
 
     <footer class="article-time">
@@ -281,92 +236,53 @@ nvidia-smi 查看显卡运行状态（A卡没有试过）
 
 
 
-        <time class="article-time--published">Jun 30, 2019</time>
+        <time class="article-time--published">May 04, 2021</time>
     </footer></div>
 </header>
 
     <section class="article-content">
-    <blockquote>
-<p>这篇笔记会根据情况隔段时间更新一次</p>
-</blockquote>
-<h1 id="终端操作">终端操作</h1>
+    <p>将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是<strong>调用自身</strong>。</p>
+<ol>
+<li>结束条件</li>
+<li>减小规模</li>
+<li>调用自身</li>
+</ol>
+<p>递归调用的实现：函数每次调用将现场数据压入系统调用栈，当函数返回时则从栈顶返回恢复现场。</p>
 <blockquote>
-<p>cd+文件夹名  进入文件夹 可以使用TAB键进行自动补全或选择 <!-- raw HTML omitted -->
-cd   ..( 退出几层就加几个..)  退出到上n层路径<br>
-ls 显示文件夹中的目录<br>
-pwd 显示当前路径<br>
-gedit 使用文本编辑器编辑文件<br>
-cat 在终端中查看文件（多用做文本文件）<br>
-sudo  进入管理员模式（超级用户)<br>
-sudo su 进入根用户<br>
-nvidia-smi  查看显卡运行状态（A卡没有试过）</p>
+<p>现场数据：栈保存的一个函数调用所需要维护的信息。<br>
+每次调用，压入栈的现场数据成为栈帧。</p>
 </blockquote>
-<p>在ubuntu中一些文件被写保护，需要更高级权限才能修改，可以在命令前加sudo</p>
-<h2 id="复制一个文件到指定目录">复制一个文件到指定目录</h2>
-<blockquote>
-<p>(1) 在桌面上打开终端，输入sudo su<br>
-(2) 输入密码，就切换到root用户下<br>
-(3) 切换到桌面 命令输入为 cd 桌面<br>
-(4) 然后输入复制命令行 cp -r studio.zip /home/androidstudio<br>
-(5) 回车 大功告成 可以看看/home/androidstudio目录下是否有studio.zip</p>
-</blockquote>
-<p>作者：飞奔的小付<br>
-来源：CSDN<br>
-<a class="link" href="https://blog.csdn.net/feibendexiaoma/article/details/73739319"  target="_blank" rel="noopener"
-    >原文</a></p>
-<p>移动文件（假设现在在该文件的目录下）</p>
-<blockquote>
-<p>sudo mv xxx.xx 新的位置的路径</p>
-</blockquote>
-<p>解压文件</p>
-<blockquote>
-<p>sudo unzip opencv-3.3.0.zip</p>
-</blockquote>
-<p>重命名文件</p>
-<blockquote>
-<p>sudo cp 原文件名 新文件名</p>
-</blockquote>
-<h1 id="软件安装">软件安装</h1>
-<p>软件安装前一般要先更新软件目录</p>
-<blockquote>
-<p>sudo apt-get update</p>
-</blockquote>
-<p>升级已有软件</p>
-<blockquote>
-<p>sudo apt-get upgrade
-常用软件安装
-<a href="https://www.jianshu.com/p/f44e1ae080a5">https://www.jianshu.com/p/f44e1ae080a5</a></p>
-</blockquote>
-<p>下载好网易云音乐安装完成后可能会遇到问题打不开。可以在终端中使用</p>
-<blockquote>
-<p>sudo netease  TAb(自动补全)</p>
-</blockquote>
-<p>当下在好软件安装包后，也可以在本地安装</p>
-<blockquote>
-<p>sudo sh xxx.sh<br>
-dpkg -i xxx.deb</p>
-</blockquote>
-<p><a class="link" href="https://jingyan.baidu.com/article/335530da98061b19cb41c31d.html"  target="_blank" rel="noopener"
-    >google浏览器安装</a></p>
-<h1 id="踩过的坑">踩过的坑</h1>
-<p><a class="link" href="https://blog.csdn.net/sannerlittle/article/details/77479656"  target="_blank" rel="noopener"
-    >没有声音解决办法</a><br>
-具体情况是：可以调节音量，但却没有声音
-这个问题到现在，我仍旧是每次开机仍要打开文章中所说的软件修改一次
-ubuntu和win双系统中无法访问win中的磁盘分区</p>
-<blockquote>
-<p>sudo ntfsfix /dev/磁盘号<br>
-如sudo ntfsfix /dev/sda6</p>
-</blockquote>
-<p><a class="link" href="https://blog.csdn.net/u010801439/article/details/79485914"  target="_blank" rel="noopener"
-    >ubuntu中python2和3共存</a></p>
-<blockquote>
-<p>source activate  [要激活的环境名称]<br>
-source deactivate</p>
-</blockquote>
-<p><a class="link" href="https://linux.cn/article-5409-1.html"  target="_blank" rel="noopener"
-    >如何修复 apt-get update 无法添加新的 CD-ROM 的错误</a></p>
-<p><strong>侵权即删</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#python中递归深度的设置(默认为1000)</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">setrecursion</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+</code></pre></div><h2 id="递归的应用">递归的应用</h2>
+<ul>
+<li>递归数列求和：将问题拆分成两个数相加，当列表长度为1时结束。</li>
+<li>0-16任意进制的转换：设置<code>convertstring = &quot;0123456789ABCDEF&quot;</code> 通过除以整除<code>\\</code>进制基<code>base</code>以及对进制基求余数来将整数拆开。当数小于进制基时结束。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">convertstring</span> <span class="o">=</span> <span class="s2">&#34;0123456789ABCDEF&#34;</span>
+    <span class="o">......</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">toStr</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="n">base</span><span class="p">,</span><span class="n">base</span><span class="p">)</span> <span class="o">+</span> <span class="n">convertstring</span><span class="p">[</span><span class="n">n</span><span class="o">%</span><span class="n">base</span><span class="p">]</span>
+        <span class="c1">#字符串连接；n//base表示整除</span>
+</code></pre></div><ul>
+<li>
+<p>迷宫：在原位置先向北走一步，如果找不到出口则按北南西东的顺序尝试。（这个实际上随意设置也行）；为了防止艳茹无限递归的死循环，需要加入之前的路径。</p>
+</li>
+<li>
+<p>找零兑换：求兑换最少数量的硬币</p>
+<ol>
+<li>贪心策略：从允许最多数量最大面值的硬币开始，余额则用下一最大面值硬币尽可能多的数量分解。由此直到到达最小面值或余额为0。为了减少算法中的重复计算，可以将中间结果保存在表中。递归之前查表，直接返回。
+2.动态规划法</li>
+</ol>
+</li>
+</ul>
+<h2 id="动态规划">动态规划</h2>
+<p><strong>动态规划</strong>：从问题的最小规模的最优解开始，逐步扩大问题规模到要解决的问题。</p>
+<p>最优化问题能用动态规划解决的必要条件：<strong>问题最优解包含和更小规模子问题的最优解</strong>。</p>
+<h2 id="递归可视化">递归可视化</h2>
+<p>分形树，谢尔宾斯基三角形，汉诺塔</p>
 
 </section>
 
@@ -397,18 +313,6 @@ source deactivate</p>
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
-                
-                    
-<article class="">
-    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">算法笔记4_递归Recursion</h2>
-        </div>
-    </a>
-</article>
                 
                     
 <article class="">
@@ -454,6 +358,18 @@ source deactivate</p>
 
         <div class="article-details">
             <h2 class="article-title">算法笔记0</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/ubuntu%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Ubuntu笔记</h2>
         </div>
     </a>
 </article>
