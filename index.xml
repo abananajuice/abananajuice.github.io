@@ -54,6 +54,11 @@
 &lt;p&gt;最优化问题能用动态规划解决的必要条件：&lt;strong&gt;问题最优解包含和更小规模子问题的最优解&lt;/strong&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;递归可视化&#34;&gt;递归可视化&lt;/h2&gt;
 &lt;p&gt;分形树，谢尔宾斯基三角形，汉诺塔&lt;/p&gt;
+&lt;h1 id=&#34;引用&#34;&gt;引用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.icourse163.org/learn/PKU-1206307812&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;数据结构与算法Python版_中国大学MOOC(慕课)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
