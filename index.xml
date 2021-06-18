@@ -6,13 +6,120 @@
         <description>Recent content on Mark</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 04 May 2021 20:54:38 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 18 Jun 2021 21:36:53 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>算法笔记5_排序与查找</title>
+        <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B05_%E6%8E%92%E5%BA%8F%E4%B8%8E%E6%9F%A5%E6%89%BE/</link>
+        <pubDate>Fri, 18 Jun 2021 21:36:53 +0800</pubDate>
+        
+        <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B05_%E6%8E%92%E5%BA%8F%E4%B8%8E%E6%9F%A5%E6%89%BE/</guid>
+        <description>&lt;h2 id=&#34;查找&#34;&gt;查找&lt;/h2&gt;
+&lt;p&gt;线性（顺序）关系：数据项保存在列表这样的集合中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;顺序查找&lt;/strong&gt;：按照顺序来访问和查找数据项；针对无序表当所要找的数据不在表中时查找需要遍历整个列表，而对于有序表可以设置一个提前结束标志减少计算量。但无论是有序表还是无序表其算法复杂度都为O(n)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;二分查找（binary search）&lt;/strong&gt;：对于&lt;strong&gt;有序表&lt;/strong&gt;可以从中间项开始匹配，不断缩小表的规模知道找到数据的位置。二分查找法也体现了&lt;strong&gt;分治算法&lt;/strong&gt;。因此二分查找法可以用递归实现。算法复杂度为O(log n)。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;binarySearch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;#二分查找的递归实现&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;......&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;midpoint&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;midpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;True&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;#减小规模，调用自身&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;midpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;binarySearch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;midpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;binarySearch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;midpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于两种查找算法，需要根据实际的应用情况进行选择。&lt;/p&gt;
+&lt;h2 id=&#34;排序&#34;&gt;排序&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;冒泡排序（bubble sort）&lt;/strong&gt;:两两相邻的数据进行比较，多趟之后即可完成排序。与在c语言中交换两个位置的值需要中间变量不同，python中可以使用&lt;code&gt;alist[i],alist[i+1]=alist[i+1],alist[i]&lt;/code&gt;语句完成。算法每趟的比较次数由n-1不断递减，因此算法复杂度为O(n^2)。&lt;/p&gt;
+&lt;p&gt;冒泡排序常作为其他算法的对比基准（妥妥的工具人🙃），其中的对次比对交换操作时无效的。优势在于无需额外储存空间的开销。&lt;br&gt;
+改进的冒泡排序：当某次比对未发生交换，便说明比对完成，可以提前结束。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;shortBubbleSort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;......&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;exchange&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;False&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;passnum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;exchange&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;True&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;passnum&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;passnum&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;选择排序(Selection Sort)&lt;/strong&gt;：对冒泡算法中,每趟只进行一次交换。先记录最大项所在的位置再交换。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;插入排序（Insertion Sort）&lt;/strong&gt;:复杂度仍为O(n^2);是中唯持一个已排好序的子列表，其位置始终在列表的前部。并将其逐步扩大只全表。列表越接近有序，插入排序的对比次数就越少。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;insertionSort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;......&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;position&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;position&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentvalue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;position&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;position&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;position&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;position&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;#每次与左侧的项进行比较，如果左侧的值大就将其右移，依次循环直到左侧值更小，在之前的空位中插入。&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;alist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;position&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentvalue&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;谢尔排序（Shell Sort）&lt;/strong&gt;:以“间隔”划分子列表，每个子列表执行插入排序，从而减少整体排序对比的次数。最后再进行标准的插入排序。减少了插入排序中无效的比对，介于O(n)于O(n^2)之间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;分支思想的排序算法&#34;&gt;分支思想的排序算法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;归并排序（Merge Sort）&lt;/strong&gt;：不断将数据表分裂为原来的一半，直到表中仅有一个数据项。之后再从最小规模开始排序（&lt;strong&gt;两个列表中小的先放，迭代，最后归并剩余项&lt;/strong&gt;）直到完成这个列表的排序。&lt;/p&gt;
+&lt;p&gt;总体来说分为分裂和归并两个过程，算法复杂度分别为O(log n)和O(n)。但会占用更多的储存空间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;快速排序（Quick Sort）&lt;/strong&gt;:依据“中值”将数据项分为两半，排序。不断分解至仅有一个数据项。算法复杂度取决于“中值”选取的情况，综合为O(log n)，但不需要额外的储存空间。“中值”选取中很难取得列表中准确的中值（真要准确的中值不还得排序😐），因此只能尽可能通过各种方法使选取的值与“中值”接近。&lt;/p&gt;
+&lt;p&gt;分裂方法：左标向右移动，直到遇到比中值大的左标；同时右标向右移动，直到遇到比中值小的。将左右标指向的值交换并继续向前移动。当左标到达右标的右侧，右标所指位置即为“中值”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;散列hashing&#34;&gt;散列（Hashing）&lt;/h2&gt;
+&lt;p&gt;散列可以使查找算法的复杂度降到O(1)，散列表(hash table)包含用来储存&lt;strong&gt;数据的槽(slot)以及槽对应的唯一的名称。&lt;strong&gt;槽被数据项占据的比例称为&lt;/strong&gt;负载因子&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;数据与槽名称通过散列函数来对应。可以通过除余数来实现槽号与槽数据项的对应，但当要存储的两个数字余数相同时便会产生冲突。&lt;/p&gt;
+&lt;p&gt;如果一个散列函数能不会造成冲突便称之为&lt;strong&gt;完美散列函数&lt;/strong&gt;。完美散列函数可以用于数据校验。将散列值看作槽中信息的摘要，由于该摘要具有唯一性因此可以通过摘要对比信息的异同。要具备数据校验的函数应具有以下特性；压缩性、易计算性、抗修改性和抗冲突性。&lt;/p&gt;
+&lt;p&gt;近似完美散列函数MD5,SHA。&lt;/p&gt;
+&lt;h2 id=&#34;区块链&#34;&gt;区块链&lt;/h2&gt;
+&lt;p&gt;区块链是一种分布式数据库，具有去中心化的特点。区块链由区块(block)组成。每个区块中包含着头(head)和体(body)。头中记录着一些元数据和链接到前一个区块的信息（生成时间、前一个区块的散列值）。&lt;/p&gt;
+&lt;p&gt;区块链具有不可修改性。由于区块链的分布式的性质，同步速度较慢因此新区快的添加速度被限制。&lt;/p&gt;
+&lt;p&gt;PS:每次虚拟货币涨的时候，硬件价格便会水涨船高，加上黄牛党的推波助澜，DIY玩家苦不堪言。&lt;/p&gt;
+&lt;h2 id=&#34;散列函数的设计&#34;&gt;散列函数的设计&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;折叠法&lt;/strong&gt;：对数据分段、相加、求余得到槽号。通过哥数反转的方法进行微调。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平方取中法&lt;/strong&gt;：数据平方、取中间两位、求余（相比折叠法，计算量提高）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特殊情况&lt;br&gt;
+- 对于非数项可通过ASCⅡ表进行转换。
+- 对于变为词，加入权重因子&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;散列函数在设计时盈尽量简单并减少冲突。&lt;/p&gt;
+&lt;h2 id=&#34;冲突解决方案&#34;&gt;冲突解决方案&lt;/h2&gt;
+&lt;p&gt;再找一个空槽放置冲突数据（&lt;strong&gt;开放定址、再散列&lt;/strong&gt;）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线性探测：向后逐个寻找空槽，查找时顺序查找。缺点：有聚集趋势。&lt;/li&gt;
+&lt;li&gt;跳跃式探测；选择固定步长或逐步变化进行探测。固定步长取值时不能被散列表大小整除，否则会产生周期。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;数据项链&lt;/strong&gt;：槽扩展为容纳数据项的集合。这会延长查找的时间&lt;/p&gt;
+&lt;h1 id=&#34;引用&#34;&gt;引用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.icourse163.org/learn/PKU-1206307812&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;数据结构与算法Python版_中国大学MOOC(慕课)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>算法笔记4_递归Recursion</title>
         <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/</link>
         <pubDate>Tue, 04 May 2021 20:54:38 +0800</pubDate>
         
         <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/</guid>
-        <description>&lt;p&gt;将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是&lt;strong&gt;调用自身&lt;/strong&gt;。&lt;/p&gt;
+        <description>&lt;h2 id=&#34;开头的碎碎念&#34;&gt;开头的碎碎念&lt;/h2&gt;
+&lt;p&gt;个人认为，递归算法是一种十分优美的算法。它总是能够用十分短小的代码长度来解决许多复杂的问题。前端实际，在看快速傅里叶变换(FFT)时，看到递归算法仅用极小的代码量即可实现复杂的理论，内心感到十分的震撼。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是&lt;strong&gt;调用自身&lt;/strong&gt;。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;结束条件&lt;/li&gt;
 &lt;li&gt;减小规模&lt;/li&gt;

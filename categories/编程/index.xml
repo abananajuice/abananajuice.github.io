@@ -6,14 +6,33 @@
     <description>Recent content in 编程 on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 May 2021 20:54:38 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Jun 2021 21:36:53 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法笔记5_排序与查找</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B05_%E6%8E%92%E5%BA%8F%E4%B8%8E%E6%9F%A5%E6%89%BE/</link>
+      <pubDate>Fri, 18 Jun 2021 21:36:53 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B05_%E6%8E%92%E5%BA%8F%E4%B8%8E%E6%9F%A5%E6%89%BE/</guid>
+      <description>查找 线性（顺序）关系：数据项保存在列表这样的集合中。
+  顺序查找：按照顺序来访问和查找数据项；针对无序表当所要找的数据不在表中时查找需要遍历整个列表，而对于有序表可以设置一个提前结束标志减少计算量。但无论是有序表还是无序表其算法复杂度都为O(n)。
+  二分查找（binary search）：对于有序表可以从中间项开始匹配，不断缩小表的规模知道找到数据的位置。二分查找法也体现了分治算法。因此二分查找法可以用递归实现。算法复杂度为O(log n)。
+def binarySearch(alist,item): #二分查找的递归实现 ...... midpoint = len(alist)//2 if alist[midpoint]==item: return True else: #减小规模，调用自身 if item &amp;lt;alist[midpoint]: return binarySearch(alist[:midpoint],item) else: return binarySearch(alist[midpoint+1:],item)   对于两种查找算法，需要根据实际的应用情况进行选择。
+排序   冒泡排序（bubble sort）:两两相邻的数据进行比较，多趟之后即可完成排序。与在c语言中交换两个位置的值需要中间变量不同，python中可以使用alist[i],alist[i+1]=alist[i+1],alist[i]语句完成。算法每趟的比较次数由n-1不断递减，因此算法复杂度为O(n^2)。
+冒泡排序常作为其他算法的对比基准（妥妥的工具人🙃），其中的对次比对交换操作时无效的。优势在于无需额外储存空间的开销。
+改进的冒泡排序：当某次比对未发生交换，便说明比对完成，可以提前结束。
+def shortBubbleSort(alist): ...... exchange = False for i in range(passnum): if alist[i]&amp;gt;alist[i+1]: exchange = True alist[i],alist[i+1]=alist[i+1],alist[i] passnum = passnum-1   选择排序(Selection Sort)：对冒泡算法中,每趟只进行一次交换。先记录最大项所在的位置再交换。
+  插入排序（Insertion Sort）:复杂度仍为O(n^2);是中唯持一个已排好序的子列表，其位置始终在列表的前部。并将其逐步扩大只全表。列表越接近有序，插入排序的对比次数就越少。
+def insertionSort(alist): .</description>
+    </item>
+    
     <item>
       <title>算法笔记4_递归Recursion</title>
       <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/</link>
       <pubDate>Tue, 04 May 2021 20:54:38 +0800</pubDate>
       
       <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/</guid>
-      <description>将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是调用自身。
+      <description>开头的碎碎念 个人认为，递归算法是一种十分优美的算法。它总是能够用十分短小的代码长度来解决许多复杂的问题。前端实际，在看快速傅里叶变换(FFT)时，看到递归算法仅用极小的代码量即可实现复杂的理论，内心感到十分的震撼。
+ 将一个分问题不断拆分成更小的相同问题，其在算法上的特点就是调用自身。
  结束条件 减小规模 调用自身  递归调用的实现：函数每次调用将现场数据压入系统调用栈，当函数返回时则从栈顶返回恢复现场。
  现场数据：栈保存的一个函数调用所需要维护的信息。
 每次调用，压入栈的现场数据成为栈帧。
