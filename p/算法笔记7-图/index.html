@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='图是比树更一般的结构，由节点和边组成。根据边是否有方向分为有向图和无向图。同时在每个边上可以加入权重，代表从一个顶点到另一个顶点的代价。
+圈(Cycle):首尾顶点相同的路径。
+图的抽象数据类型 图的抽象数据类型主要通过邻接矩阵或邻接表来实现。
+ 邻接矩阵：每行每列代表图中的顶点，行列值表示节点是否相连;简单，但大多为稀疏矩阵效率低下。 邻接列表：一个列表中包含所有顶点，其中每个顶点关联一个与自身有连接的顶点的列表；存储空间紧凑高效。  词梯问题  目标:找到从一个单词到另一个单词之间最短的变换序列。  步骤一：将所有单词的关系表达为图   方法一：将所有单词之间互相比较；思路简单，但计算量大。
+  方法二：创建桶，将去掉一个字母后相同的单词放入统一桶中，最后对统一桶中的单词构建边。
+def buildGraph(wordfile): d = {} #桶 # 构建桶，并将相同的单词放入桶中 for line in wfile: word = line[:-1] for i in range(len(word)): bucket = word[:i] &#43; &amp;#39;_&amp;#39; &#43; word[i&#43;1:] if bucket in d: d[bucket].append(word) else: d[bucket]=word ......   步骤二：采用广度优先搜索(Breadth First Search)寻找所有有效路径 BFS搜索时，在达到更远距离K&#43;1前会找到全部距离为K的顶点。
+搜索时需要添加距离，前驱节点，颜色三个属性，并使用队列对已发现顶点进行排列。其中颜色中白色代表尚未发现，灰色代表以及发现，黑色代表已经完成探索。
+步骤三：选择最优路径 最后通过追溯函数即可确定最短词梯。
+骑士周游问题 目标：从棋盘上一个点走遍所有棋盘上的点；建建立一个没有分支的最深的深度优先树，表现为一条线性的包含所有节点的退化树。
+步骤一：构建图 根据马走&amp;rsquo;日&amp;rsquo;的特性设置相对位置并保证不会超过棋盘边界。之后通过遍历构建出图。
+步骤二：寻找一个路径恰好将所有节点包含所有节点且只经过一次 通过深度优先搜索算法(Depth First Search)实现。**DFS:沿着树的单枝尽量深入向下搜索，如果无法找到解就回溯到上一层搜索下一枝。**在骑士周游问题中每个顶点仅访问一次。'><title>算法笔记7-图</title>
+
+<link rel='canonical' href='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B07-%E5%9B%BE/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='算法笔记7-图'>
+<meta property='og:description' content='图是比树更一般的结构，由节点和边组成。根据边是否有方向分为有向图和无向图。同时在每个边上可以加入权重，代表从一个顶点到另一个顶点的代价。
+圈(Cycle):首尾顶点相同的路径。
+图的抽象数据类型 图的抽象数据类型主要通过邻接矩阵或邻接表来实现。
+ 邻接矩阵：每行每列代表图中的顶点，行列值表示节点是否相连;简单，但大多为稀疏矩阵效率低下。 邻接列表：一个列表中包含所有顶点，其中每个顶点关联一个与自身有连接的顶点的列表；存储空间紧凑高效。  词梯问题  目标:找到从一个单词到另一个单词之间最短的变换序列。  步骤一：将所有单词的关系表达为图   方法一：将所有单词之间互相比较；思路简单，但计算量大。
+  方法二：创建桶，将去掉一个字母后相同的单词放入统一桶中，最后对统一桶中的单词构建边。
+def buildGraph(wordfile): d = {} #桶 # 构建桶，并将相同的单词放入桶中 for line in wfile: word = line[:-1] for i in range(len(word)): bucket = word[:i] &#43; &amp;#39;_&amp;#39; &#43; word[i&#43;1:] if bucket in d: d[bucket].append(word) else: d[bucket]=word ......   步骤二：采用广度优先搜索(Breadth First Search)寻找所有有效路径 BFS搜索时，在达到更远距离K&#43;1前会找到全部距离为K的顶点。
+搜索时需要添加距离，前驱节点，颜色三个属性，并使用队列对已发现顶点进行排列。其中颜色中白色代表尚未发现，灰色代表以及发现，黑色代表已经完成探索。
+步骤三：选择最优路径 最后通过追溯函数即可确定最短词梯。
+骑士周游问题 目标：从棋盘上一个点走遍所有棋盘上的点；建建立一个没有分支的最深的深度优先树，表现为一条线性的包含所有节点的退化树。
+步骤一：构建图 根据马走&amp;rsquo;日&amp;rsquo;的特性设置相对位置并保证不会超过棋盘边界。之后通过遍历构建出图。
+步骤二：寻找一个路径恰好将所有节点包含所有节点且只经过一次 通过深度优先搜索算法(Depth First Search)实现。**DFS:沿着树的单枝尽量深入向下搜索，如果无法找到解就回溯到上一层搜索下一枝。**在骑士周游问题中每个顶点仅访问一次。'>
+<meta property='og:url' content='https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B07-%E5%9B%BE/'>
+<meta property='og:site_name' content='Mark'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-08-31T11:53:14&#43;08:00'/><meta property='article:modified_time' content='2021-08-31T11:53:14&#43;08:00'/>
+<meta name="twitter:title" content="算法笔记7-图">
+<meta name="twitter:description" content="图是比树更一般的结构，由节点和边组成。根据边是否有方向分为有向图和无向图。同时在每个边上可以加入权重，代表从一个顶点到另一个顶点的代价。
+圈(Cycle):首尾顶点相同的路径。
+图的抽象数据类型 图的抽象数据类型主要通过邻接矩阵或邻接表来实现。
+ 邻接矩阵：每行每列代表图中的顶点，行列值表示节点是否相连;简单，但大多为稀疏矩阵效率低下。 邻接列表：一个列表中包含所有顶点，其中每个顶点关联一个与自身有连接的顶点的列表；存储空间紧凑高效。  词梯问题  目标:找到从一个单词到另一个单词之间最短的变换序列。  步骤一：将所有单词的关系表达为图   方法一：将所有单词之间互相比较；思路简单，但计算量大。
+  方法二：创建桶，将去掉一个字母后相同的单词放入统一桶中，最后对统一桶中的单词构建边。
+def buildGraph(wordfile): d = {} #桶 # 构建桶，并将相同的单词放入桶中 for line in wfile: word = line[:-1] for i in range(len(word)): bucket = word[:i] &#43; &amp;#39;_&amp;#39; &#43; word[i&#43;1:] if bucket in d: d[bucket].append(word) else: d[bucket]=word ......   步骤二：采用广度优先搜索(Breadth First Search)寻找所有有效路径 BFS搜索时，在达到更远距离K&#43;1前会找到全部距离为K的顶点。
+搜索时需要添加距离，前驱节点，颜色三个属性，并使用队列对已发现顶点进行排列。其中颜色中白色代表尚未发现，灰色代表以及发现，黑色代表已经完成探索。
+步骤三：选择最优路径 最后通过追溯函数即可确定最短词梯。
+骑士周游问题 目标：从棋盘上一个点走遍所有棋盘上的点；建建立一个没有分支的最深的深度优先树，表现为一条线性的包含所有节点的退化树。
+步骤一：构建图 根据马走&amp;rsquo;日&amp;rsquo;的特性设置相对位置并保证不会超过棋盘边界。之后通过遍历构建出图。
+步骤二：寻找一个路径恰好将所有节点包含所有节点且只经过一次 通过深度优先搜索算法(Depth First Search)实现。**DFS:沿着树的单枝尽量深入向下搜索，如果无法找到解就回溯到上一层搜索下一枝。**在骑士周游问题中每个顶点仅访问一次。">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://abananajuice.github.io/">Mark</a></h1>
+        <h2 class="site-description">“You don&#39;t need to be accepted by others. You need to be yourself.”</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://abananajuice.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AE%85/" >
+                技术宅
+            </a>
+        
+            <a href="/categories/%E7%BC%96%E7%A8%8B/" >
+                编程
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B07-%E5%9B%BE/">算法笔记7-图</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Aug 31, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <p>图是比树更一般的结构，由节点和边组成。根据边是否有方向分为有向图和无向图。同时在每个边上可以加入权重，代表从一个顶点到另一个顶点的代价。</p>
+<p>圈(Cycle):首尾顶点相同的路径。</p>
+<h2 id="图的抽象数据类型">图的抽象数据类型</h2>
+<p>图的抽象数据类型主要通过邻接矩阵或邻接表来实现。</p>
+<ul>
+<li>邻接矩阵：每行每列代表图中的顶点，行列值表示节点是否相连;简单，但大多为稀疏矩阵效率低下。</li>
+<li>邻接列表：一个列表中包含所有顶点，其中每个顶点关联一个与自身有连接的顶点的列表；存储空间紧凑高效。</li>
+</ul>
+<h2 id="词梯问题">词梯问题</h2>
+<ul>
+<li>目标:找到从一个单词到另一个单词之间最短的变换序列。</li>
+</ul>
+<h3 id="步骤一将所有单词的关系表达为图">步骤一：将所有单词的关系表达为图</h3>
+<ul>
+<li>
+<p>方法一：将所有单词之间互相比较；思路简单，但计算量大。</p>
+</li>
+<li>
+<p>方法二：创建桶，将去掉一个字母后相同的单词放入统一桶中，最后对统一桶中的单词构建边。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">buildGraph</span><span class="p">(</span><span class="n">wordfile</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#桶</span>
+    <span class="c1"># 构建桶，并将相同的单词放入桶中</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wfile</span><span class="p">:</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
+            <span class="n">bucket</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">bucket</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">bucket</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">bucket</span><span class="p">]</span><span class="o">=</span><span class="n">word</span>
+    <span class="o">......</span>
+</code></pre></div></li>
+</ul>
+<h3 id="步骤二采用广度优先搜索breadth-first-search寻找所有有效路径">步骤二：采用<strong>广度优先搜索</strong>(Breadth First Search)寻找所有有效路径</h3>
+<p><strong>BFS搜索时，在达到更远距离K+1前会找到全部距离为K的顶点。</strong></p>
+<p>搜索时需要添加距离，前驱节点，颜色三个属性，并使用队列对已发现顶点进行排列。其中颜色中白色代表尚未发现，灰色代表以及发现，黑色代表已经完成探索。</p>
+<h3 id="步骤三选择最优路径">步骤三：选择最优路径</h3>
+<p>最后通过追溯函数即可确定最短词梯。</p>
+<h2 id="骑士周游问题">骑士周游问题</h2>
+<p>目标：从棋盘上一个点走遍所有棋盘上的点；建建立一个没有分支的最深的深度优先树，表现为一条线性的包含所有节点的退化树。</p>
+<h3 id="步骤一构建图">步骤一：构建图</h3>
+<p>根据马走&rsquo;日&rsquo;的特性设置相对位置并保证不会超过棋盘边界。之后通过遍历构建出图。</p>
+<h3 id="步骤二寻找一个路径恰好将所有节点包含所有节点且只经过一次">步骤二：寻找一个路径恰好将所有节点包含所有节点且只经过一次</h3>
+<p>通过深度优先搜索算法(Depth First Search)实现。**DFS:沿着树的单枝尽量深入向下搜索，如果无法找到解就回溯到上一层搜索下一枝。**在骑士周游问题中每个顶点仅访问一次。</p>
+<p>如果沿单枝搜索至无法继续路径仍没有达到预定值（棋盘格数），就清除颜色标记递归调用函数切换至下一枝（灰色代表以及探索，白色代表未探索）。在搜索过程中使用一个栈还记录路径便于回溯。</p>
+<h3 id="搜索算法的改进">搜索算法的改进</h3>
+<p>修改遍历下一格的次序。改为具有最少合法移动目标的格子优先搜索。（启发式规则）</p>
+<h2 id="通用深度优先搜索">通用深度优先搜索</h2>
+<p>有时候深度优先搜索会创建多棵树，称为&quot;深度优先森林&quot;。</p>
+<p>通用DFS算法中加入发现时间和结束时间两个属性。</p>
+<blockquote>
+<p>在访问一个节点时将节点设置为灰色（搜索中），并记录开始时间。对该节点连接的白色（未搜索）节点递归调用函数（深度优先向下搜索）。最后搜索完成后将节点改为黑色（搜索完成），并记录结束时间。</p>
+</blockquote>
+<h2 id="图的应用">图的应用</h2>
+<ul>
+<li>
+<p>拓扑排序：从工作流程图（DAG图：有向无环）得到工作次序排列的算法。利用DFS实现。</p>
+</li>
+<li>
+<p>强连通分支：图G的子集C中任意两个顶点间都有路径来回，且C是具有这样性质的最大子集。图和专职图在强连通分支的数量和划分上是相同的。</p>
+<blockquote>
+<p>1.对图G使用DFS算法，计算每个顶点的结束时间。<br>
+2.将图G转置使用DFS算法，以顶点结束时间倒序顺序搜索。<br>
+3. 深度优先森林中的每一颗树就是一个强连通分支。</p>
+</blockquote>
+</li>
+<li>
+<p>最短路径：当图已知时，带权图的最短路径问题可以看作词梯问题的改进。使用Dijkstra算法实现。</p>
+<blockquote>
+<p>Dijkstra算法:在顶点vertex类中的成员dist用于记录开始顶点到到本顶点的最短带权路径长度（权重之和），算法对图中的每个顶点迭代一次，得出从一个顶点到其余所有顶点的最短路径。【只能处理权重大于0的图】</p>
+</blockquote>
+</li>
+<li>
+<p>最小生成树</p>
+<p>信息广播问题：</p>
+<blockquote>
+<p>1.最简单解法时由广播源维护一个收听者列表，将每个消息向每个收听者发送一次。<br>
+2.洪水解法：将每条消息在路由器间散布出去。每个路由器将消息分别转发到相邻的路由器和收听者，并加入TTL（消息源到收听者的最远距离）。<br>
+3.最小权重生成树。生成树：拥有图中所有顶点和最小数量的边，以保持连通的子图。使用Prim算法，每部都沿着最小权重的边向前搜索实现。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="引用">引用</h1>
+<ul>
+<li><a class="link" href="https://www.icourse163.org/learn/PKU-1206307812"  target="_blank" rel="noopener"
+    >数据结构与算法Python版_中国大学MOOC(慕课)</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under GNU General Public License v2.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B06-%E6%A0%91/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记6-树</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B05_%E6%8E%92%E5%BA%8F%E4%B8%8E%E6%9F%A5%E6%89%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记5_排序与查找</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记4_递归Recursion</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记3</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记2</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Mark
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

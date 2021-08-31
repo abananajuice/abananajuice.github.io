@@ -6,7 +6,48 @@
     <description>Recent content in 编程 on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 18 Jun 2021 21:36:53 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 11:53:14 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法笔记7-图</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B07-%E5%9B%BE/</link>
+      <pubDate>Tue, 31 Aug 2021 11:53:14 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B07-%E5%9B%BE/</guid>
+      <description>图是比树更一般的结构，由节点和边组成。根据边是否有方向分为有向图和无向图。同时在每个边上可以加入权重，代表从一个顶点到另一个顶点的代价。
+圈(Cycle):首尾顶点相同的路径。
+图的抽象数据类型 图的抽象数据类型主要通过邻接矩阵或邻接表来实现。
+ 邻接矩阵：每行每列代表图中的顶点，行列值表示节点是否相连;简单，但大多为稀疏矩阵效率低下。 邻接列表：一个列表中包含所有顶点，其中每个顶点关联一个与自身有连接的顶点的列表；存储空间紧凑高效。  词梯问题  目标:找到从一个单词到另一个单词之间最短的变换序列。  步骤一：将所有单词的关系表达为图   方法一：将所有单词之间互相比较；思路简单，但计算量大。
+  方法二：创建桶，将去掉一个字母后相同的单词放入统一桶中，最后对统一桶中的单词构建边。
+def buildGraph(wordfile): d = {} #桶 # 构建桶，并将相同的单词放入桶中 for line in wfile: word = line[:-1] for i in range(len(word)): bucket = word[:i] + &amp;#39;_&amp;#39; + word[i+1:] if bucket in d: d[bucket].append(word) else: d[bucket]=word ......   步骤二：采用广度优先搜索(Breadth First Search)寻找所有有效路径 BFS搜索时，在达到更远距离K+1前会找到全部距离为K的顶点。
+搜索时需要添加距离，前驱节点，颜色三个属性，并使用队列对已发现顶点进行排列。其中颜色中白色代表尚未发现，灰色代表以及发现，黑色代表已经完成探索。
+步骤三：选择最优路径 最后通过追溯函数即可确定最短词梯。
+骑士周游问题 目标：从棋盘上一个点走遍所有棋盘上的点；建建立一个没有分支的最深的深度优先树，表现为一条线性的包含所有节点的退化树。
+步骤一：构建图 根据马走&amp;rsquo;日&amp;rsquo;的特性设置相对位置并保证不会超过棋盘边界。之后通过遍历构建出图。
+步骤二：寻找一个路径恰好将所有节点包含所有节点且只经过一次 通过深度优先搜索算法(Depth First Search)实现。**DFS:沿着树的单枝尽量深入向下搜索，如果无法找到解就回溯到上一层搜索下一枝。**在骑士周游问题中每个顶点仅访问一次。</description>
+    </item>
+    
+    <item>
+      <title>算法笔记6-树</title>
+      <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B06-%E6%A0%91/</link>
+      <pubDate>Tue, 31 Aug 2021 11:53:11 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B06-%E6%A0%91/</guid>
+      <description>非线性数据结构； 包括根，枝，叶三部分；也可以说由节点(node)和边(edge)组成； 层次化，各个子节点之间独立每个叶节点具有唯一性； 树中所有节点的最大曾经称为树的高度根节点所在的层级为0。  树的实现 嵌套列表实现 子树结构与树相同，是一种递归数据结构。
+ atree=[&#39;a&#39;,[&#39;left&#39;,[],[]],[&#39;right&#39;,[],[]]]
+ 插入方法的实现(以插入左树为例)。
+def insertLeft(root,newBranch): t = root.pop(1) #提取左子节点 if len(t) &amp;gt; 1: #如果左子节点存在，则需要先插入新节点再将原来的节点作为其左子节点  root.insert(1,[newBranch,t,[]]) else: root.insert(1,[newBranch,[],[]]) 树的链表实现  节点链表法：链表中每个节点保存节点的数据项以及左右子树的链接。  插入方法：加入中间变量，将插入节点与原先节点相连接。
+应用  树表示表达式  树的遍历(Tree Traversals) 遍历(Traversals)：对数据集中所有数据进行访问。对于线性数据结构，按顺序访问即可。
+树的遍历包括：前序遍历（根&amp;ndash;左&amp;ndash;右），中序遍历（左&amp;ndash;根&amp;ndash;右）和后序遍历（左&amp;ndash;右&amp;ndash;根）。
+优先队列与二叉堆 优先队列：先入先出，内部次序由优先级确定
+二叉堆（Binary Heap）实现优先队列 入队和出队的复杂度均为O（log n）。如果使操作始终保持再对数量级上，二叉树必须保持平衡。可以通过完全二叉树近似实现平衡。
+完全二叉树：叶节点最多只出现在最底层和次底层；最底层的叶节点集中在左边（最多由有一个节点例外）。
+性质：若节点下表为p,则其左子节点下标为2p，右子节点下标为2p+1。所以可以使用非嵌套列表表示完全二叉树。
+堆次序（Heap Order）：父节点的key小于其子节点。
+二叉堆 二叉堆的性质：
+ 完全二叉树：可以用非嵌套数组表示 堆：任意路径为有序数列。  二叉堆操作的实现 列表保存堆数据，列表中下标为0项不用。
+class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert（key）</description>
+    </item>
+    
     <item>
       <title>算法笔记5_排序与查找</title>
       <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B05_%E6%8E%92%E5%BA%8F%E4%B8%8E%E6%9F%A5%E6%89%BE/</link>
