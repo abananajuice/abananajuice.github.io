@@ -6,7 +6,29 @@
     <description>Recent content in 编程 on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 31 Aug 2021 11:53:14 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Sep 2021 15:59:55 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Matplotlib基础</title>
+      <link>https://abananajuice.github.io/p/matplotlib%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sun, 05 Sep 2021 15:59:55 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/matplotlib%E5%9F%BA%E7%A1%80/</guid>
+      <description>PS:最近刚好用到Matlplotlib数据可视化，顺便对一些常用的函数做一下总结。🍥🍥
+绘制单张数据图 import matplotlib.pyplot as plt # 后续默认已经调用过库 plt.plot([1,2,3,8,6,9]) 
+将多个数据放在同一个表格中 plt.plot([1,2,3,8,6,9]) plt.plot([1,3,9,6,2,0]) 
+加入标签 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.legend() 
+  🌚如果不加入plt.legend()图片中无法显示标签，并且可以通过调整参数更改绘制的位置。同时，也可以将标签放到统计图的外侧。
+  🍪在结束绘制时记得添加plt.close(),否则就会把图像全部画在同一张图片里。plt.cla()、plt.clf()、plt.close()之间的区别可以参考
+  在统计图中绘制辅助线 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.axvline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制竖直辅助线 plt.axhline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制水平参考线 plt.legend() 
+显示图片是可以使用plt.show() 保存绘制的图像plt.savefig(&#39;保存路径及文件名&#39;)，可以添加参数设置保存图像的质量
+在一个窗口中显示多个表格 plt.subplot(2,1,1) # 在窗口1行1列绘制图像 plt.plot([1,2,3,8,6,9]) plt.subplot(2,1,2) # 在窗口2行1列绘制图像 plt.plot([1,3,9,6,2,0]) plt.close() 
+引用 Python——legend()图例位置调整
+Python_matplotlib画图时图例说明(legend)放到图像外侧
+matplotlib之清理、清除 axes 和 figure （plt.cla、plt.clf、plt.close）
+数据可视化之matplotlib实战：plt.axhline() axvline()函数 绘制水平or垂直参考线
+Python使用matplotlib.subplot在同一窗口中绘制多个子图</description>
+    </item>
+    
     <item>
       <title>算法笔记7-图</title>
       <link>https://abananajuice.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B07-%E5%9B%BE/</link>

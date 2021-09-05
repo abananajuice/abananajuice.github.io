@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='PS:最近刚好用到Matlplotlib数据可视化，顺便对一些常用的函数做一下总结。🍥🍥
+绘制单张数据图 import matplotlib.pyplot as plt # 后续默认已经调用过库 plt.plot([1,2,3,8,6,9]) 
+将多个数据放在同一个表格中 plt.plot([1,2,3,8,6,9]) plt.plot([1,3,9,6,2,0]) 
+加入标签 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.legend() 
+  🌚如果不加入plt.legend()图片中无法显示标签，并且可以通过调整参数更改绘制的位置。同时，也可以将标签放到统计图的外侧。
+  🍪在结束绘制时记得添加plt.close(),否则就会把图像全部画在同一张图片里。plt.cla()、plt.clf()、plt.close()之间的区别可以参考
+  在统计图中绘制辅助线 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.axvline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制竖直辅助线 plt.axhline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制水平参考线 plt.legend() 
+显示图片是可以使用plt.show() 保存绘制的图像plt.savefig(&#39;保存路径及文件名&#39;)，可以添加参数设置保存图像的质量
+在一个窗口中显示多个表格 plt.subplot(2,1,1) # 在窗口1行1列绘制图像 plt.plot([1,2,3,8,6,9]) plt.subplot(2,1,2) # 在窗口2行1列绘制图像 plt.plot([1,3,9,6,2,0]) plt.close() 
+引用 Python——legend()图例位置调整
+Python_matplotlib画图时图例说明(legend)放到图像外侧
+matplotlib之清理、清除 axes 和 figure （plt.cla、plt.clf、plt.close）
+数据可视化之matplotlib实战：plt.axhline() axvline()函数 绘制水平or垂直参考线
+Python使用matplotlib.subplot在同一窗口中绘制多个子图'><title>Matplotlib基础</title>
+
+<link rel='canonical' href='https://abananajuice.github.io/p/matplotlib%E5%9F%BA%E7%A1%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Matplotlib基础'>
+<meta property='og:description' content='PS:最近刚好用到Matlplotlib数据可视化，顺便对一些常用的函数做一下总结。🍥🍥
+绘制单张数据图 import matplotlib.pyplot as plt # 后续默认已经调用过库 plt.plot([1,2,3,8,6,9]) 
+将多个数据放在同一个表格中 plt.plot([1,2,3,8,6,9]) plt.plot([1,3,9,6,2,0]) 
+加入标签 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.legend() 
+  🌚如果不加入plt.legend()图片中无法显示标签，并且可以通过调整参数更改绘制的位置。同时，也可以将标签放到统计图的外侧。
+  🍪在结束绘制时记得添加plt.close(),否则就会把图像全部画在同一张图片里。plt.cla()、plt.clf()、plt.close()之间的区别可以参考
+  在统计图中绘制辅助线 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.axvline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制竖直辅助线 plt.axhline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制水平参考线 plt.legend() 
+显示图片是可以使用plt.show() 保存绘制的图像plt.savefig(&#39;保存路径及文件名&#39;)，可以添加参数设置保存图像的质量
+在一个窗口中显示多个表格 plt.subplot(2,1,1) # 在窗口1行1列绘制图像 plt.plot([1,2,3,8,6,9]) plt.subplot(2,1,2) # 在窗口2行1列绘制图像 plt.plot([1,3,9,6,2,0]) plt.close() 
+引用 Python——legend()图例位置调整
+Python_matplotlib画图时图例说明(legend)放到图像外侧
+matplotlib之清理、清除 axes 和 figure （plt.cla、plt.clf、plt.close）
+数据可视化之matplotlib实战：plt.axhline() axvline()函数 绘制水平or垂直参考线
+Python使用matplotlib.subplot在同一窗口中绘制多个子图'>
+<meta property='og:url' content='https://abananajuice.github.io/p/matplotlib%E5%9F%BA%E7%A1%80/'>
+<meta property='og:site_name' content='Mark'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-09-05T15:59:55&#43;08:00'/><meta property='article:modified_time' content='2021-09-05T15:59:55&#43;08:00'/>
+<meta name="twitter:title" content="Matplotlib基础">
+<meta name="twitter:description" content="PS:最近刚好用到Matlplotlib数据可视化，顺便对一些常用的函数做一下总结。🍥🍥
+绘制单张数据图 import matplotlib.pyplot as plt # 后续默认已经调用过库 plt.plot([1,2,3,8,6,9]) 
+将多个数据放在同一个表格中 plt.plot([1,2,3,8,6,9]) plt.plot([1,3,9,6,2,0]) 
+加入标签 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.legend() 
+  🌚如果不加入plt.legend()图片中无法显示标签，并且可以通过调整参数更改绘制的位置。同时，也可以将标签放到统计图的外侧。
+  🍪在结束绘制时记得添加plt.close(),否则就会把图像全部画在同一张图片里。plt.cla()、plt.clf()、plt.close()之间的区别可以参考
+  在统计图中绘制辅助线 plt.plot([1,2,3,8,6,9],label=1) plt.plot([1,3,9,6,2,0],label=2) plt.axvline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制竖直辅助线 plt.axhline(3,linestyle=&amp;#39;dashed&amp;#39;) # 绘制水平参考线 plt.legend() 
+显示图片是可以使用plt.show() 保存绘制的图像plt.savefig(&#39;保存路径及文件名&#39;)，可以添加参数设置保存图像的质量
+在一个窗口中显示多个表格 plt.subplot(2,1,1) # 在窗口1行1列绘制图像 plt.plot([1,2,3,8,6,9]) plt.subplot(2,1,2) # 在窗口2行1列绘制图像 plt.plot([1,3,9,6,2,0]) plt.close() 
+引用 Python——legend()图例位置调整
+Python_matplotlib画图时图例说明(legend)放到图像外侧
+matplotlib之清理、清除 axes 和 figure （plt.cla、plt.clf、plt.close）
+数据可视化之matplotlib实战：plt.axhline() axvline()函数 绘制水平or垂直参考线
+Python使用matplotlib.subplot在同一窗口中绘制多个子图">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://abananajuice.github.io/">Mark</a></h1>
+        <h2 class="site-description">“You don&#39;t need to be accepted by others. You need to be yourself.”</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://abananajuice.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BC%96%E7%A8%8B/" >
+                编程
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/matplotlib%E5%9F%BA%E7%A1%80/">Matplotlib基础</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Sep 05, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <p>PS:最近刚好用到Matlplotlib数据可视化，顺便对一些常用的函数做一下总结。🍥🍥</p>
+<h2 id="绘制单张数据图">绘制单张数据图</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+    <span class="c1"># 后续默认已经调用过库</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyaStP"  target="_blank" rel="noopener"
+    ><img src="https://z3.ax1x.com/2021/09/03/hyaStP.png" alt="hyaStP.png"  /></a></p>
+<h2 id="将多个数据放在同一个表格中">将多个数据放在同一个表格中</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUvTI"  target="_blank" rel="noopener"
+    ><img src="https://z3.ax1x.com/2021/09/03/hyUvTI.png" alt="hyUvTI.png"  /></a></p>
+<h2 id="加入标签">加入标签</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUj0A"  target="_blank" rel="noopener"
+    ><img src="https://z3.ax1x.com/2021/09/03/hyUj0A.png" alt="hyUj0A.png"  /></a></p>
+<ul>
+<li>
+<p>🌚如果不加入<code>plt.legend()</code>图片中无法显示标签，并且可以通过调整参数<a class="link" href="https://blog.csdn.net/Wannna/article/details/102751689"  target="_blank" rel="noopener"
+    >更改绘制的位置</a>。同时，也可以将标签<a class="link" href="https://blog.csdn.net/Poul_henry/article/details/82533569"  target="_blank" rel="noopener"
+    >放到统计图的外侧</a>。</p>
+</li>
+<li>
+<p>🍪在结束绘制时记得添加<code>plt.close()</code>,否则就会把图像全部画在同一张图片里。<code>plt.cla()</code>、<code>plt.clf()</code>、<code>plt.close()</code>之间的区别可以<a class="link" href="https://blog.csdn.net/tz_zs/article/details/81393098"  target="_blank" rel="noopener"
+    >参考</a></p>
+</li>
+</ul>
+<h2 id="在统计图中绘制辅助线">在统计图中绘制辅助线</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span> <span class="c1"># 绘制竖直辅助线</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span> <span class="c1"># 绘制水平参考线</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUzkt"  target="_blank" rel="noopener"
+    ><img src="https://z3.ax1x.com/2021/09/03/hyUzkt.png" alt="hyUzkt.png"  /></a></p>
+<p>显示图片是可以使用<code>plt.show()</code>
+保存绘制的图像<code>plt.savefig('保存路径及文件名')</code>，可以添加参数设置保存图像的质量</p>
+<h2 id="在一个窗口中显示多个表格">在一个窗口中显示多个表格</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 在窗口1行1列绘制图像</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 在窗口2行1列绘制图像</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyapff"  target="_blank" rel="noopener"
+    ><img src="https://z3.ax1x.com/2021/09/03/hyapff.png" alt="hyapff.png"  /></a></p>
+<h1 id="引用">引用</h1>
+<p><a class="link" href="https://blog.csdn.net/Wannna/article/details/102751689"  target="_blank" rel="noopener"
+    >Python——legend()图例位置调整</a></p>
+<p><a class="link" href="https://blog.csdn.net/Poul_henry/article/details/82533569"  target="_blank" rel="noopener"
+    >Python_matplotlib画图时图例说明(legend)放到图像外侧</a></p>
+<p><a class="link" href="https://blog.csdn.net/tz_zs/article/details/81393098"  target="_blank" rel="noopener"
+    >matplotlib之清理、清除 axes 和 figure （plt.cla、plt.clf、plt.close）</a></p>
+<p><a class="link" href="https://blog.csdn.net/u014779536/article/details/108908503"  target="_blank" rel="noopener"
+    >数据可视化之matplotlib实战：plt.axhline() axvline()函数 绘制水平or垂直参考线</a></p>
+<p><a class="link" href="https://blog.csdn.net/qq_43511299/article/details/113873866"  target="_blank" rel="noopener"
+    >Python使用matplotlib.subplot在同一窗口中绘制多个子图</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under GNU General Public License v2.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B07-%E5%9B%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记7-图</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B06-%E6%A0%91/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记6-树</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B05_%E6%8E%92%E5%BA%8F%E4%B8%8E%E6%9F%A5%E6%89%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记5_排序与查找</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B04_%E9%80%92%E5%BD%92recursion/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记4_递归Recursion</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算法笔记3</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Mark
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
