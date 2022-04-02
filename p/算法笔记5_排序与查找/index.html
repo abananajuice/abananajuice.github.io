@@ -78,7 +78,7 @@ def insertionSort(alist): .">
                     
                     
                         
-                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -252,17 +252,17 @@ def insertionSort(alist): .">
 </li>
 <li>
 <p><strong>二分查找（binary search）</strong>：对于<strong>有序表</strong>可以从中间项开始匹配，不断缩小表的规模知道找到数据的位置。二分查找法也体现了<strong>分治算法</strong>。因此二分查找法可以用递归实现。算法复杂度为O(log n)。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="n">alist</span><span class="p">,</span><span class="n">item</span><span class="p">):</span>  <span class="c1">#二分查找的递归实现</span>
-<span class="o">......</span>
-<span class="n">midpoint</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
-<span class="k">if</span> <span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]</span><span class="o">==</span><span class="n">item</span><span class="p">:</span>
-    <span class="k">return</span> <span class="bp">True</span>
-<span class="k">else</span><span class="p">:</span>   <span class="c1">#减小规模，调用自身</span>
-    <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span><span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="n">binarySearch</span><span class="p">(</span><span class="n">alist</span><span class="p">[:</span><span class="n">midpoint</span><span class="p">],</span><span class="n">item</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">binarySearch</span><span class="p">(</span><span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="o">+</span><span class="mi">1</span><span class="p">:],</span><span class="n">item</span><span class="p">)</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="n">alist</span><span class="p">,</span><span class="n">item</span><span class="p">):</span>  <span class="c1">#二分查找的递归实现</span>
+</span></span><span class="line"><span class="cl"><span class="o">......</span>
+</span></span><span class="line"><span class="cl"><span class="n">midpoint</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]</span><span class="o">==</span><span class="n">item</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>   <span class="c1">#减小规模，调用自身</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span><span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">binarySearch</span><span class="p">(</span><span class="n">alist</span><span class="p">[:</span><span class="n">midpoint</span><span class="p">],</span><span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">binarySearch</span><span class="p">(</span><span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="o">+</span><span class="mi">1</span><span class="p">:],</span><span class="n">item</span><span class="p">)</span>
+</span></span></code></pre></div></li>
 </ul>
 <p>对于两种查找算法，需要根据实际的应用情况进行选择。</p>
 <h2 id="排序">排序</h2>
@@ -271,28 +271,28 @@ def insertionSort(alist): .">
 <p><strong>冒泡排序（bubble sort）</strong>:两两相邻的数据进行比较，多趟之后即可完成排序。与在c语言中交换两个位置的值需要中间变量不同，python中可以使用<code>alist[i],alist[i+1]=alist[i+1],alist[i]</code>语句完成。算法每趟的比较次数由n-1不断递减，因此算法复杂度为O(n^2)。</p>
 <p>冒泡排序常作为其他算法的对比基准（妥妥的工具人🙃），其中的对次比对交换操作时无效的。优势在于无需额外储存空间的开销。<br>
 改进的冒泡排序：当某次比对未发生交换，便说明比对完成，可以提前结束。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">shortBubbleSort</span><span class="p">(</span><span class="n">alist</span><span class="p">):</span>
-    <span class="o">......</span>
-    <span class="n">exchange</span> <span class="o">=</span> <span class="bp">False</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">passnum</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="n">exchange</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">passnum</span> <span class="o">=</span> <span class="n">passnum</span><span class="o">-</span><span class="mi">1</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">shortBubbleSort</span><span class="p">(</span><span class="n">alist</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="o">......</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exchange</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">passnum</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exchange</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">            <span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">passnum</span> <span class="o">=</span> <span class="n">passnum</span><span class="o">-</span><span class="mi">1</span>
+</span></span></code></pre></div></li>
 <li>
 <p><strong>选择排序(Selection Sort)</strong>：对冒泡算法中,每趟只进行一次交换。先记录最大项所在的位置再交换。</p>
 </li>
 <li>
 <p><strong>插入排序（Insertion Sort）</strong>:复杂度仍为O(n^2);是中唯持一个已排好序的子列表，其位置始终在列表的前部。并将其逐步扩大只全表。列表越接近有序，插入排序的对比次数就越少。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">insertionSort</span><span class="p">(</span><span class="n">alist</span><span class="p">):</span>
-<span class="o">......</span>
-<span class="k">while</span> <span class="n">position</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">currentvalue</span><span class="p">:</span>
-    <span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="o">=</span><span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">position</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="c1">#每次与左侧的项进行比较，如果左侧的值大就将其右移，依次循环直到左侧值更小，在之前的空位中插入。</span>
-<span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="o">=</span><span class="n">currentvalue</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">insertionSort</span><span class="p">(</span><span class="n">alist</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">......</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="n">position</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">currentvalue</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="o">=</span><span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">position</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#每次与左侧的项进行比较，如果左侧的值大就将其右移，依次循环直到左侧值更小，在之前的空位中插入。</span>
+</span></span><span class="line"><span class="cl"><span class="n">alist</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="o">=</span><span class="n">currentvalue</span>
+</span></span></code></pre></div></li>
 <li>
 <p><strong>谢尔排序（Shell Sort）</strong>:以“间隔”划分子列表，每个子列表执行插入排序，从而减少整体排序对比的次数。最后再进行标准的插入排序。减少了插入排序中无效的比对，介于O(n)于O(n^2)之间。</p>
 </li>
@@ -362,6 +362,28 @@ def insertionSort(alist): .">
     </footer>
 
     
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
+    
 </article>
 
     <aside class="related-contents--wrapper">
@@ -370,6 +392,18 @@ def insertionSort(alist): .">
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svd%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90pca%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90ica/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">奇异值分解（SVD）、主成分分析（PCA）和独立成分分析（ICA）</h2>
+        </div>
+    </a>
+</article>
                 
                     
 <article class="">
@@ -419,18 +453,6 @@ def insertionSort(alist): .">
     </a>
 </article>
                 
-                    
-<article class="">
-    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">算法笔记2</h2>
-        </div>
-    </a>
-</article>
-                
             </div>
         </div>
     
@@ -447,7 +469,7 @@ def insertionSort(alist): .">
         
             2020 - 
         
-        2021 Mark
+        2022 Mark
     </section>
     
     <section class="powerby">

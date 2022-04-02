@@ -6,7 +6,37 @@
     <description>Recent content in Posts on Mark</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Sep 2021 15:59:55 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Apr 2022 16:59:52 +0800</lastBuildDate><atom:link href="https://abananajuice.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>奇异值分解（SVD）、主成分分析（PCA）和独立成分分析（ICA）</title>
+      <link>https://abananajuice.github.io/p/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svd%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90pca%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90ica/</link>
+      <pubDate>Sat, 02 Apr 2022 16:59:52 +0800</pubDate>
+      
+      <guid>https://abananajuice.github.io/p/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svd%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90pca%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90ica/</guid>
+      <description>奇异值分解（SVD） 奇异值分解是将矩阵分解为奇异向量（singular vector）和奇异值（singular value）。奇异值分解将原矩阵$A$分解为三个矩阵的乘积：
+$A_{mn}=U_{mm}D_{mn}V_{nn}^{T}$
+其中矩阵$U$和$V$为正交矩阵，$D$为对角矩阵。$D$对角线上的元素称为$A$的奇异值，$U$的列向量被称为左奇异向量，$V$的列向量被称为右奇异向量。$A$的左奇异向量是$AA^{T}$的特征向量，$A$的右奇异向量是$A^{T}A$的特征向量。
+设$r(D)=k$,$r(A)\leqslant r(D)=k$,若切割矩阵$A$取$m$行$k$列,$D$取$k$行$k$列,$V^{T}$取$k$行$n$列，则$A_{mn}=UDV^{T}$
+对于奇异值,它跟我们特征分解中的特征值类似，在奇异值矩阵中也是按照从大到小排列，而且奇异值的减少特别的快，在很多情况下，前10%甚至1%的奇异值的和就占了全部的奇异值之和的99%以上的比例。也就是说，我们也可以用最大的k个的奇异值和对应的左右奇异向量来近似描述矩阵。即$A_{mn}=U_{mm}D_{mn}V_{nn}^{T}\approx U_{mk}D_{kk}V_{kn}^T$
+矩阵SVD分解 $$(A^{T}A)V_i=\lambda_i V_i$$ $$(AA^{T})U_j=\lambda_j U_j$$
+由$V$正交，得$AV=UDV^TV=UD$，所以有$Av_i=\sigma_i u_i$。由此可以得到矩阵$D$
+主成分分析（PCA） 主成分分析主作为一种降维方法，将高维数据映射到低维上，并被整在低的每个轴上的方差最大。
+推导的思路是：
+   假设$Z=DX$;$Z$为pca降维之后的数据，$X$为原数据
+  限制条件：$Z$中各行方差尽可能大(保证最大可分性)同时$D$中各行正交。（D可以理解为将原数据从一个空间投影到另一个空间的轴，各轴之间应保持正交。而原数据转移到另一个空间在每个轴上的方差也应尽可能大。）
+  要保证$Var(Z)=\frac{1}{N}\sum{tr(ZZ^T)}$最大，即$D^T\frac{1}{N}\sum{(x-\bar{x})(x-\bar{x})^T}D=D^TCov(x)D=D^TSD$即使得$(D)^TSD$最大【（$x-\bar{x})(x-\bar{x})^T$对数据中心化】。
+  经过推导利用拉格朗日乘子法最终可以得到$XX^TD=D\Lambda$即$XX^Td_i=\lambda d_i$。通过对$X$进行SVD可以代替特征值分解。抽取其中几维即可实现降维。
+  为了使得$ZD^T$更接近$X$可以尽可能选择较大的特征值。
+   PCA的应用流程 1.对输入的数据中心化处理 2.对于中心化的数据$X$,对$XX^T$做特征值分解 3.选择最大的的特征值对应的特征向量即为PCA降维后的数据
+对于输入中心化的数据X也可通过SVD分解的形式得到降维后的数据。
+独立成分分析（ICA） 独立成分分析属于盲源分离的范畴。
+大多是根据“鸡尾酒会问题”来推导。鸡尾酒会问题假设会场上同时发言的任务与麦克风的数量相同。为了通过麦克风录制的声音分理处不同发言者的声音（这有点类似于分离出音乐中不同声部的声音）。
+主要思路是：
+  假设个声音（信号）源相互独立，对数据分布指定CDF(概率累计函数，概率密度函数是概率累计函数的导数) 使用似然估计和梯度上升推导出解混矩阵   具体可以参考ICA 独立成分分析
+注意： 1.无法恢复高斯信号（若信号源分布旋转对称，则无法恢复）； 2.“麦克风”数量不能少于“声源数量”； 3.假设各信号相互独立。
+引用  李宏毅《机器学习》课程 周志华《机器学习》 【吃瓜教程】《机器学习公式详解》（南瓜书）与西瓜书公式推导直播合集 ICA 独立成分分析 CS229-2018秋:吴恩达,机器学习，第十六课  </description>
+    </item>
+    
     <item>
       <title>Matplotlib基础</title>
       <link>https://abananajuice.github.io/p/matplotlib%E5%9F%BA%E7%A1%80/</link>

@@ -117,7 +117,7 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
                     
                     
                         
-                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -292,18 +292,18 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
 <li>how： 或称问题——算法流程解决</li>
 </ul>
 <p>欧几里得算法的python实现</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">alg</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span> <span class="p">:</span>
-        <span class="k">return</span> <span class="n">a</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-    <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">%</span><span class="n">b</span>
-    <span class="n">alg</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>   <span class="c1">#a,b为要计算的两个数</span>
-    <span class="n">a</span><span class="o">=</span><span class="mi">15</span>
-    <span class="n">b</span><span class="o">=</span><span class="mi">9</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">alg</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
-<span class="n">main</span><span class="p">()</span>
-</code></pre></div><p>计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">alg</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">%</span><span class="n">b</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alg</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>   <span class="c1">#a,b为要计算的两个数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="o">=</span><span class="mi">15</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">=</span><span class="mi">9</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">alg</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></div><p>计算复杂性研究的是问题的难度，算法实在资源约束的情况下寻找最优方案。</p>
 <p>不可计算问题</p>
 <ul>
 <li>停机问题</li>
@@ -341,45 +341,45 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
 <li>将每一个单词逐个检查</li>
 </ul>
 <p>课程给的代码示例：</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">solu1_example</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
-   <span class="n">alist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-   <span class="n">pos1</span> <span class="o">=</span> <span class="mi">0</span>
-   <span class="n">stillok</span> <span class="o">=</span> <span class="bp">True</span>
-   <span class="k">while</span> <span class="n">pos1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">stillok</span><span class="p">:</span> <span class="c1">#只要字符中有一个没找到就可以通过32行退出</span>
-       <span class="n">pos2</span> <span class="o">=</span> <span class="mi">0</span>
-       <span class="n">found</span> <span class="o">=</span><span class="bp">False</span>
-       <span class="k">while</span> <span class="n">pos2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>     
-           <span class="k">if</span> <span class="n">s1</span><span class="p">[</span><span class="n">pos2</span><span class="p">]</span> <span class="o">==</span>  <span class="n">alist</span><span class="p">[</span><span class="n">pos2</span><span class="p">]:</span>
-               <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
-           <span class="k">else</span><span class="p">:</span>
-               <span class="n">pos2</span> <span class="o">=</span> <span class="n">pos2</span> <span class="o">+</span> <span class="mi">1</span>
-           <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
-               <span class="n">alist</span><span class="p">[</span><span class="n">pos2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-           <span class="k">else</span><span class="p">:</span>
-               <span class="n">stillok</span> <span class="o">=</span> <span class="bp">False</span>
-       <span class="n">pos1</span> <span class="o">=</span> <span class="n">pos1</span> <span class="o">+</span> <span class="mi">1</span>
-   <span class="k">return</span> <span class="n">stillok</span>   
-</code></pre></div><p>如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">solu1_example</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">alist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">pos1</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">   <span class="n">stillok</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">   <span class="k">while</span> <span class="n">pos1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">stillok</span><span class="p">:</span> <span class="c1">#只要字符中有一个没找到就可以通过32行退出</span>
+</span></span><span class="line"><span class="cl">       <span class="n">pos2</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">       <span class="n">found</span> <span class="o">=</span><span class="kc">False</span>
+</span></span><span class="line"><span class="cl">       <span class="k">while</span> <span class="n">pos2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>     
+</span></span><span class="line"><span class="cl">           <span class="k">if</span> <span class="n">s1</span><span class="p">[</span><span class="n">pos2</span><span class="p">]</span> <span class="o">==</span>  <span class="n">alist</span><span class="p">[</span><span class="n">pos2</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">               <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">           <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">               <span class="n">pos2</span> <span class="o">=</span> <span class="n">pos2</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">           <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">               <span class="n">alist</span><span class="p">[</span><span class="n">pos2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">           <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">               <span class="n">stillok</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">       <span class="n">pos1</span> <span class="o">=</span> <span class="n">pos1</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">stillok</span>   
+</span></span></code></pre></div><p>如果将自己一个一个对比，要注意同一个字符在字符串中可能会出现很多次。因此，在判断是找到一个相同时必须要设置为none</p>
 <h3 id="数量级的计算">数量级的计算</h3>
 <p>两层循环，外层循环为n次，每次到内层每次循环查找次数为1&ndash;n之间。因此总和为：1/2*(n^2)+1/2*n。所以数量级为O(n^2)</p>
 <ul>
 <li>排序比较：先将字符串按字母顺序排好，再一一对比</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">solu2</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
-    <span class="n">alist1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
-    <span class="n">alist2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-
-    <span class="n">alist1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>    <span class="c1">#列表排序函数</span>
-    <span class="n">alist2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-    <span class="n">pos</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">matches</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">matches</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">alist1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">alist2</span><span class="p">[</span><span class="n">pos</span><span class="p">]:</span>
-            <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">matches</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="k">return</span> <span class="n">matches</span>
-</code></pre></div><p>看似很简单仅有一个循环，但在两个数组排序过程消耗的时间不可忽视。时间运算数量级为O(nlog n)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">solu2</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alist1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alist2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">alist1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>    <span class="c1">#列表排序函数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alist2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pos</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">matches</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">matches</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">alist1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">alist2</span><span class="p">[</span><span class="n">pos</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">matches</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">matches</span>
+</span></span></code></pre></div><p>看似很简单仅有一个循环，但在两个数组排序过程消耗的时间不可忽视。时间运算数量级为O(nlog n)</p>
 <h3 id="暴力法">暴力法</h3>
 <p>将S1中的字符进行全排列，然后查看S2是否在其中。<br>
 用暴力算法解决时，数量级会以N!的方式增长。</p>
@@ -388,24 +388,24 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
 <p><code>ord()</code>函数：返回字符的Unicode编码值</p>
 <p>T(n)=2n + 26;<br>
 因此数量级为O(n);相比之下，该项算法性能较优，然而该算法需要的内存空间较大。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">solu4</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
-    <span class="n">c1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">26</span>
-    <span class="n">c2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">26</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)):</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="c1">#返回一个字符的uincode编码</span>
-        <span class="n">c1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">c1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s2</span><span class="p">)):</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
-        <span class="n">c2</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">c2</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">stillok</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">26</span> <span class="ow">and</span> <span class="n">stillok</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">c1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">c2</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">stillok</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="k">return</span> <span class="n">stillok</span>
-</code></pre></div><h1 id="python数据类型的性能">Python数据类型的性能</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">solu4</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">26</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">26</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pos</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="c1">#返回一个字符的uincode编码</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">c1</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s2</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pos</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c2</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">c2</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stillok</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">26</span> <span class="ow">and</span> <span class="n">stillok</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">c1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">c2</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stillok</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">stillok</span>
+</span></span></code></pre></div><h1 id="python数据类型的性能">Python数据类型的性能</h1>
 <h2 id="list和dict">list和dict</h2>
 <p><img src="https://s2.ax1x.com/2020/03/02/3WYNM6.png" alt="3WYNM6.png"  /></p>
 <p>按索引取值和赋值：由于列表的随机访问特性，均为O(1)</p>
@@ -444,6 +444,28 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
     </footer>
 
     
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
+    
 </article>
 
     <aside class="related-contents--wrapper">
@@ -452,6 +474,18 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svd%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90pca%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90ica/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">奇异值分解（SVD）、主成分分析（PCA）和独立成分分析（ICA）</h2>
+        </div>
+    </a>
+</article>
                 
                     
 <article class="">
@@ -501,18 +535,6 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
     </a>
 </article>
                 
-                    
-<article class="">
-    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">算法笔记3</h2>
-        </div>
-    </a>
-</article>
-                
             </div>
         </div>
     
@@ -529,7 +551,7 @@ def solu1_example(s1,s2): alist = list(s2) pos1 = 0 stillok = True while pos1 &a
         
             2020 - 
         
-        2021 Mark
+        2022 Mark
     </section>
     
     <section class="powerby">

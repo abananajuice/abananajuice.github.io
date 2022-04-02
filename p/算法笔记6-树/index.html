@@ -90,7 +90,7 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
                     
                     
                         
-                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -269,15 +269,15 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
 <p><code>atree=['a',['left',[],[]],['right',[],[]]]</code></p>
 </blockquote>
 <p>插入方法的实现(以插入左树为例)。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">insertLeft</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">newBranch</span><span class="p">):</span>
-  <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  
-  <span class="c1">#提取左子节点</span>
-  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-  <span class="c1">#如果左子节点存在，则需要先插入新节点再将原来的节点作为其左子节点   </span>
-    <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,</span><span class="n">t</span><span class="p">,[]])</span>
-  <span class="k">else</span><span class="p">:</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,[],[]])</span>
-</code></pre></div><h3 id="树的链表实现">树的链表实现</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">insertLeft</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">newBranch</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  <span class="c1">#提取左子节点</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">#如果左子节点存在，则需要先插入新节点再将原来的节点作为其左子节点   </span>
+</span></span><span class="line"><span class="cl">    <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,</span><span class="n">t</span><span class="p">,[]])</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,[],[]])</span>
+</span></span></code></pre></div><h3 id="树的链表实现">树的链表实现</h3>
 <ul>
 <li>节点链表法：链表中每个节点保存节点的数据项以及左右子树的链接。</li>
 </ul>
@@ -304,35 +304,35 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
 </ul>
 <h3 id="二叉堆操作的实现">二叉堆操作的实现</h3>
 <p>列表保存堆数据，列表中下标为0项不用。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BinHeap</span><span class="p">:</span>
-  <span class="k">def</span> <span class="fm">__init__</span><span class="p">():</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">currentsize</span> <span class="o">=</span> <span class="mi">0</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BinHeap</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__init__</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">currentsize</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span></code></pre></div><ul>
 <li>
 <p><code>insert（key）</code></p>
 <p>为了保证二叉堆中堆的性质，需要将插入key上浮至正确的位置。插入时先添加到末尾并改变二叉树currentsize的值，之后进行上浮操作。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#上浮(i 二叉树节点数)</span>
-<span class="k">def</span> <span class="nf">perUp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
-  <span class="k">while</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1">#到根节点j结束循环</span>
-    <span class="c1">#与父节点比较</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">]:</span>   
-      <span class="c1">#与父节点交换位置</span>
-      <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#上浮(i 二叉树节点数)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">perUp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1">#到根节点j结束循环</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#与父节点比较</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">]:</span>   
+</span></span><span class="line"><span class="cl">      <span class="c1">#与父节点交换位置</span>
+</span></span><span class="line"><span class="cl">      <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span>
+</span></span></code></pre></div></li>
 <li>
 <p><code>delMin()</code></p>
 <p>删除堆中最小的key，即根节点。最后一个节点代替根节点并下沉。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 下沉</span>
-<span class="k">def</span> <span class="nf">percDown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
-  <span class="c1"># 是否存在左节点</span>
-  <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentSize</span><span class="p">:</span>
-    <span class="n">mc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minChild</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1"># 返回子节点的较小值的位置</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">mc</span><span class="p">]:</span>
-      <span class="c1"># 交换下沉</span>
-      <span class="o">......</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">mc</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 下沉</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">percDown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># 是否存在左节点</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentSize</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minChild</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1"># 返回子节点的较小值的位置</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heapList</span><span class="p">[</span><span class="n">mc</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># 交换下沉</span>
+</span></span><span class="line"><span class="cl">      <span class="o">......</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="n">mc</span>
+</span></span></code></pre></div></li>
 <li>
 <p><code>buildHeap(lst)</code></p>
 <p>利用下沉法从无序表生成堆。从最后一个节点的父节点处开始下沉（<code>len(list)//2</code>处），并不断迭代；为保证完全二叉树的性质，需要在无序表前端插入一个空值。</p>
@@ -356,15 +356,15 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
 </li>
 <li>
 <p>迭代器<code>__iter__(self)</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-  <span class="k">if</span> <span class="bp">self</span><span class="p">:</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
-      <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="p">:</span>
-        <span class="c1"># in在这里相当于递归</span>
-        <span class="k">yield</span> <span class="n">elem</span>
-    <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
-    <span class="o">......</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="bp">self</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># in在这里相当于递归</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="n">elem</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
+</span></span><span class="line"><span class="cl">    <span class="o">......</span>
+</span></span></code></pre></div></li>
 <li>
 <p><code>delete(self,key)</code>
 先用_get方法找到要删除的节点之后执行删除<code>self.remove(nodeToRemove)</code>。删除节点时的情况：</p>
@@ -381,19 +381,19 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
 <p>在插入方法中需要接入更新平衡因子的函数，自下而上更新每个节点的平衡因子。</p>
 <h3 id="重新平衡">重新平衡</h3>
 <p>将不平衡的子树进行旋转实现，左重右旋，右重左旋，左旋挂右，右旋挂左。在旋转过程中，只有新根节点和就根节点的平衡因子发生了变化。</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">rotateLeft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rotRoot</span><span class="p">):</span>
-  <span class="n">newRoot</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">rightChild</span>
-  <span class="n">rotRoot</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span>
-  <span class="c1"># 新根左子节点，挂到旧根的右子节点,父与子相连。左旋挂右。</span>
-  <span class="k">if</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotRoot</span> 
-    <span class="c1"># 子与父相连</span>
-    <span class="o">...</span> <span class="o">...</span>
-    <span class="c1"># 整理节点之间关系</span>
-    <span class="o">...</span> <span class="o">...</span>
-    <span class="n">rotRoot</span><span class="o">.</span><span class="n">blanceFactor</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">newRoot</span><span class="o">.</span><span class="n">blanceFactor</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-</code></pre></div><p>在左旋要检查右子节点的因子，若右子节点左重则应先右旋在左旋。同样，右旋也需要进行类似操作。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rotateLeft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rotRoot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">newRoot</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">rightChild</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rotRoot</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># 新根左子节点，挂到旧根的右子节点,父与子相连。左旋挂右。</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotRoot</span> 
+</span></span><span class="line"><span class="cl">    <span class="c1"># 子与父相连</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 整理节点之间关系</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rotRoot</span><span class="o">.</span><span class="n">blanceFactor</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">newRoot</span><span class="o">.</span><span class="n">blanceFactor</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></div><p>在左旋要检查右子节点的因子，若右子节点左重则应先右旋在左旋。同样，右旋也需要进行类似操作。</p>
 <h1 id="引用">引用</h1>
 <ul>
 <li><a class="link" href="https://www.icourse163.org/learn/PKU-1206307812"  target="_blank" rel="noopener"
@@ -421,6 +421,28 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
     </footer>
 
     
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
+    
 </article>
 
     <aside class="related-contents--wrapper">
@@ -429,6 +451,18 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svd%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90pca%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90ica/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">奇异值分解（SVD）、主成分分析（PCA）和独立成分分析（ICA）</h2>
+        </div>
+    </a>
+</article>
                 
                     
 <article class="">
@@ -478,18 +512,6 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
     </a>
 </article>
                 
-                    
-<article class="">
-    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">算法笔记2</h2>
-        </div>
-    </a>
-</article>
-                
             </div>
         </div>
     
@@ -506,7 +528,7 @@ class BinHeap: def __init__(): self.heapList = [0] self.currentsize = 0   insert
         
             2020 - 
         
-        2021 Mark
+        2022 Mark
     </section>
     
     <section class="powerby">

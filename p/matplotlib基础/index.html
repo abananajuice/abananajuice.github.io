@@ -90,7 +90,7 @@ Python使用matplotlib.subplot在同一窗口中绘制多个子图">
                     
                     
                         
-                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -254,21 +254,21 @@ Python使用matplotlib.subplot在同一窗口中绘制多个子图">
     <section class="article-content">
     <p>PS:最近刚好用到Matlplotlib数据可视化，顺便对一些常用的函数做一下总结。🍥🍥</p>
 <h2 id="绘制单张数据图">绘制单张数据图</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-    <span class="c1"># 后续默认已经调用过库</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
-</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyaStP"  target="_blank" rel="noopener"
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 后续默认已经调用过库</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+</span></span></code></pre></div><p><a class="link" href="https://imgtu.com/i/hyaStP"  target="_blank" rel="noopener"
     ><img src="https://z3.ax1x.com/2021/09/03/hyaStP.png" alt="hyaStP.png"  /></a></p>
 <h2 id="将多个数据放在同一个表格中">将多个数据放在同一个表格中</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUvTI"  target="_blank" rel="noopener"
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</span></span></code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUvTI"  target="_blank" rel="noopener"
     ><img src="https://z3.ax1x.com/2021/09/03/hyUvTI.png" alt="hyUvTI.png"  /></a></p>
 <h2 id="加入标签">加入标签</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUj0A"  target="_blank" rel="noopener"
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span></span></code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUj0A"  target="_blank" rel="noopener"
     ><img src="https://z3.ax1x.com/2021/09/03/hyUj0A.png" alt="hyUj0A.png"  /></a></p>
 <ul>
 <li>
@@ -282,22 +282,22 @@ Python使用matplotlib.subplot在同一窗口中绘制多个子图">
 </li>
 </ul>
 <h2 id="在统计图中绘制辅助线">在统计图中绘制辅助线</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span> <span class="c1"># 绘制竖直辅助线</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span> <span class="c1"># 绘制水平参考线</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUzkt"  target="_blank" rel="noopener"
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span> <span class="c1"># 绘制竖直辅助线</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span> <span class="c1"># 绘制水平参考线</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span></span></code></pre></div><p><a class="link" href="https://imgtu.com/i/hyUzkt"  target="_blank" rel="noopener"
     ><img src="https://z3.ax1x.com/2021/09/03/hyUzkt.png" alt="hyUzkt.png"  /></a></p>
 <p>显示图片是可以使用<code>plt.show()</code>
 保存绘制的图像<code>plt.savefig('保存路径及文件名')</code>，可以添加参数设置保存图像的质量</p>
 <h2 id="在一个窗口中显示多个表格">在一个窗口中显示多个表格</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 在窗口1行1列绘制图像</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 在窗口2行1列绘制图像</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div><p><a class="link" href="https://imgtu.com/i/hyapff"  target="_blank" rel="noopener"
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 在窗口1行1列绘制图像</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 在窗口2行1列绘制图像</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span></code></pre></div><p><a class="link" href="https://imgtu.com/i/hyapff"  target="_blank" rel="noopener"
     ><img src="https://z3.ax1x.com/2021/09/03/hyapff.png" alt="hyapff.png"  /></a></p>
 <h1 id="引用">引用</h1>
 <p><a class="link" href="https://blog.csdn.net/Wannna/article/details/102751689"  target="_blank" rel="noopener"
@@ -332,6 +332,28 @@ Python使用matplotlib.subplot在同一窗口中绘制多个子图">
     </footer>
 
     
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
+    
 </article>
 
     <aside class="related-contents--wrapper">
@@ -340,6 +362,18 @@ Python使用matplotlib.subplot在同一窗口中绘制多个子图">
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svd%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90pca%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90ica/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">奇异值分解（SVD）、主成分分析（PCA）和独立成分分析（ICA）</h2>
+        </div>
+    </a>
+</article>
                 
                     
 <article class="">
@@ -389,18 +423,6 @@ Python使用matplotlib.subplot在同一窗口中绘制多个子图">
     </a>
 </article>
                 
-                    
-<article class="">
-    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B03/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">算法笔记3</h2>
-        </div>
-    </a>
-</article>
-                
             </div>
         </div>
     
@@ -417,7 +439,7 @@ Python使用matplotlib.subplot在同一窗口中绘制多个子图">
         
             2020 - 
         
-        2021 Mark
+        2022 Mark
     </section>
     
     <section class="powerby">

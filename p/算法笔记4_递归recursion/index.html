@@ -81,7 +81,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3de406396c4f091c8d3a97b96fdc30d7_164011_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -261,21 +261,21 @@
 <p>现场数据：栈保存的一个函数调用所需要维护的信息。<br>
 每次调用，压入栈的现场数据成为栈帧。</p>
 </blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#python中递归深度的设置(默认为1000)</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">()</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">setrecursion</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
-</code></pre></div><h2 id="递归的应用">递归的应用</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#python中递归深度的设置(默认为1000)</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">setrecursion</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="递归的应用">递归的应用</h2>
 <ul>
 <li>递归数列求和：将问题拆分成两个数相加，当列表长度为1时结束。</li>
 <li>0-16任意进制的转换：设置<code>convertstring = &quot;0123456789ABCDEF&quot;</code> 通过除以整除<code>\\</code>进制基<code>base</code>以及对进制基求余数来将整数拆开。当数小于进制基时结束。</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">convertstring</span> <span class="o">=</span> <span class="s2">&#34;0123456789ABCDEF&#34;</span>
-    <span class="o">......</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">toStr</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="n">base</span><span class="p">,</span><span class="n">base</span><span class="p">)</span> <span class="o">+</span> <span class="n">convertstring</span><span class="p">[</span><span class="n">n</span><span class="o">%</span><span class="n">base</span><span class="p">]</span>
-        <span class="c1">#字符串连接；n//base表示整除</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">convertstring</span> <span class="o">=</span> <span class="s2">&#34;0123456789ABCDEF&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">......</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">toStr</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="n">base</span><span class="p">,</span><span class="n">base</span><span class="p">)</span> <span class="o">+</span> <span class="n">convertstring</span><span class="p">[</span><span class="n">n</span><span class="o">%</span><span class="n">base</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#字符串连接；n//base表示整除</span>
+</span></span></code></pre></div><ul>
 <li>
 <p>迷宫：在原位置先向北走一步，如果找不到出口则按北南西东的顺序尝试。（这个实际上随意设置也行）；为了防止艳茹无限递归的死循环，需要加入之前的路径。</p>
 </li>
@@ -319,6 +319,28 @@
     </footer>
 
     
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
+    
 </article>
 
     <aside class="related-contents--wrapper">
@@ -327,6 +349,18 @@
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svd%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90pca%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90ica/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">奇异值分解（SVD）、主成分分析（PCA）和独立成分分析（ICA）</h2>
+        </div>
+    </a>
+</article>
                 
                     
 <article class="">
@@ -376,18 +410,6 @@
     </a>
 </article>
                 
-                    
-<article class="">
-    <a href="/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B02/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">算法笔记2</h2>
-        </div>
-    </a>
-</article>
-                
             </div>
         </div>
     
@@ -404,7 +426,7 @@
         
             2020 - 
         
-        2021 Mark
+        2022 Mark
     </section>
     
     <section class="powerby">
